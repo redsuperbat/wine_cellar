@@ -9,7 +9,7 @@ class TypePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButton<String>(
-      value: model.size,
+      value: model.type,
       hint: Text("Type of wine"),
       onChanged: (String newValue) => model.setType(newValue),
       items: <String>[

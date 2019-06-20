@@ -4,7 +4,6 @@ import 'package:wine_cellar/core/models/country.dart';
 import 'package:flutter/material.dart';
 import 'package:wine_cellar/core/models/wine.dart';
 import 'package:wine_cellar/core/services/json_service.dart';
-import 'package:wine_cellar/core/services/wine_db_service.dart';
 import 'package:wine_cellar/core/services/wine_service.dart';
 import '../../locator.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,9 +11,8 @@ import 'package:image_picker/image_picker.dart';
 import 'base_model.dart';
 
 class AddModel extends BaseModel {
-  WineService wineService = locator<WineService>();
+  WineService _wineService = locator<WineService>();
   JsonService _json = locator<JsonService>();
-  WineDb _db = locator<WineDb>();
 
   //variables for the new wines
   DateTime selected = DateTime.now();
@@ -68,7 +66,7 @@ class AddModel extends BaseModel {
   }
 
   void increment() {
-    if(amountOfBottles != 999) {
+    if (amountOfBottles != 999) {
       amountOfBottles++;
       counterCont.text = '$amountOfBottles';
     }
@@ -97,19 +95,21 @@ class AddModel extends BaseModel {
 
   void addWineToDb() async {
     Wine wine = Wine(
-      id: wineService.wines.length + 1,
+      id: _wineService.wines.length + 1,
       owned: amountOfBottles,
       name: nameProdCont.text ?? "",
+      country: country != null ? country.name : "",
       aoo: aooCont.text ?? "",
+      location: country == null && aooCont.text == null
+          ? ""
+          : '${country != null ? country.name : ""}, ${aooCont.text ?? ""}',
       grapes: grapeCont.text ?? "",
       vintage: isChecked ? "NV" : selected.year.toString(),
       type: type ?? "",
       size: size ?? "",
-      country: country == null ? "" : country.name,
       image: image == null ? null : image.path,
       time: DateTime.now().toString(),
     );
-    print(wine.id);
-    await wineService.insert(wine);
+    await _wineService.insert(wine);
   }
 }

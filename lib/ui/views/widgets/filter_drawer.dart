@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wine_cellar/core/viewmodels/home_model.dart';
 
-import 'add_view/size_picker.dart';
 import 'type_checkbox.dart';
 
 class FilterDrawer extends StatelessWidget {

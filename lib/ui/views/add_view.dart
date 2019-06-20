@@ -3,7 +3,6 @@ import 'package:wine_cellar/core/viewmodels/add_model.dart';
 
 import 'base_view.dart';
 import 'widgets/add_view/bottle_amount.dart';
-import 'widgets/add_view/country_dialog.dart';
 import 'widgets/add_view/country_picker.dart';
 import 'widgets/add_view/size_picker.dart';
 import 'widgets/add_view/type_picker.dart';

@@ -1,14 +1,15 @@
 class Wine {
   String name;
-  String country;
+  String location;
   String vintage;
   String type;
   String size;
+  String aoo;
+  String country;
   int id;
   int owned;
   String grapes;
   String image;
-  String aoo;
   double rating = 0.0;
   String comment;
   String time; //appellation of origin
@@ -16,36 +17,38 @@ class Wine {
   Wine(
       {this.name,
       this.type,
+      this.aoo,
       this.country,
+      this.location,
       this.vintage,
       this.id,
       this.grapes,
       this.owned,
       this.size,
       this.image,
-      this.aoo,
       this.time,
       this.comment});
 
   Map<String, dynamic> toJson() => <String, dynamic>{
         'name': name,
-        'country': country,
+        'location': location,
         'type': type,
         'vintage': vintage,
+        'aoo': aoo,
+        'country': country,
         'id': id,
         'grapes': grapes,
         'owned': owned,
         'size': size,
         'image': image,
-        'aoo': aoo,
         'time': time,
-        'rating':rating,
-        'comment':comment,
+        'rating': rating,
+        'comment': comment,
       };
 
   Wine.fromJson(Map<String, dynamic> json) {
     name = json['name'];
-    country = json['country'];
+    location = json['location'];
     type = json['type'];
     vintage = json['vintage'].toString();
     id = json['id'];
@@ -53,9 +56,10 @@ class Wine {
     owned = json['owned'];
     size = json['size'];
     image = json['image'];
-    aoo = json['aoo'];
     time = json['time'];
     rating = json['rating'];
     comment = json['comment'];
+    aoo = json['aoo'];
+    country = json['country'];
   }
 }

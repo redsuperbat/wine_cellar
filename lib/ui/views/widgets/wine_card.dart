@@ -5,7 +5,6 @@ import 'package:wine_cellar/core/models/wine.dart';
 import 'package:wine_cellar/core/viewmodels/home_model.dart';
 import 'package:wine_cellar/core/viewmodels/search_model.dart';
 
-import '../wine_view.dart';
 import 'wine_slider.dart';
 
 class WineCard extends StatelessWidget {
@@ -82,18 +81,7 @@ class WineCard extends StatelessWidget {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  RichText(
-                    text: TextSpan(
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black87,
-                      ),
-                      text: wine.country == "" ? "" : '${wine.country}, ',
-                      children: <TextSpan>[
-                        TextSpan(text: wine.aoo),
-                      ],
-                    ),
-                  ),
+                  Text(wine.location),
                   Text(
                     wine.grapes,
                     style: TextStyle(fontSize: 13, fontStyle: FontStyle.italic),

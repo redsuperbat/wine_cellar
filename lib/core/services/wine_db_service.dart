@@ -15,6 +15,7 @@ class WineDb {
           "id INTEGER PRIMARY KEY, "
           "name TEXT, "
           "vintage INTEGER, "
+          "location TEXT, "
           "aoo TEXT, "
           "country TEXT, "
           "type TEXT, "
