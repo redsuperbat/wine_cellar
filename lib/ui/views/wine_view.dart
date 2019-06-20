@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:wine_cellar/core/viewmodels/wine_model.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-import '../constants.dart';
 
 import 'base_view.dart';
 import 'widgets/wine_view/wine_image.dart';

@@ -5,7 +5,7 @@ import 'package:wine_cellar/core/models/wine.dart';
 import 'package:wine_cellar/core/viewmodels/home_model.dart';
 import 'package:wine_cellar/core/viewmodels/search_model.dart';
 
-import 'wine_slider.dart';
+import 'package:wine_cellar/ui/views/widgets/home_view/wine_slider.dart';
 
 class WineCard extends StatelessWidget {
   final Wine wine;

@@ -23,27 +23,26 @@ class AddModel extends BaseModel {
   bool isChecked = false;
   String size;
 
-  final List<Country> _countries = [];
   final TextEditingController grapeCont = TextEditingController();
   final TextEditingController nameProdCont = TextEditingController();
   final TextEditingController counterCont = TextEditingController(text: '1');
   final TextEditingController aooCont = TextEditingController();
 
   //Getters
-  List<Country> get countries => _countries;
+  List<Country> get countries => _json.countries;
+
+  List<String> get sizes => _json.sizes;
+
+  List<String> get types => _json.types;
 
   Country get country => _country;
 
   //constructor with initializing methods
   AddModel() {
     counterCont.addListener(_listener);
-    loadCountries();
   }
 
-  Future<void> loadCountries() async {
-    List data = await _json.getCountries();
-    data.forEach((c) => _countries.add(Country.fromJson(c)));
-  }
+
 
   void setCountry(int index) {
     _country = countries[index];

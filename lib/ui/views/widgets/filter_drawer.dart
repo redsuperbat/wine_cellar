@@ -17,7 +17,7 @@ class FilterDrawer extends StatelessWidget {
           Row(
             children: <Widget>[
               Text("Types: "),
-              for (Map item in model.types)
+              for (Map item in model.typess)
                 TypeCheckbox(
                   model: model,
                   title: item['title'],

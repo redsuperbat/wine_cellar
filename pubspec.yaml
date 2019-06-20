@@ -58,7 +58,7 @@ flutter:
   assets:
     - assets/countries/
     - assets/wine_placeholder.png
-    - assets/country_data.json
+    - assets/text/
     - assets/wines/
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg

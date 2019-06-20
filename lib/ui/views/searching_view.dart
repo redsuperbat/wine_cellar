@@ -3,7 +3,7 @@ import 'package:wine_cellar/core/enums/viewstate.dart';
 import 'package:wine_cellar/core/viewmodels/search_model.dart';
 
 import 'base_view.dart';
-import 'widgets/wine_card.dart';
+import 'package:wine_cellar/ui/views/widgets/home_view/wine_card.dart';
 
 class SearchView extends StatelessWidget {
   final TextStyle style = TextStyle(
