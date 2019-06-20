@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Spain",
+    "flag": "assets/countries/es.png"
+  },
+  {
+    "name": "France",
+    "flag": "assets/countries/fr.png"
+  },
+  {
+    "name": "Argentina",
+    "flag": "assets/countries/ar.png"
+  },
+  {
+    "name": "Austria",
+    "flag": "assets/countries/at.png"
+  },
+  {
+    "name": "Australia",
+    "flag": "assets/countries/au.png"
+  },
+  {
+    "name": "Chile",
+    "flag": "assets/countries/cl.png"
+  },
+  {
+    "name": "Germany",
+    "flag": "assets/countries/de.png"
+  },
+  {
+    "name": "Italy",
+    "flag": "assets/countries/it.png"
+  },
+  {
+    "name": "Portugal",
+    "flag": "assets/countries/pt.png"
+  },
+  {
+    "name": "America",
+    "flag": "assets/countries/us.png"
+  },
+  {
+    "name": "South Africa",
+    "flag": "assets/countries/za.png"
+  }
+]
