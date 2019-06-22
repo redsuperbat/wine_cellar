@@ -3,7 +3,7 @@ import 'package:wine_cellar/core/enums/viewstate.dart';
 import 'package:wine_cellar/core/viewmodels/home_model.dart';
 
 import 'base_view.dart';
-import 'widgets/filter_drawer.dart';
+import 'widgets/home_view/drawer.dart';
 import 'package:wine_cellar/ui/views/widgets/home_view/wine_card.dart';
 
 class HomeView extends StatelessWidget {
@@ -11,7 +11,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseView<HomeModel>(
       onModelReady: (model) {
-        model.loadMockData();
+        model.loadDbData();
         model.loadAssets();
       },
       builder: (context, model, child) => model.state == ViewState.Busy
@@ -22,8 +22,20 @@ class HomeView extends StatelessWidget {
             )
           : Scaffold(
               appBar: AppBar(
-                title: Text("Your Wines"),
-                centerTitle: true,
+                title: Container(
+                  margin: EdgeInsets.only(top: 5),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text("Your Wines"),
+                      Text(
+                        model.subtitle,
+                        style: TextStyle(
+                            fontSize: 15, fontStyle: FontStyle.italic),
+                      )
+                    ],
+                  ),
+                ),
                 actions: <Widget>[
                   Container(
                     margin: EdgeInsets.only(top: 3),
@@ -50,7 +62,7 @@ class HomeView extends StatelessWidget {
                       ),
                 ),
               ),
-              drawer: FilterDrawer(model: model),
+              drawer: MyDrawer(model: model),
               floatingActionButton: FloatingActionButton(
                 backgroundColor: Colors.red,
                 onPressed: () => Navigator.pushNamed(context, 'add'),

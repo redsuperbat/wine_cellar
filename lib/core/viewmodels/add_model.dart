@@ -27,6 +27,7 @@ class AddModel extends BaseModel {
   final TextEditingController nameProdCont = TextEditingController();
   final TextEditingController counterCont = TextEditingController(text: '1');
   final TextEditingController aooCont = TextEditingController();
+  final TextEditingController priceCont = TextEditingController();
 
   //Getters
   List<Country> get countries => _json.countries;
@@ -41,8 +42,6 @@ class AddModel extends BaseModel {
   AddModel() {
     counterCont.addListener(_listener);
   }
-
-
 
   void setCountry(int index) {
     _country = countries[index];
@@ -93,22 +92,23 @@ class AddModel extends BaseModel {
   }
 
   void addWineToDb() async {
+    print(priceCont.text ?? 'null');
     Wine wine = Wine(
-      id: _wineService.wines.length + 1,
-      owned: amountOfBottles,
-      name: nameProdCont.text ?? "",
-      country: country != null ? country.name : "",
-      aoo: aooCont.text ?? "",
-      location: country == null && aooCont.text == null
-          ? ""
-          : '${country != null ? country.name : ""}, ${aooCont.text ?? ""}',
-      grapes: grapeCont.text ?? "",
-      vintage: isChecked ? "NV" : selected.year.toString(),
-      type: type ?? "",
-      size: size ?? "",
-      image: image == null ? null : image.path,
-      time: DateTime.now().toString(),
-    );
+        id: _wineService.wines.length + 1,
+        owned: amountOfBottles,
+        name: nameProdCont.text ?? "",
+        country: country != null ? country.name : "",
+        aoo: aooCont.text ?? "",
+        location: country == null && aooCont.text == null
+            ? ""
+            : '${country != null ? country.name : ""}, ${aooCont.text ?? ""}',
+        grapes: grapeCont.text ?? "",
+        vintage: isChecked ? "NV" : selected.year.toString(),
+        type: type ?? "",
+        size: size ?? "",
+        image: image == null ? null : image.path,
+        time: DateTime.now().toString(),
+        price: double.parse(priceCont.text == "" ? '0' : priceCont.text));
     await _wineService.insert(wine);
   }
 }

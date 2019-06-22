@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:wine_cellar/core/viewmodels/home_model.dart';
 
-import 'type_checkbox.dart';
 
-class FilterDrawer extends StatelessWidget {
+class MyDrawer extends StatelessWidget {
   final HomeModel model;
 
-  FilterDrawer({this.model});
+  MyDrawer({this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +16,6 @@ class FilterDrawer extends StatelessWidget {
           Row(
             children: <Widget>[
               Text("Types: "),
-              for (Map item in model.typess)
-                TypeCheckbox(
-                  model: model,
-                  title: item['title'],
-                  type: item['type'],
-                ),
             ],
           )
         ],

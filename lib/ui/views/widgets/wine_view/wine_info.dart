@@ -30,14 +30,6 @@ class WineInfo extends StatelessWidget {
           controller: model.vintageController,
           title: 'Vintage',
         ),
-        Text(
-          model.wine.size,
-          style: TextStyle(fontSize: fontSize),
-        ),
-        Text(
-          '${model.wine.owned} pc',
-          style: TextStyle(fontSize: fontSize),
-        ),
       ],
     );
   }

@@ -15,7 +15,7 @@ class VintagePicker extends StatelessWidget {
             SizedBox(width: 15,),
             Text(
               "Select vintage",
-              style: TextStyle(fontSize: 25),
+              style: TextStyle(fontSize: 15),
             ),
             Spacer(),
             Text('Non-vintage?'),

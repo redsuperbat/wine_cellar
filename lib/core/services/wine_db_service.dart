@@ -23,9 +23,9 @@ class WineDb {
           "size TEXT, "
           "owned INTEGER, "
           "time TEXT, "
-          "price INTEGER, "
           "comment TEXT, "
-          "rating FLOAT, "
+          "rating DOUBLE, "
+          "price DOUBLE, "
           "image TEXT)"),
       version: 1,
     );

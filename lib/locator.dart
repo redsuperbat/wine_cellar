@@ -1,7 +1,6 @@
 import 'package:get_it/get_it.dart';
 
 import 'core/services/json_service.dart';
-import 'core/services/json_storage.dart';
 import 'core/services/wine_db_service.dart';
 import 'core/services/wine_service.dart';
 import 'core/viewmodels/add_model.dart';
@@ -17,7 +16,6 @@ void setupLocator() {
   // locator.registerLazySingleton(() => Api());
   locator.registerLazySingleton(() => WineDb());
   locator.registerLazySingleton(() => WineService());
-  locator.registerLazySingleton(() => JsonStorage());
   locator.registerLazySingleton(() => JsonService());
 
   // Example of model  locator.registerFactory(() => ProfileModel());

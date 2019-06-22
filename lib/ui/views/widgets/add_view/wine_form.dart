@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:wine_cellar/core/viewmodels/add_model.dart';
 
 class WineForm extends StatelessWidget {
@@ -24,7 +25,7 @@ class WineForm extends StatelessWidget {
             controller: model.aooCont,
             decoration: InputDecoration(
               suffixIcon: Tooltip(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: EdgeInsets.symmetric(horizontal: 20),
                   message:
                       'Where the wine originates from. \nEg. Bourgogne, Bourdeaux or Napa-Valley',
                   child: Icon(
@@ -32,7 +33,15 @@ class WineForm extends StatelessWidget {
                   )),
               hintText: 'Appellation of origin',
             ),
-          )
+          ),
+          TextField(
+            keyboardType: TextInputType.number,
+            inputFormatters: <TextInputFormatter>[
+              // WhitelistingTextInputFormatter('[0-9.]'), Implement me
+            ],
+            controller: model.priceCont,
+            decoration: InputDecoration(hintText: 'Purchase price'),
+          ),
         ],
       ),
     );

@@ -12,6 +12,8 @@ class HomeModel extends BaseModel {
   JsonService _json = locator<JsonService>();
   List<String> filter;
 
+  String subtitle = "show all";
+
   List<Wine> get wines => _wineService.wines;
 
   List<String> get sizes => _json.sizes;
@@ -24,7 +26,7 @@ class HomeModel extends BaseModel {
     {'title': 'Rosé', 'type': false}
   ];
 
-  Future<void> loadMockData() async {
+  Future<void> loadDbData() async {
     setState(ViewState.Busy);
     await _wineService.loadMockData();
     _wineService.wines
@@ -58,6 +60,7 @@ class HomeModel extends BaseModel {
   }
 
   Future<void> filterWines(String value) async {
+    subtitle = value;
     if (value == 'show all') await _wineService.getAllWine();
     if (sizes.contains(value))
       await _wineService.filterWine(query: value, column: 'size');
