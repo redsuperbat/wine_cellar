@@ -20,7 +20,7 @@ class Picker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(items);
+    print("Im being rebuilt");
     return DropdownButton<String>(
       underline: underline,
       icon: icon,

@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:wine_cellar/core/enums/viewstate.dart';
-import 'package:wine_cellar/core/viewmodels/home_model.dart';
+import 'package:provider/provider.dart';
+import 'package:wine_cellar/core/viewmodels/views/home_model.dart';
 
-import 'base_view.dart';
+import 'base_widget.dart';
 import 'widgets/home_view/drawer.dart';
-import 'package:wine_cellar/ui/views/widgets/home_view/wine_card.dart';
+import 'widgets/home_view/wine_list.dart';
 
 class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BaseView<HomeModel>(
+    return BaseWidget<HomeModel>(
+      model: HomeModel(
+        wineService: Provider.of(context),
+        json: Provider.of(context),
+      ),
       onModelReady: (model) {
         model.loadDbData();
         model.loadAssets();
       },
-      builder: (context, model, child) => model.state == ViewState.Busy
+      builder: (context, model, child) => model.busy
           ? Scaffold(
               body: Center(
                 child: CircularProgressIndicator(),
@@ -76,21 +80,7 @@ class HomeView extends StatelessWidget {
                       "The latest additions to the cellar",
                       style: TextStyle(fontStyle: FontStyle.italic),
                     ),
-                    model.state == ViewState.Busy
-                        ? Center(
-                            child: CircularProgressIndicator(),
-                          )
-                        : Flexible(
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: model.wines.length,
-                              itemBuilder: (context, index) => WineCard(
-                                    wine: model.wines[index],
-                                    homeModel: model,
-                                  ),
-                              //WineCard(wine: model.wines[index]),
-                            ),
-                          ),
+                    WineList(),
                   ],
                 ),
               ),

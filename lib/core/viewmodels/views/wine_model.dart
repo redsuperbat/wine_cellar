@@ -5,12 +5,11 @@ import 'package:wine_cellar/core/models/wine.dart';
 import 'package:wine_cellar/core/services/json_service.dart';
 import 'package:wine_cellar/core/services/wine_service.dart';
 
-import '../../locator.dart';
-import 'base_model.dart';
+import 'package:wine_cellar/core/viewmodels/base_model.dart';
 
 class WineModel extends BaseModel {
-  final WineService _wineService = locator<WineService>();
-  final JsonService _json = locator<JsonService>();
+  final WineService _wineService;
+  final JsonService _json;
 
   TextEditingController cmtController;
   TextEditingController nameController;
@@ -26,9 +25,14 @@ class WineModel extends BaseModel {
 
   List<String> get types => _json.types;
 
-  Wine get wine => _wineService.viewWine;
+  Wine wine;
 
-  WineModel() {
+  WineModel(
+      {@required WineService wineService,
+      @required JsonService json})
+      : _json = json,
+        _wineService = wineService {
+    wine = _wineService.viewWine;
     cmtController = TextEditingController(text: wine.comment);
     nameController = TextEditingController(text: wine.name);
     vintageController = TextEditingController(text: wine.vintage);
@@ -45,8 +49,9 @@ class WineModel extends BaseModel {
     wine.name = nameController.text;
     wine.vintage = vintageController.text;
     wine.aoo = aooController.text;
-    wine.price = double.parse(
-        num.tryParse(priceController.text) == null ? '0' : priceController.text);
+    wine.price = double.parse(num.tryParse(priceController.text) == null
+        ? '0'
+        : priceController.text);
     wine.location = '${countryController.text}, ${aooController.text}';
     await _wineService.updateWine(wine);
     return true;

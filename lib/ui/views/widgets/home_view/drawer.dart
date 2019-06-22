@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wine_cellar/core/viewmodels/home_model.dart';
+import 'package:wine_cellar/core/viewmodels/views/home_model.dart';
 
 
 class MyDrawer extends StatelessWidget {

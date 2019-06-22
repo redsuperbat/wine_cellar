@@ -4,6 +4,7 @@ this is where you place all of your routes, preferably with the help of an enum
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:wine_cellar/core/models/wine.dart';
 
 import 'views/add_view.dart';
 import 'views/home_view.dart';

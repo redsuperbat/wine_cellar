@@ -5,14 +5,22 @@ import 'package:flutter/material.dart';
 import 'package:wine_cellar/core/models/wine.dart';
 import 'package:wine_cellar/core/services/json_service.dart';
 import 'package:wine_cellar/core/services/wine_service.dart';
-import '../../locator.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'base_model.dart';
+import 'package:wine_cellar/core/viewmodels/base_model.dart';
 
 class AddModel extends BaseModel {
-  WineService _wineService = locator<WineService>();
-  JsonService _json = locator<JsonService>();
+  /*WineService _wineService = locator<WineService>();
+  JsonService _json = locator<JsonService>();*/
+
+  final JsonService _json;
+  final WineService _wineService;
+
+  AddModel({@required JsonService json, @required WineService wineService})
+      : _json = json,
+        _wineService = wineService {
+    counterCont.addListener(_listener);
+  }
 
   //variables for the new wines
   DateTime selected = DateTime.now();
@@ -37,11 +45,6 @@ class AddModel extends BaseModel {
   List<String> get types => _json.types;
 
   Country get country => _country;
-
-  //constructor with initializing methods
-  AddModel() {
-    counterCont.addListener(_listener);
-  }
 
   void setCountry(int index) {
     _country = countries[index];

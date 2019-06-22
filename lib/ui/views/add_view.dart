@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:wine_cellar/core/viewmodels/add_model.dart';
+import 'package:provider/provider.dart';
+import 'package:wine_cellar/core/viewmodels/views/add_model.dart';
 
-import 'base_view.dart';
+import 'base_widget.dart';
 import 'widgets/add_view/bottle_amount.dart';
 import 'widgets/add_view/country_picker.dart';
 import 'widgets/add_view/picker.dart';
@@ -13,7 +13,11 @@ import 'widgets/add_view/wine_image.dart';
 class Add extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BaseView<AddModel>(
+    return BaseWidget<AddModel>(
+      model: AddModel(
+        json: Provider.of(context),
+        wineService: Provider.of(context),
+      ),
       builder: (context, model, child) => Scaffold(
             appBar: AppBar(),
             body: SingleChildScrollView(

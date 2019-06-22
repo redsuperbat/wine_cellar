@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:wine_cellar/core/viewmodels/add_model.dart';
+import 'package:wine_cellar/core/viewmodels/views/add_model.dart';
 
 class BottleAmount extends StatelessWidget {
   final AddModel model;

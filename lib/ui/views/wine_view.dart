@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:wine_cellar/core/viewmodels/wine_model.dart';
+import 'package:provider/provider.dart';
+import 'package:wine_cellar/core/viewmodels/views/wine_model.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-import 'base_view.dart';
+import 'base_widget.dart';
 import 'widgets/add_view/picker.dart';
-import 'widgets/wine_view/property_changer.dart';
 import 'widgets/wine_view/wine_image.dart';
 import 'widgets/wine_view/wine_info.dart';
 
@@ -13,7 +13,11 @@ class WineView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BaseView<WineModel>(
+    return BaseWidget<WineModel>(
+      model: WineModel(
+        wineService: Provider.of(context),
+        json: Provider.of(context),
+      ),
       builder: (context, model, child) => WillPopScope(
             onWillPop: () => model.updateWine(),
             child: Scaffold(
@@ -49,10 +53,34 @@ class WineView extends StatelessWidget {
                       children: <Widget>[
                         Flexible(
                           flex: 3,
-                          child: PropertyChanger(
-                            keyBoardType: TextInputType.number,
-                            controller: model.priceController,
-                            title: 'Purchase price',
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Container(
+                                margin: EdgeInsets.only(left: 15, top: 8),
+                                child: Text('Purchase price'),
+                              ),
+                              Card(
+                                margin: EdgeInsets.symmetric(horizontal: 15),
+                                child: Row(
+                                  children: <Widget>[
+                                    Flexible(
+                                      child: TextField(
+                                        keyboardType: TextInputType.number,
+                                        decoration: InputDecoration(
+                                            border: InputBorder.none),
+                                        controller: model.priceController,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Current currency",
+                                      style: TextStyle(
+                                          fontStyle: FontStyle.italic),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         Spacer(),

@@ -1,13 +1,14 @@
 import 'package:flutter/widgets.dart';
-import 'package:wine_cellar/core/enums/viewstate.dart';
+import 'package:wine_cellar/core/services/settings_service.dart';
 
 class BaseModel extends ChangeNotifier {
-  ViewState _state = ViewState.Idle;
+  bool _busy = false;
 
-  ViewState get state => _state;
+  bool get busy => _busy;
 
-  void setState(ViewState viewState) {
-    _state = viewState;
+
+  void setBusy(bool busy) {
+    _busy = busy;
     notifyListeners();
   }
 }
