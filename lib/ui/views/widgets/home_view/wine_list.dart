@@ -21,7 +21,7 @@ class WineList extends StatelessWidget {
             shrinkWrap: true,
             itemCount: model.wines.length,
             itemBuilder: (context, index) =>
-                WineCard(wine: model.wines[index]),
+                WineCard(wine: model.wines[index], model: model),
             //WineCard(wine: model.wines[index]),
           ),
         ),

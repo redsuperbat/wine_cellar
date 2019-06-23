@@ -4,12 +4,17 @@ import 'package:wine_cellar/core/models/wine.dart';
 import 'wine_db_service.dart';
 
 class WineService {
-  //WineDb _db = locator<WineDb>();
-
   final WineDb _db;
 
   WineService({@required WineDb database}) : _db = database;
+
+  Wine addWine = Wine();
+
   Wine viewWine;
+
+  String subType = "show all";
+
+  String type = "";
 
   List<Wine> _wines = [];
 
@@ -26,7 +31,12 @@ class WineService {
   }
 
   void removeWine(Wine wine) {
-    _wines.removeWhere((w) => w.id == wine.id);
+ /*   wines.forEach(
+        (w) => print('Thsee are the ID:s of the wines in the array ${w.id}'));
+    print("This is the ID of the wine we are trying to remove ${wine.id}");
+
+    wines.removeWhere((w) => w.id == wine.id);
+    print(wines);*/
     _db.deleteWine(wine.id);
   }
 
@@ -34,17 +44,19 @@ class WineService {
     _wines = await _db.filterWine(query: query, column: column);
   }
 
-  Future<void> insert(Wine wine) async {
-    _wines.insert(0, wine);
-    await _db.insertWine(wine);
+  Future<void> insertWine() async {
+    addWine.id = wines.length + 1;
+    addWine.time = DateTime.now().toString();
+    wines.insert(0, addWine);
+    await _db.insertWine(addWine);
   }
 
   Future<void> getAllWine() async {
     _wines = await _db.getWines();
   }
 
-  Future<void> updateWine(Wine wine) async {
-    await _db.updateWine(wine);
+  Future<void> updateWine() async {
+    await _db.updateWine(addWine);
   }
 
   void decrementWine(Wine wine) {

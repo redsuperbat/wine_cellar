@@ -3,21 +3,29 @@ import 'package:wine_cellar/core/models/wine.dart';
 import 'package:wine_cellar/core/services/json_service.dart';
 import 'package:wine_cellar/core/services/wine_service.dart';
 
-
 import 'package:wine_cellar/core/viewmodels/base_model.dart';
 
 class HomeModel extends BaseModel {
   final WineService _wineService; //= locator<WineService>();
-  final  JsonService _json; // = locator<JsonService>();
+  final JsonService _json; // = locator<JsonService>();
 
-  HomeModel({@required WineService wineService, @required JsonService json}):
-      _json = json, _wineService = wineService;
+  HomeModel({@required WineService wineService, @required JsonService json})
+      : _json = json,
+        _wineService = wineService;
 
-  List<String> filter;
+  final List<String> filter = ['see all', 'type', 'size'];
 
-  String subtitle = "show all";
+  int index = 0;
+
+  String get type => _wineService.type;
+
+  String get subType => _wineService.subType;
 
   List<Wine> get wines => _wineService.wines;
+
+  List<String> get category => ['see all', "types", "sizes"];
+
+  List<List<String>> get subCategory => [['see all'], sizes, types];
 
   List<String> get sizes => _json.sizes;
 
@@ -29,7 +37,7 @@ class HomeModel extends BaseModel {
     setBusy(false);
   }
 
-  Future<void> getAllWine()async{
+  Future<void> getAllWine() async {
     setBusy(true);
     await _wineService.getAllWine();
     setBusy(false);
@@ -38,21 +46,18 @@ class HomeModel extends BaseModel {
   Future<void> loadAssets() async {
     setBusy(true);
     await _json.loadAssets();
-    filter = [
-      ['show all'],
-      sizes,
-      types
-    ].expand((l) => l).toList();
     setBusy(false);
   }
 
+  void setType(String type) {
+    _wineService.type = type;
+  }
+
+  void setSubType(String subType) {
+    _wineService.subType = subType;
+  }
+
   Future<void> filterWines(String value) async {
-    subtitle = value;
-    if (value == 'show all') await _wineService.getAllWine();
-    if (sizes.contains(value))
-      await _wineService.filterWine(query: value, column: 'size');
-    if (types.contains(value))
-      await _wineService.filterWine(query: value, column: 'type');
     notifyListeners();
   }
 }

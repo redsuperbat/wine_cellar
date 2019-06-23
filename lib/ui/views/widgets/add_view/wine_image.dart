@@ -8,6 +8,7 @@ class WineImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("wine image rebuilt");
     return model.image != null
         ? Image.file(
             model.image,

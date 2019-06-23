@@ -33,7 +33,7 @@ class HomeView extends StatelessWidget {
                     children: <Widget>[
                       Text("Your Wines"),
                       Text(
-                        model.subtitle,
+                        model.subType,
                         style: TextStyle(
                             fontSize: 15, fontStyle: FontStyle.italic),
                       )
@@ -41,19 +41,6 @@ class HomeView extends StatelessWidget {
                   ),
                 ),
                 actions: <Widget>[
-                  Container(
-                    margin: EdgeInsets.only(top: 3),
-                    child: PopupMenuButton(
-                      icon: Icon(Icons.filter_list),
-                      onSelected: (value) => model.filterWines(value),
-                      itemBuilder: (context) => model.filter
-                          .map((f) => PopupMenuItem<String>(
-                                value: f,
-                                child: Text(f),
-                              ))
-                          .toList(),
-                    ),
-                  ),
                   IconButton(
                     icon: Icon(Icons.search),
                     onPressed: () => Navigator.pushNamed(context, 'search'),

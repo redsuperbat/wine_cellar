@@ -1,9 +1,7 @@
 import 'package:wine_cellar/core/models/wine.dart';
-import 'package:wine_cellar/core/services/wine_db_service.dart';
 import 'package:wine_cellar/core/services/wine_service.dart';
 
 import 'package:wine_cellar/core/viewmodels/base_model.dart';
-import 'package:flutter/material.dart';
 
 class SearchModel extends BaseModel {
   final WineService _wineService;

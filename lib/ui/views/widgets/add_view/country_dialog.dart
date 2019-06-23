@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:wine_cellar/core/viewmodels/views/add_model.dart';
+import 'package:wine_cellar/core/viewmodels/widgets/country_picker_model.dart';
 
 class CountryDialog extends StatelessWidget {
-  final AddModel model;
+  final CountryPickerModel model;
 
   CountryDialog({this.model});
 

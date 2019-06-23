@@ -53,7 +53,7 @@ class WineModel extends BaseModel {
         ? '0'
         : priceController.text);
     wine.location = '${countryController.text}, ${aooController.text}';
-    await _wineService.updateWine(wine);
+    //await _wineService.updateWine(wine);
     return true;
   }
 

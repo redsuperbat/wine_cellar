@@ -15,7 +15,6 @@ class Add extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseWidget<AddModel>(
       model: AddModel(
-        json: Provider.of(context),
         wineService: Provider.of(context),
       ),
       builder: (context, model, child) => Scaffold(
@@ -32,28 +31,10 @@ class Add extends StatelessWidget {
                   WineImage(
                     model: model,
                   ),
-                  WineForm(model: model),
+                  WineForm(),
+                  Picker(),
                   SizedBox(
                     height: 15,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Spacer(),
-                      Picker(
-                        hint: Text('Size of bottle(s)'),
-                        setter: (value) => model.setSize(value),
-                        value: model.size,
-                        items: model.sizes,
-                      ),
-                      Spacer(),
-                      Picker(
-                        hint: Text('Type of Wine'),
-                        setter: (value) => model.setType(value),
-                        value: model.type,
-                        items: model.types,
-                      ),
-                      Spacer(),
-                    ],
                   ),
                   SizedBox(
                     height: 15,
@@ -61,21 +42,19 @@ class Add extends StatelessWidget {
                   Row(
                     children: <Widget>[
                       Spacer(),
-                      CountryPicker(model: model),
+                      CountryPicker(),
                       Spacer(),
-                      BottleAmount(
-                        model: model,
-                      ),
+                      BottleAmount(),
                       Spacer(),
                     ],
                   ),
                   SizedBox(
                     height: 15,
                   ),
-                  VintagePicker(model: model),
+                  VintagePicker(),
                   RaisedButton(
-                    onPressed: () {
-                      model.addWineToDb();
+                    onPressed: () async {
+                      await model.addWineToDb();
                       Navigator.pop(context);
                     },
                     child: Text("Add to Cellar"),

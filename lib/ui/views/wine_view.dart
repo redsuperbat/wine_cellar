@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wine_cellar/core/viewmodels/views/add_model.dart';
 import 'package:wine_cellar/core/viewmodels/views/wine_model.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'base_widget.dart';
 import 'widgets/add_view/picker.dart';
+import 'widgets/add_view/wine_form.dart';
 import 'widgets/wine_view/wine_image.dart';
 import 'widgets/wine_view/wine_info.dart';
 
@@ -13,10 +15,9 @@ class WineView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BaseWidget<WineModel>(
-      model: WineModel(
-        wineService: Provider.of(context),
-        json: Provider.of(context),
+    return BaseWidget<AddModel>(
+      model: AddModel(
+        wineService: Provider.of(context)
       ),
       builder: (context, model, child) => WillPopScope(
             onWillPop: () => model.updateWine(),
@@ -39,17 +40,15 @@ class WineView extends StatelessWidget {
                               initialRating: model.wine.rating,
                               allowHalfRating: true,
                               onRatingUpdate: (rating) =>
-                                  model.updateRating(rating),
+                                  model.setRating(rating),
                             ),
                             Text('${model.wine.rating}/5.0')
                           ],
                         ),
                       ],
                     ),
-                    WineInfo(
-                      model: model,
-                    ),
-                    Row(
+                    WineForm(),
+                   /* Row(
                       children: <Widget>[
                         Flexible(
                           flex: 3,
@@ -90,25 +89,11 @@ class WineView extends StatelessWidget {
                         ),
                         Spacer(),
                       ],
-                    ),
+                    ),*/
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Picker(
-                          hint: Text('Type of Wine'),
-                          setter: (value) => model.setType(value),
-                          value: model.wine.type == "" ? null : model.wine.type,
-                          items: model.types,
-                        ),
-                        SizedBox(
-                          width: 25,
-                        ),
-                        Picker(
-                          hint: Text('Size of bottle(s)'),
-                          setter: (value) => model.setSize(value),
-                          value: model.wine.size == "" ? null : model.wine.size,
-                          items: model.sizes,
-                        ),
+                        Picker()
                       ],
                     ),
                     Text("Comments"),
@@ -116,7 +101,7 @@ class WineView extends StatelessWidget {
                       margin: EdgeInsets.only(right: 25, left: 25, bottom: 10),
                       elevation: 3,
                       child: TextField(
-                        controller: model.cmtController,
+                        onChanged: (value) => model.setComments(value),
                         decoration: InputDecoration.collapsed(
                           hintText: "Write your notes about the wine here",
                         ),

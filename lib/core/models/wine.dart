@@ -10,7 +10,7 @@ class Wine {
   int owned;
   String grapes;
   String image;
-  double rating = 0.0;
+  double rating;
   String comment;
   double price;
   String time; //appellation of origin
@@ -24,12 +24,13 @@ class Wine {
       this.vintage,
       this.id,
       this.grapes,
-      this.owned,
+      this.owned = 1,
       this.size,
       this.image,
       this.time,
       this.comment,
-      this.price});
+      this.price,
+      this.rating = 0.0});
 
   Map<String, dynamic> toJson() => <String, dynamic>{
         'name': name,
