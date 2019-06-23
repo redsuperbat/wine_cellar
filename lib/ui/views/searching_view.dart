@@ -5,6 +5,7 @@ import 'package:wine_cellar/core/viewmodels/views/search_model.dart';
 import 'package:wine_cellar/ui/views/widgets/home_view/wine_card.dart';
 
 import 'base_widget.dart';
+import 'widgets/home_view/wine_list.dart';
 
 class SearchView extends StatelessWidget {
   final TextStyle style = TextStyle(
@@ -43,26 +44,7 @@ class SearchView extends StatelessWidget {
                     height: 2,
                     width: MediaQuery.of(context).size.width,
                   ),
-                  model.busy
-                      ? Expanded(
-                          child: Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                        )
-                      : Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Expanded(
-                                child: ListView.builder(
-                                  itemCount: model.wines.length,
-                                  itemBuilder: (context, index) =>
-                                      WineCard(wine: model.wines[index]),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                  WineList(),
                 ],
               ),
             ),

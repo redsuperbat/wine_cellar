@@ -3,20 +3,12 @@ import 'package:wine_cellar/core/services/wine_service.dart';
 
 import '../base_model.dart';
 
-class WineListModel extends BaseModel {
+class WineCardModel extends BaseModel {
   final WineService _wineService;
 
-  WineListModel({WineService wineService}) : _wineService = wineService;
+  WineCardModel({WineService wineService}) : _wineService = wineService;
 
   List<Wine> get wines => _wineService.wines;
-
-
-  Future<void> onRefresh() async {
-    print("Im refreshing");
-    setBusy(true);
-    await _wineService.getAllWine();
-    setBusy(false);
-  }
 
   void removeWine(Wine wine) {
     wines.removeWhere((w) => w.id == wine.id);
@@ -33,6 +25,4 @@ class WineListModel extends BaseModel {
     _wineService.decrementWine(wine);
     notifyListeners();
   }
-
-
 }

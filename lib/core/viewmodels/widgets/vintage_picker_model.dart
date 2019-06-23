@@ -5,10 +5,10 @@ import '../base_model.dart';
 class VintagePickerModel extends BaseModel {
   final WineService _wineService;
 
-  VintagePickerModel({WineService wineService}) : _wineService = wineService;
-
   DateTime selected = DateTime.now();
   bool isChecked = false;
+
+  VintagePickerModel({WineService wineService}) : _wineService = wineService;
 
   void change() {
     isChecked = !isChecked;
@@ -16,6 +16,7 @@ class VintagePickerModel extends BaseModel {
   }
 
   void setYear(DateTime value) {
+    print('this is the dateTiem $value');
     selected = value;
     _wineService.addWine.vintage = isChecked ? "NV" : selected.year.toString();
     notifyListeners();

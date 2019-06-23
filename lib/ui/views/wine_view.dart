@@ -47,7 +47,7 @@ class WineView extends StatelessWidget {
                         ),
                       ],
                     ),
-                    WineForm(),
+                    Flexible(child: WineForm()),
                    /* Row(
                       children: <Widget>[
                         Flexible(
@@ -93,7 +93,7 @@ class WineView extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Picker()
+                        Flexible(child: Picker())
                       ],
                     ),
                     Text("Comments"),
@@ -101,7 +101,7 @@ class WineView extends StatelessWidget {
                       margin: EdgeInsets.only(right: 25, left: 25, bottom: 10),
                       elevation: 3,
                       child: TextField(
-                        onChanged: (value) => model.setComments(value),
+                        controller: model.cmtController,
                         decoration: InputDecoration.collapsed(
                           hintText: "Write your notes about the wine here",
                         ),

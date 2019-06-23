@@ -10,6 +10,7 @@ class VintagePicker extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseWidget<VintagePickerModel>(
       model: VintagePickerModel(wineService: Provider.of(context)),
+      onModelReady: (model) => model.setYear(DateTime.now()),
       builder: (context, model, child) => Column(
             children: <Widget>[
               Row(

@@ -17,16 +17,16 @@ class WineForm extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 TextField(
-                  onChanged: (value) => model.setName(value),
+                  controller: model.nameController,
                   decoration:
                       InputDecoration(hintText: 'Brand Name & Wine Producer'),
                 ),
                 TextField(
-                  onChanged: (value) => model.setGrapes(value),
+                  controller: model.grapeController,
                   decoration: InputDecoration(hintText: 'Grapes'),
                 ),
                 TextField(
-                  onChanged: (value) => model.setAoo(value),
+                  controller: model.aooController,
                   decoration: InputDecoration(
                     suffixIcon: Tooltip(
                         padding: EdgeInsets.symmetric(horizontal: 20),
@@ -40,7 +40,7 @@ class WineForm extends StatelessWidget {
                 ),
                 TextField(
                   keyboardType: TextInputType.number,
-                  onChanged: (value) => model.setPrice(value),
+                  controller: model.priceController,
                   inputFormatters: <TextInputFormatter>[
                     // WhitelistingTextInputFormatter('[0-9.]'), Implement me
                   ],

@@ -29,7 +29,7 @@ class Wine {
       this.image,
       this.time,
       this.comment,
-      this.price,
+      this.price = 0.0,
       this.rating = 0.0});
 
   Map<String, dynamic> toJson() => <String, dynamic>{

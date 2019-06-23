@@ -31,12 +31,6 @@ class WineService {
   }
 
   void removeWine(Wine wine) {
- /*   wines.forEach(
-        (w) => print('Thsee are the ID:s of the wines in the array ${w.id}'));
-    print("This is the ID of the wine we are trying to remove ${wine.id}");
-
-    wines.removeWhere((w) => w.id == wine.id);
-    print(wines);*/
     _db.deleteWine(wine.id);
   }
 
@@ -53,6 +47,7 @@ class WineService {
 
   Future<void> getAllWine() async {
     _wines = await _db.getWines();
+    sort('time');
   }
 
   Future<void> updateWine() async {
@@ -68,7 +63,7 @@ class WineService {
   void sort(String sort) {
     switch (sort) {
       case 'time':
-        return wines.sort((f, s) => f.time.compareTo(s.time));
+        return wines.sort((f, s) => s.time.compareTo(f.time));
       case 'type':
         return wines.sort((f, s) => f.type.compareTo(s.type));
       case 'size':
