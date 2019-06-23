@@ -12,7 +12,7 @@ class BottleAmountModel extends BaseModel {
 
   TextEditingController get controller => _controller;
 
-  Wine get wine => _wineService.addWine;
+  Wine get wine => _wineService.wine;
 
   void increment() {
     if (wine.owned != 999) {

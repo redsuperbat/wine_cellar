@@ -18,7 +18,7 @@ class WineCardModel extends BaseModel {
 
 
   void injectWine(Wine wine) {
-    _wineService.addWine = wine;
+    _wineService.wine = wine;
   }
 
   void decrement(Wine wine) {

@@ -8,7 +8,7 @@ class WineService {
 
   WineService({@required WineDb database}) : _db = database;
 
-  Wine addWine = Wine();
+  Wine wine = Wine();
 
   Wine viewWine;
 
@@ -39,10 +39,10 @@ class WineService {
   }
 
   Future<void> insertWine() async {
-    addWine.id = wines.length + 1;
-    addWine.time = DateTime.now().toString();
-    wines.insert(0, addWine);
-    await _db.insertWine(addWine);
+    wine.id = wines.length + 1;
+    wine.time = DateTime.now().toString();
+    wines.insert(0, wine);
+    await _db.insertWine(wine);
   }
 
   Future<void> getAllWine() async {
@@ -51,7 +51,7 @@ class WineService {
   }
 
   Future<void> updateWine() async {
-    await _db.updateWine(addWine);
+    await _db.updateWine(wine);
   }
 
   void decrementWine(Wine wine) {

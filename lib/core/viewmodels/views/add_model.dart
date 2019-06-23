@@ -12,7 +12,7 @@ class AddModel extends BaseModel {
 
   File image;
 
-  Wine get wine => _wineService.addWine;
+  Wine get wine => _wineService.wine;
 
   TextEditingController cmtController;
 
@@ -39,7 +39,7 @@ class AddModel extends BaseModel {
   @override
   void dispose() {
     print("Disposing AddModel");
-    _wineService.addWine = Wine();
+    _wineService.wine = Wine();
     super.dispose();
   }
 
@@ -49,17 +49,17 @@ class AddModel extends BaseModel {
   }
 
   void setRating(double value) {
-    _wineService.addWine.rating = value;
+    _wineService.wine.rating = value;
     notifyListeners();
   }
 
   void setComments() {
-    _wineService.addWine.comment = cmtController.text;
+    _wineService.wine.comment = cmtController.text;
   }
 
   Future addWineToDb() async {
-    _wineService.addWine.image = image == null ? null : image.path;
-    print(_wineService.addWine.vintage);
+    _wineService.wine.image = image == null ? null : image.path;
+    print(_wineService.wine.vintage);
     await _wineService.insertWine();
   }
 }

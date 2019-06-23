@@ -22,7 +22,7 @@ class CountryPickerModel extends BaseModel {
 
   void setCountry(int index) {
     _country = countries[index];
-    _wineService.addWine.country = _country.name;
+    _wineService.wine.country = _country.name;
     notifyListeners();
   }
 }

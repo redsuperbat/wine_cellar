@@ -31,7 +31,7 @@ class Add extends StatelessWidget {
                   WineImage(
                     model: model,
                   ),
-                  WineForm(),
+                  WineForm(add: true,),
                   Picker(),
                   SizedBox(
                     height: 15,

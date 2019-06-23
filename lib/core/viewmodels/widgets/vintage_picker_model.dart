@@ -18,7 +18,7 @@ class VintagePickerModel extends BaseModel {
   void setYear(DateTime value) {
     print('this is the dateTiem $value');
     selected = value;
-    _wineService.addWine.vintage = isChecked ? "NV" : selected.year.toString();
+    _wineService.wine.vintage = isChecked ? "NV" : selected.year.toString();
     notifyListeners();
   }
 }

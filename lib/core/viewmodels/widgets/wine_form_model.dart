@@ -20,11 +20,6 @@ class WineFormModel extends BaseModel {
 
   }
 
-/*  final TextEditingController aooCont = TextEditingController();
-  final TextEditingController priceCont = TextEditingController();
-  final TextEditingController grapeCont = TextEditingController();
-  final TextEditingController nameProdCont = TextEditingController();*/
-
   TextEditingController aooController;
   TextEditingController priceController;
   TextEditingController nameController;
@@ -32,7 +27,7 @@ class WineFormModel extends BaseModel {
 
 
 
-  Wine get wine => _wineService.addWine;
+  Wine get wine => _wineService.wine;
 
   void setName() {
     wine.name = nameController.text;

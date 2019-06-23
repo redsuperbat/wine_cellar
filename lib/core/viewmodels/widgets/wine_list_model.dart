@@ -10,6 +10,8 @@ class WineListModel extends BaseModel {
 
   List<Wine> get wines => _wineService.wines;
 
+  Wine get wine => _wineService.wine;
+
 
   Future<void> onRefresh() async {
     print("Im refreshing");
@@ -25,8 +27,8 @@ class WineListModel extends BaseModel {
   }
 
 
-  void injectWine(Wine wine) {
-    _wineService.addWine = wine;
+  void injectWine(Wine newWine) {
+    _wineService.wine = newWine;
   }
 
   void decrement(Wine wine) {
