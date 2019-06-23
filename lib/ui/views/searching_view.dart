@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wine_cellar/core/viewmodels/views/search_model.dart';
 
-import 'package:wine_cellar/ui/views/widgets/home_view/wine_card.dart';
 
 import 'base_widget.dart';
 import 'widgets/home_view/wine_list.dart';

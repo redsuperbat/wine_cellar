@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wine_cellar/core/viewmodels/views/add_model.dart';
 import 'package:wine_cellar/core/viewmodels/widgets/country_picker_model.dart';
 
 import '../../base_widget.dart';

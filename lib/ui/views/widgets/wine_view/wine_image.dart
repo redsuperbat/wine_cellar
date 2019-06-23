@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:wine_cellar/core/viewmodels/views/add_model.dart';
-import 'package:wine_cellar/core/viewmodels/views/wine_model.dart';
 
 class WineImage extends StatelessWidget {
   final AddModel model;

@@ -1,14 +1,11 @@
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:wine_cellar/core/models/wine.dart';
-import 'package:wine_cellar/core/viewmodels/widgets/wine_card_model.dart';
 import 'package:wine_cellar/core/viewmodels/widgets/wine_list_model.dart';
 
 import 'package:wine_cellar/ui/views/widgets/home_view/wine_slider.dart';
 
-import '../../base_widget.dart';
 
 
 class WineCard extends StatelessWidget {
