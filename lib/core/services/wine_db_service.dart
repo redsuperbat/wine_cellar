@@ -39,7 +39,7 @@ class WineDb {
 
   Future<List<Wine>> getAllWines({String orderBy = 'time'}) async {
     final List<Map<String, dynamic>> _wines =
-        await database.query('wines', orderBy: orderBy);
+        await database.query('wines', orderBy: '$orderBy DESC');
     List<Wine> wines = [];
     _wines.forEach((w) => wines.add(Wine.fromJson(w)));
     return wines;

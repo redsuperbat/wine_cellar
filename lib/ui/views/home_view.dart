@@ -49,12 +49,6 @@ class HomeView extends StatelessWidget {
                       ),
                       DropdownFilter(),
                     ],
-                    leading: Builder(
-                      builder: (context) => IconButton(
-                            icon: Icon(Icons.settings),
-                            onPressed: () => Scaffold.of(context).openDrawer(),
-                          ),
-                    ),
                   ),
             drawer: MyDrawer(model: model),
             floatingActionButton: FloatingActionButton(

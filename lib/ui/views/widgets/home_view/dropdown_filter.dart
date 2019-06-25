@@ -19,42 +19,48 @@ class DropdownFilter extends StatelessWidget {
             child: InkWell(
               child: Icon(Icons.filter_list),
               onTap: () async {
-                model.setType(await showMenu(
-                  context: context,
-                  position: RelativeRect.fromLTRB(100.0, 40.0, 30.0, 100.0),
-                  items: model.category
-                      .map(
-                        (s) => PopupMenuItem(
-                              child: Text(s),
-                              value: s,
-                            ),
-                      )
-                      .toList(),
-                ));
-                print(model.type);
-                model.type == "show all"
-                    ? await model.getAllWine()
-                    : model.setSubType(await showMenu(
+                model.setType(
+                  await showMenu(
                         context: context,
                         position:
                             RelativeRect.fromLTRB(100.0, 40.0, 30.0, 100.0),
-                        items: model.type == "Type"
-                            ? model.types
-                                .map((t) => PopupMenuItem(
-                                      child: Text(t),
-                                      value: t,
-                                    ))
-                                .toList()
-                            : model.sizes
-                                .map((s) => PopupMenuItem(
-                                      child: Text(s),
-                                      value: s,
-                                    ))
-                                .toList()));
+                        items: model.category
+                            .map(
+                              (s) => PopupMenuItem(
+                                    child: Text(s),
+                                    value: s,
+                                  ),
+                            )
+                            .toList(),
+                      ) ??
+                      "show all",
+                );
+                print(model.type);
+                model.type == "show all"
+                    ? await model.getAllWine()
+                    : model.setSubType(
+                        await showMenu(
+                          context: context,
+                          position:
+                              RelativeRect.fromLTRB(100.0, 40.0, 30.0, 100.0),
+                          items: model.type == "Type"
+                              ? model.types
+                                  .map((t) => PopupMenuItem(
+                                        child: Text(t),
+                                        value: t,
+                                      ))
+                                  .toList()
+                              : model.sizes
+                                  .map((s) => PopupMenuItem(
+                                        child: Text(s),
+                                        value: s,
+                                      ))
+                                  .toList(),
+                        ),
+                      );
               },
             ),
           ),
     );
   }
 }
-

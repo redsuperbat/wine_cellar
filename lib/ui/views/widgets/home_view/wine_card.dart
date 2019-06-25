@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wine_cellar/core/models/wine.dart';
 import 'package:wine_cellar/core/viewmodels/widgets/wine_card_model.dart';
-import 'package:wine_cellar/core/viewmodels/widgets/wine_list_model.dart';
 
 import 'package:wine_cellar/ui/views/widgets/home_view/wine_slider.dart';
 
@@ -22,7 +21,7 @@ class WineCard extends StatelessWidget {
       model: WineCardModel(wineService: Provider.of(context)),
       builder: (context, model, child) => Slidable(
             key: ValueKey(wine.id),
-            secondaryActions: <Widget>[
+            actions: <Widget>[
               SlideAction(
                 child: WineSlider(
                   title: 'Remove all',
@@ -34,20 +33,34 @@ class WineCard extends StatelessWidget {
                 ),
                 onTap: () => model.removeWine(wine),
               ),
+            ],
+            secondaryActions: <Widget>[
+              SlideAction(
+                child: WineSlider(
+                  title: 'Add one',
+                  child: Icon(
+                    Icons.add_box,
+                    color: Colors.white,
+                  ),
+                  color: Colors.green[300],
+                ),
+                onTap: () => model.increment(wine),
+              ),
               SlideAction(
                 child: WineSlider(
                   title: "Drink one",
                   color: Colors.blue[300],
                   child: Icon(
-                    Icons.delete_sweep,
+                    Icons.local_drink,
                     color: Colors.white,
                   ),
                 ),
-                onTap: ()=> model.decrement(wine),
+                onTap: () => model.decrement(wine),
               )
             ],
             actionPane: SlidableScrollActionPane(),
             child: Card(
+              elevation: 3,
               child: InkWell(
                 onTap: () {
                   model.injectWine(wine);
@@ -64,12 +77,16 @@ class WineCard extends StatelessWidget {
                                 ? 'assets/wines/rose_wine.png'
                                 : wine.type == "Red"
                                     ? 'assets/wines/red_wine.png'
-                                    : 'assets/wines/white_wine.png',
+                                    : wine.type == "Sparkling White" ||
+                                            wine.type == "Sparkling Rosé"
+                                        ? 'assets/wines/sparkling_wine.png'
+                                        : 'assets/wines/white_wine.png',
                         height: 100,
                         fit: BoxFit.contain,
                       ),
                     ),
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Container(
                           width: MediaQuery.of(context).size.width / 2,
@@ -79,10 +96,13 @@ class WineCard extends StatelessWidget {
                           ),
                         ),
                         Text('${wine.country}, ${wine.aoo}'),
-                        Text(
-                          wine.grapes ?? "",
-                          style: TextStyle(
-                              fontSize: 13, fontStyle: FontStyle.italic),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          child: Text(
+                            wine.grapes ?? "",
+                            style: TextStyle(
+                                fontSize: 13, fontStyle: FontStyle.italic),
+                          ),
                         ),
                       ],
                     ),

@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'views/add_view.dart';
+import 'views/export_view.dart';
 import 'views/home_view.dart';
-import 'views/searching_view.dart';
+import 'views/settings_view.dart';
+import 'views/statistics_view.dart';
 import 'views/wine_view.dart';
 
 class Router {
@@ -17,10 +19,14 @@ class Router {
         return MaterialPageRoute(builder: (_) => HomeView());
       case 'add':
         return MaterialPageRoute(builder: (_) => Add());
-      case 'search':
-        return MaterialPageRoute(builder: (_) => SearchView(),);
       case 'wine':
         return MaterialPageRoute(builder: (_) => WineView());
+      case 'export':
+        return MaterialPageRoute(builder: (_) => ExportView());
+      case 'settings':
+        return MaterialPageRoute(builder: (_) => SettingsView());
+      case 'statistics':
+        return MaterialPageRoute(builder: (_) => StatisticsView());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

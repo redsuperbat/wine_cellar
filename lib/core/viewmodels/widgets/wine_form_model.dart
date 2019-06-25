@@ -19,7 +19,7 @@ class WineFormModel extends BaseModel {
     nameController = TextEditingController(text: wine.name ?? "");
     grapeController = TextEditingController(text: wine.grapes ?? "");
     priceController = TextEditingController(
-        text: wine.price == 0.0 ? 'Set price' : wine.price.toString());
+        text: wine.price == 0.0 ? '' : wine.price.toString());
     vintageController = TextEditingController(text: wine.vintage);
     countryController = TextEditingController(text: wine.country ?? "");
 

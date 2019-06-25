@@ -1,12 +1,9 @@
-import 'package:wine_cellar/core/models/wine.dart';
 import 'package:wine_cellar/core/services/wine_service.dart';
 
 import 'package:wine_cellar/core/viewmodels/base_model.dart';
 
 class SearchModel extends BaseModel {
   final WineService _wineService;
-
-  Stream<Wine> get wines => _wineService.wines;
 
   SearchModel({WineService wineService}) : _wineService = wineService;
 
@@ -22,7 +19,7 @@ class SearchModel extends BaseModel {
     super.dispose();
   }
 
-  void search(String query) async {
+  Future search(String query) async {
     await _wineService.searchWine(query);
   }
 }

@@ -12,12 +12,17 @@ class WineCardModel extends BaseModel {
     _wineService.removeWine(wine);
   }
 
+  Future increment(Wine wine)async {
+    wine.owned++;
+    await _wineService.updateWine(newWine: wine);
+  }
 
   void injectWine(Wine wine) {
     _wineService.wine = wine;
   }
 
   Future decrement(Wine wine)async {
+    wine.owned--;
    await _wineService.decrementWine(wine);
   }
 }
