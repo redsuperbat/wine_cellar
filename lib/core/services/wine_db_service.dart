@@ -37,8 +37,9 @@ class WineDb {
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
-  Future<List<Wine>> getWines() async {
-    final List<Map<String, dynamic>> _wines = await database.query('wines');
+  Future<List<Wine>> getAllWines({String orderBy = 'time'}) async {
+    final List<Map<String, dynamic>> _wines =
+        await database.query('wines', orderBy: orderBy);
     List<Wine> wines = [];
     _wines.forEach((w) => wines.add(Wine.fromJson(w)));
     return wines;
@@ -47,6 +48,7 @@ class WineDb {
   Future<void> updateWine(Wine wine) async {
     await database
         .update('wines', wine.toJson(), where: "id = ?", whereArgs: [wine.id]);
+
   }
 
   Future<List<Wine>> filterWine({String query, String column}) async {
@@ -60,7 +62,6 @@ class WineDb {
   Future<List<Wine>> searchWine(String name) async {
     final List<Map<String, dynamic>> _wines = await database
         .query('wines', where: "name LIKE ?", whereArgs: ['%$name%']);
-    print(_wines);
     List<Wine> wines = [];
     _wines.forEach((w) => wines.add(Wine.fromJson(w)));
     return wines;
@@ -70,10 +71,7 @@ class WineDb {
     database.delete('wines', where: "id = ?", whereArgs: [id]);
   }
 
-  void dropDatabase() async {
-    print(await databaseExists(database.path));
-    deleteDatabase(database.path);
-    print(await databaseExists(await getDatabasesPath()));
-    print(database.path);
+  Future dropDatabase() async {
+    await deleteDatabase(database.path);
   }
 }

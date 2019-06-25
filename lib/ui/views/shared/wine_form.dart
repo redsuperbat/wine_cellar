@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:wine_cellar/core/viewmodels/widgets/wine_form_model.dart';
 import 'package:wine_cellar/ui/views/widgets/wine_view/property_changer.dart';
 
-import '../../base_widget.dart';
+import '../base_widget.dart';
 
 class WineForm extends StatelessWidget {
   final bool add;
@@ -61,6 +61,10 @@ class WineForm extends StatelessWidget {
                       ),
                       PropertyChanger(
                         controller: model.grapeController,
+                        title: 'Grapes',
+                      ),
+                      PropertyChanger(
+                        controller: model.countryController,
                         title: 'Country',
                       ),
                       PropertyChanger(
@@ -69,6 +73,12 @@ class WineForm extends StatelessWidget {
                       ),
                       PropertyChanger(
                         controller: model.priceController,
+                        keyBoardType: TextInputType.number,
+                        title: 'Price',
+                      ),
+                      PropertyChanger(
+                        controller: model.vintageController,
+                        keyBoardType: TextInputType.number,
                         title: 'Vintage',
                       ),
                     ],

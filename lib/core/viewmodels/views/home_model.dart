@@ -6,30 +6,20 @@ import 'package:wine_cellar/core/services/wine_service.dart';
 import 'package:wine_cellar/core/viewmodels/base_model.dart';
 
 class HomeModel extends BaseModel {
-  final WineService _wineService; //= locator<WineService>();
-  final JsonService _json; // = locator<JsonService>();
+  final WineService _wineService;
 
-  HomeModel({@required WineService wineService, @required JsonService json})
-      : _json = json,
-        _wineService = wineService;
+  HomeModel({@required WineService wineService}) : _wineService = wineService;
 
-  final List<String> filter = ['see all', 'type', 'size'];
+  Stream<List<Wine>> get wines => _wineService.wines;
 
-  int index = 0;
+  Stream<String> get subType => _wineService.subType;
 
-  String get type => _wineService.type;
+  bool search =false;
 
-  String get subType => _wineService.subType;
-
-  List<Wine> get wines => _wineService.wines;
-
-  List<String> get category => ['see all', "types", "sizes"];
-
-  List<List<String>> get subCategory => [['see all'], sizes, types];
-
-  List<String> get sizes => _json.sizes;
-
-  List<String> get types => _json.types;
+  void beginSearch(){
+    search = !search;
+    notifyListeners();
+  }
 
   Future<void> loadDbData() async {
     setBusy(true);
@@ -41,23 +31,5 @@ class HomeModel extends BaseModel {
     setBusy(true);
     await _wineService.getAllWine();
     setBusy(false);
-  }
-
-  Future<void> loadAssets() async {
-    setBusy(true);
-    await _json.loadAssets();
-    setBusy(false);
-  }
-
-  void setType(String type) {
-    _wineService.type = type;
-  }
-
-  void setSubType(String subType) {
-    _wineService.subType = subType;
-  }
-
-  Future<void> filterWines(String value) async {
-    notifyListeners();
   }
 }

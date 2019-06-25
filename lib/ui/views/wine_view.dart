@@ -5,7 +5,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'base_widget.dart';
 import 'widgets/add_view/picker.dart';
-import 'widgets/add_view/wine_form.dart';
+import 'package:wine_cellar/ui/views/shared/wine_form.dart';
 import 'widgets/wine_view/wine_image.dart';
 
 class WineView extends StatelessWidget {
@@ -18,7 +18,9 @@ class WineView extends StatelessWidget {
       builder: (context, model, child) => WillPopScope(
             onWillPop: () => model.updateWine(),
             child: Scaffold(
-              appBar: AppBar(),
+              appBar: AppBar(
+                title: Text("Your Wine"),
+              ),
               body: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,

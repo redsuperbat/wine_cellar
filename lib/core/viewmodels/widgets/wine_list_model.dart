@@ -1,40 +1,29 @@
+import 'package:meta/meta.dart';
 import 'package:wine_cellar/core/models/wine.dart';
+import 'package:wine_cellar/core/services/json_service.dart';
 import 'package:wine_cellar/core/services/wine_service.dart';
 
 import '../base_model.dart';
 
 class WineListModel extends BaseModel {
   final WineService _wineService;
+  final JsonService _json;
 
-  WineListModel({WineService wineService}) : _wineService = wineService;
+  WineListModel({WineService wineService, @required JsonService json})
+      : _wineService = wineService,
+        _json = json;
 
-  List<Wine> get wines => _wineService.wines;
-
-  Wine get wine => _wineService.wine;
+  Stream<List<Wine>> get wines => _wineService.wines;
 
 
   Future<void> onRefresh() async {
-    print("Im refreshing");
-    setBusy(true);
+    _wineService.subTypeSink.add("show all");
     await _wineService.getAllWine();
+  }
+
+  Future<void> loadAssets() async {
+    setBusy(true);
+    await _json.loadAssets();
     setBusy(false);
   }
-
-  void removeWine(Wine wine) {
-    wines.removeWhere((w) => w.id == wine.id);
-    _wineService.removeWine(wine);
-    notifyListeners();
-  }
-
-
-  void injectWine(Wine newWine) {
-    _wineService.wine = newWine;
-  }
-
-  void decrement(Wine wine) {
-    _wineService.decrementWine(wine);
-    notifyListeners();
-  }
-
-
 }

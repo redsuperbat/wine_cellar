@@ -8,12 +8,8 @@ class WineCardModel extends BaseModel {
 
   WineCardModel({WineService wineService}) : _wineService = wineService;
 
-  List<Wine> get wines => _wineService.wines;
-
   void removeWine(Wine wine) {
-    wines.removeWhere((w) => w.id == wine.id);
     _wineService.removeWine(wine);
-    notifyListeners();
   }
 
 
@@ -21,8 +17,7 @@ class WineCardModel extends BaseModel {
     _wineService.wine = wine;
   }
 
-  void decrement(Wine wine) {
-    _wineService.decrementWine(wine);
-    notifyListeners();
+  Future decrement(Wine wine)async {
+   await _wineService.decrementWine(wine);
   }
 }

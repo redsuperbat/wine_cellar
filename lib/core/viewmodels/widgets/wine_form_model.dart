@@ -7,25 +7,29 @@ import 'package:flutter/material.dart';
 class WineFormModel extends BaseModel {
   final WineService _wineService;
 
-  WineFormModel({WineService wineService}) : _wineService = wineService {
-    aooController = TextEditingController(text: wine.aoo ?? "");
-    nameController = TextEditingController(text: wine.name?? "");
-    grapeController = TextEditingController(text: wine.grapes ?? "");
-    priceController = TextEditingController(
-        text: wine.price == 0.0 ? 'Set price' : wine.price.toString());
-    aooController.addListener(setAoo);
-    nameController.addListener(setName);
-    grapeController.addListener(setGrapes);
-    priceController.addListener(setPrice);
-
-  }
-
   TextEditingController aooController;
   TextEditingController priceController;
   TextEditingController nameController;
   TextEditingController grapeController;
+  TextEditingController vintageController;
+  TextEditingController countryController;
 
+  WineFormModel({WineService wineService}) : _wineService = wineService {
+    aooController = TextEditingController(text: wine.aoo ?? "");
+    nameController = TextEditingController(text: wine.name ?? "");
+    grapeController = TextEditingController(text: wine.grapes ?? "");
+    priceController = TextEditingController(
+        text: wine.price == 0.0 ? 'Set price' : wine.price.toString());
+    vintageController = TextEditingController(text: wine.vintage);
+    countryController = TextEditingController(text: wine.country ?? "");
 
+    countryController.addListener(setCountry);
+    vintageController.addListener(setVintage);
+    aooController.addListener(setAoo);
+    nameController.addListener(setName);
+    grapeController.addListener(setGrapes);
+    priceController.addListener(setPrice);
+  }
 
   Wine get wine => _wineService.wine;
 
@@ -43,5 +47,13 @@ class WineFormModel extends BaseModel {
 
   void setGrapes() {
     wine.grapes = grapeController.text;
+  }
+
+  void setVintage() {
+    wine.vintage = vintageController.text;
+  }
+
+  void setCountry() {
+    wine.country = countryController.text;
   }
 }

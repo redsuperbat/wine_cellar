@@ -7,7 +7,7 @@ import 'widgets/add_view/bottle_amount.dart';
 import 'widgets/add_view/country_picker.dart';
 import 'widgets/add_view/picker.dart';
 import 'widgets/add_view/vintage_picker.dart';
-import 'widgets/add_view/wine_form.dart';
+import 'package:wine_cellar/ui/views/shared/wine_form.dart';
 import 'widgets/add_view/wine_image.dart';
 
 class Add extends StatelessWidget {

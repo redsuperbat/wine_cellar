@@ -16,11 +16,10 @@ class PropertyChanger extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Container(
-          margin: EdgeInsets.only(left: 15, top: 8),
+          margin: EdgeInsets.only(left: 5),
           child: Text(title),
         ),
         Card(
-          margin: EdgeInsets.symmetric(horizontal: 15),
           child: TextField(
             keyboardType: keyBoardType,
             inputFormatters: inputFormatters,

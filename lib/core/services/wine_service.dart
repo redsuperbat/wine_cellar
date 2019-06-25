@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:meta/meta.dart';
 import 'package:wine_cellar/core/models/wine.dart';
 
@@ -5,62 +7,78 @@ import 'wine_db_service.dart';
 
 class WineService {
   final WineDb _db;
-
-  WineService({@required WineDb database}) : _db = database;
+  final StreamController<String> _subType = StreamController.broadcast();
+  final StreamController<String> _type = StreamController.broadcast();
+  final StreamController<List<Wine>> _wines = StreamController.broadcast();
 
   Wine wine = Wine();
 
-  Wine viewWine;
+  WineService({@required WineDb database}) : _db = database;
 
-  String subType = "show all";
+  Sink get typeSink => _type.sink;
 
-  String type = "";
+  Sink get subTypeSink => _subType.sink;
 
-  List<Wine> _wines = [];
+  Stream get subType => _subType.stream;
 
-  List<Wine> get wines => _wines;
+  Stream get type => _type.stream;
+
+  Stream get wines => _wines.stream;
+
+  String category;
+  String subCategory;
+
+  void closeControllers() {
+    _subType.close();
+    _type.close();
+    _wines.close();
+  }
 
   Future<void> initializeDb() async {
     await _db.iniDb();
-    _wines = await _db.getWines();
+    await getAllWine();
   }
 
   Future<void> searchWine(String query) async {
-    _wines = await _db.searchWine(query);
-    sort('time');
+    _wines.add(await _db.searchWine(query));
+    // sort('time');
   }
 
-  void removeWine(Wine wine) {
+  Future removeWine(Wine wine) async {
     _db.deleteWine(wine.id);
+    await getAllWine();
   }
 
-  Future<void> filterWine({String query, String column}) async {
-    _wines = await _db.filterWine(query: query, column: column);
+  Future<void> filterWine() async {
+    _wines.add(await _db.filterWine(query: subCategory, column: category));
   }
 
   Future<void> insertWine() async {
-    wine.id = wines.length + 1;
+    await _db.getAllWines().then((onValue) => wine.id = onValue.length);
     wine.time = DateTime.now().toString();
-    wines.insert(0, wine);
     await _db.insertWine(wine);
+    await getAllWine();
   }
 
   Future<void> getAllWine() async {
-    _wines = await _db.getWines();
-    sort('time');
+    _wines.add(await _db.getAllWines());
+    // sort('time');
   }
 
-  Future<void> updateWine() async {
-    await _db.updateWine(wine);
+  Future<void> updateWine({Wine newWine}) async {
+    await _db.updateWine(newWine ?? wine);
+    await getAllWine();
   }
 
-  void decrementWine(Wine wine) {
-    if (wine.owned == 1) removeWine(wine);
+  Future decrementWine(Wine wine) async {
     wine.owned--;
-    _db.updateWine(wine);
+    if (wine.owned == 0)
+      await removeWine(wine);
+    else
+      await updateWine(newWine: wine);
   }
 
-  void sort(String sort) {
+/*  void sort(String sort) {
     switch (sort) {
       case 'time':
         return wines.sort((f, s) => s.time.compareTo(f.time));
@@ -71,5 +89,5 @@ class WineService {
       case 'price':
         return wines.sort((f, s) => f.price.compareTo(s.price));
     }
-  }
+  }*/
 }
