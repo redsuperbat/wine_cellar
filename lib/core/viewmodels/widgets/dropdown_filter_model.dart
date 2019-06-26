@@ -1,6 +1,5 @@
 import 'package:wine_cellar/core/services/json_service.dart';
 import 'package:wine_cellar/core/services/wine_service.dart';
-import 'package:wine_cellar/core/viewmodels/views/home_model.dart';
 
 import '../base_model.dart';
 

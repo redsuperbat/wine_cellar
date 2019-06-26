@@ -7,7 +7,7 @@ import 'widgets/add_view/bottle_amount.dart';
 import 'widgets/add_view/country_picker.dart';
 import 'widgets/add_view/picker.dart';
 import 'widgets/add_view/vintage_picker.dart';
-import 'package:wine_cellar/ui/views/shared/wine_form.dart';
+import 'widgets/add_view/wine_form.dart';
 import 'widgets/add_view/wine_image.dart';
 
 class Add extends StatelessWidget {
@@ -18,48 +18,56 @@ class Add extends StatelessWidget {
         wineService: Provider.of(context),
       ),
       builder: (context, model, child) => Scaffold(
-            appBar: AppBar(),
-            body: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Text(
-                    "Add more wine to your cellar",
-                    style: TextStyle(fontSize: 30),
-                    textAlign: TextAlign.center,
-                  ),
-                  WineImage(
-                    model: model,
-                  ),
-                  WineForm(add: true,),
-                  Picker(),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Spacer(),
-                      CountryPicker(),
-                      Spacer(),
-                      BottleAmount(),
-                      Spacer(),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  VintagePicker(),
-                  RaisedButton(
-                    onPressed: () async {
-                      await model.addWineToDb();
-                      Navigator.pop(context);
-                    },
-                    child: Text("Add to Cellar"),
-                  ),
-                ],
+            appBar: AppBar(
+              leading: IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () =>
+                      Navigator.pushReplacementNamed(context, '/')),
+            ),
+            body: WillPopScope(
+              onWillPop: () async => false,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text(
+                      "Add more wine to your cellar",
+                      style: TextStyle(fontSize: 30),
+                      textAlign: TextAlign.center,
+                    ),
+                    WineImage(
+                      model: model,
+                    ),
+                    AddWineForm(),
+                    Picker(),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Spacer(),
+                        CountryPicker(),
+                        Spacer(),
+                        BottleAmount(),
+                        Spacer(),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    VintagePicker(),
+                    RaisedButton(
+                      onPressed: () async {
+                        await model.addWineToDb();
+                        Navigator.pushReplacementNamed(context, '/');
+                      },
+                      child: Text("Add to Cellar"),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

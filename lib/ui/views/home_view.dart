@@ -53,7 +53,7 @@ class HomeView extends StatelessWidget {
             drawer: MyDrawer(model: model),
             floatingActionButton: FloatingActionButton(
               backgroundColor: Colors.red,
-              onPressed: () => Navigator.pushNamed(context, 'add'),
+              onPressed: () => Navigator.pushReplacementNamed(context, 'add'),
               child: Icon(Icons.add),
             ),
             body: Container(

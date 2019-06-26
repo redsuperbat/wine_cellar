@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:wine_cellar/core/viewmodels/widgets/bottle_amount_model.dart';
+import 'package:wine_cellar/core/viewmodels/widgets/add_view/bottle_amount_model.dart';
 
 import '../../base_widget.dart';
 

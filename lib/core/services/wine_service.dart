@@ -9,16 +9,23 @@ class WineService {
   final WineDb _db;
   final StreamController<String> _subType = StreamController.broadcast();
   final StreamController<List<Wine>> _wines = StreamController.broadcast();
+  final StreamController<Wine> _wine = StreamController.broadcast();
 
-  Wine wine = Wine();
+
 
   WineService({@required WineDb database}) : _db = database;
+
+  Stream<Wine> get wineStream => _wine.stream;
+
+  Sink<Wine> get wineSink => _wine.sink;
 
   Sink get subTypeSink => _subType.sink;
 
   Stream get subType => _subType.stream;
 
-  Stream get wines => _wines.stream;
+  Stream<List<Wine>> get wines => _wines.stream;
+
+  Wine wine = Wine();
 
   String category;
   String subCategory;
@@ -26,6 +33,7 @@ class WineService {
   void closeControllers() {
     _subType.close();
     _wines.close();
+    _wine.close();
   }
 
   Future<void> initializeDb() async {

@@ -95,7 +95,7 @@ class WineCard extends StatelessWidget {
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
-                        Text('${wine.country}, ${wine.aoo}'),
+                        Text('${wine.country ?? ""} ${wine.aoo ?? ""}'),
                         Container(
                           width: MediaQuery.of(context).size.width * 0.5,
                           child: Text(
@@ -111,7 +111,7 @@ class WineCard extends StatelessWidget {
                       children: <Widget>[
                         Container(
                           child: Text(
-                            wine.vintage ?? "",
+                            wine.vintage,
                             style: TextStyle(fontStyle: FontStyle.italic),
                           ),
                         ),
@@ -122,7 +122,7 @@ class WineCard extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.all(5),
                           child: Text(
-                            '${wine.owned ?? ""} st',
+                            '${wine.owned} st',
                             style: TextStyle(fontSize: 20, color: Colors.red),
                           ),
                         ),

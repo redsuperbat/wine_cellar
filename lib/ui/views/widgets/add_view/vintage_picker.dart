@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wine_cellar/core/viewmodels/widgets/vintage_picker_model.dart';
+import 'package:wine_cellar/core/viewmodels/widgets/add_view/vintage_picker_model.dart';
 
 import '../../base_widget.dart';
 
@@ -37,7 +37,7 @@ class VintagePicker extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20)),
                       height: 100,
                       child: YearPicker(
-                        selectedDate: model.selected,
+                        selectedDate: model.selected ?? DateTime.now(),
                         onChanged: (value) => model.setYear(value),
                         firstDate: DateTime(1850),
                         lastDate: DateTime.now(),
