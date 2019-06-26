@@ -111,7 +111,7 @@ class WineCard extends StatelessWidget {
                       children: <Widget>[
                         Container(
                           child: Text(
-                            wine.vintage,
+                            wine.vintage.substring(0,4),
                             style: TextStyle(fontStyle: FontStyle.italic),
                           ),
                         ),

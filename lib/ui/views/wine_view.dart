@@ -5,7 +5,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'base_widget.dart';
 import 'widgets/add_view/picker.dart';
-import 'package:wine_cellar/ui/views/shared/wine_form.dart';
+import 'package:wine_cellar/ui/views/widgets/wine_view/wine_form.dart';
 import 'widgets/wine_view/wine_image.dart';
 
 class WineView extends StatelessWidget {
@@ -46,9 +46,7 @@ class WineView extends StatelessWidget {
                       ],
                     ),
                     Flexible(
-                      child: WineForm(
-                        add: false,
-                      ),
+                      child: WineForm(),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

@@ -24,6 +24,11 @@ class Add extends StatelessWidget {
                   onPressed: () =>
                       Navigator.pushReplacementNamed(context, '/')),
             ),
+            floatingActionButton: FloatingActionButton(
+              backgroundColor: Colors.red,
+              child: Icon(Icons.add_a_photo, color: Colors.white,),
+              onPressed: () async => await model.getImage(),
+            ),
             body: WillPopScope(
               onWillPop: () async => false,
               child: SingleChildScrollView(
@@ -35,9 +40,13 @@ class Add extends StatelessWidget {
                       style: TextStyle(fontSize: 30),
                       textAlign: TextAlign.center,
                     ),
-                    WineImage(
-                      model: model,
-                    ),
+                    model.image == null
+                        ? Container()
+                        : Image.file(
+                            model.image,
+                            fit: BoxFit.contain,
+                            height: 100,
+                          ),
                     AddWineForm(),
                     Picker(),
                     SizedBox(
