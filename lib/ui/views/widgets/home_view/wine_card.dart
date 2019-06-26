@@ -73,12 +73,12 @@ class WineCard extends StatelessWidget {
                       child: Image.asset(
                         wine.type == null
                             ? 'assets/wine_placeholder.png'
-                            : wine.type == "Rosé"
+                            : wine.type == "Rose"
                                 ? 'assets/wines/rose_wine.png'
                                 : wine.type == "Red"
                                     ? 'assets/wines/red_wine.png'
                                     : wine.type == "Sparkling White" ||
-                                            wine.type == "Sparkling Rosé"
+                                            wine.type == "Sparkling Rose"
                                         ? 'assets/wines/sparkling_wine.png'
                                         : 'assets/wines/white_wine.png',
                         height: 100,

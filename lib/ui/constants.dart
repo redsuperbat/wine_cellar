@@ -44,3 +44,19 @@ const kSecondaryLabelTextStyle = TextStyle(
   fontSize: 18,
   color: Colors.grey,
 );
+
+const csvTitle = [
+  "Name and Wine Producer",
+  "Type of wine",
+  "Appelation of origin",
+  "Cuntry of origin",
+  "Vintage",
+  "Grapes",
+  "Number of bottles owned",
+  "Size of bottles",
+  "Path to image",
+  "DateTime of aquiring",
+  "Comments about the wine",
+  "Bought-price",
+  "Rating"
+];

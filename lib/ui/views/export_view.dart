@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:wine_cellar/core/viewmodels/views/export_model.dart';
 
 import 'base_widget.dart';
+import 'widgets/export_dialog.dart';
 
 class ExportView extends StatelessWidget {
   @override
@@ -31,10 +32,32 @@ class ExportView extends StatelessWidget {
                     style: TextStyle(fontSize: 18),
                   ),
                 ),
-                RaisedButton(
-                  onPressed: () => model.exportToCsv(),
-                  child: Text("Export your databse"),
-                ),
+                model.export
+                    ? Column(
+                        children: <Widget>[
+                          Text("Enter your filename"),
+                          TextField(
+                            controller: model.controller,
+                          ),
+                          RaisedButton(
+                            onPressed: () {
+                              model.exportToCsv();
+                              if (model.error)
+                                showDialog(
+                                  barrierDismissible: false,
+                                  context: context,
+                                  builder: (_) => ExportDialog(model: model),
+                                );
+                            },
+                            child: Text("Export!"),
+                          )
+                        ],
+                      )
+                    : RaisedButton(
+                        onPressed: () =>
+                          model.startExport(),
+                        child: Text("Export your databse"),
+                      ),
                 RaisedButton(
                   onPressed: () {},
                   child: Text("Import a new database from a CSV"),
