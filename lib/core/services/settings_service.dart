@@ -1,10 +1,16 @@
+import 'dart:async';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Settings {
-  String _currency;
+  String _currency = "SEK";
   SharedPreferences _prefs;
 
   String get currency => _currency;
+
+  Settings() {
+    getSettings();
+  }
 
   Future<void> getSettings() async {
     _prefs = await SharedPreferences.getInstance();

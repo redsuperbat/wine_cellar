@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wine_cellar/core/models/wine.dart';
+import 'package:wine_cellar/core/services/settings_service.dart';
 import 'package:wine_cellar/core/services/wine_service.dart';
 import 'dart:async';
 
@@ -7,6 +8,7 @@ import '../../base_model.dart';
 
 class AddWineFormModel extends BaseModel {
   final WineService _wineService;
+  final Settings _settings;
 
   //final LayerLink layerLink = LayerLink();
   final TextEditingController aooController = TextEditingController();
@@ -16,12 +18,16 @@ class AddWineFormModel extends BaseModel {
 
   bool showSearch = true;
 
-  AddWineFormModel({WineService wineService}) : _wineService = wineService {
+  AddWineFormModel({WineService wineService, Settings settings})
+      : _wineService = wineService,
+        _settings = settings {
     nameController.addListener(listener);
     aooController.addListener(setAoo);
     grapeController.addListener(setGrapes);
     priceController.addListener(setPrice);
   }
+
+  String get currency => _settings.currency;
 
   Stream<List<Wine>> get wines => _wineService.wines;
 
@@ -30,7 +36,6 @@ class AddWineFormModel extends BaseModel {
   List<Wine> queryWines;
 
   Wine get wine => _wineService.wine;
-
 
   @override
   void dispose() {
@@ -42,12 +47,11 @@ class AddWineFormModel extends BaseModel {
     super.dispose();
   }
 
-
-  void showWineSearch(){
+  void showWineSearch() {
     showSearch = true;
   }
 
-  void setWine(Wine wine){
+  void setWine(Wine wine) {
     _wineService.wine = wine;
     nameController.text = wine.name ?? "";
     priceController.text = wine.price?.toString() ?? "";
@@ -56,7 +60,6 @@ class AddWineFormModel extends BaseModel {
     _wineService.wineSink.add(wine);
     showSearch = false;
     notifyListeners();
-
   }
 
   void listener() {
@@ -79,5 +82,4 @@ class AddWineFormModel extends BaseModel {
   void setGrapes() {
     wine.grapes = grapeController.text;
   }
-
 }

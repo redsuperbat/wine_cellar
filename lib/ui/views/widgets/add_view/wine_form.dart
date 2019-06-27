@@ -41,13 +41,25 @@ class AddWineForm extends StatelessWidget {
                         hintText: 'Appellation of origin',
                       ),
                     ),
-                    TextField(
-                      keyboardType: TextInputType.number,
-                      controller: model.priceController,
-                      inputFormatters: <TextInputFormatter>[
-                        // WhitelistingTextInputFormatter('[0-9.]'), Implement me
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          flex: 7,
+                          child: TextField(
+                            keyboardType: TextInputType.number,
+                            controller: model.priceController,
+                            inputFormatters: <TextInputFormatter>[
+                              // WhitelistingTextInputFormatter('[0-9.]'), Implement me
+                            ],
+                            decoration:
+                                InputDecoration(hintText: 'Purchase price'),
+                          ),
+                        ),
+                        Expanded(
+                          child: Text(model.currency),
+                          flex: 3,
+                        )
                       ],
-                      decoration: InputDecoration(hintText: 'Purchase price'),
                     ),
                   ],
                 ),
@@ -78,7 +90,8 @@ class AddWineForm extends StatelessWidget {
                                             children: [
                                               Flexible(
                                                 child: Text(
-                                                  snapshot.data[index].name ?? "",
+                                                  snapshot.data[index].name ??
+                                                      "",
                                                   style:
                                                       TextStyle(fontSize: 17),
                                                 ),

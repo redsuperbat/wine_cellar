@@ -23,7 +23,7 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             title: Text("Statistics"),
             trailing: Icon(Icons.graphic_eq),
-            onTap: () => Navigator.pushNamed(context, 'statistics'),
+            onTap: () => Navigator.pushReplacementNamed(context, 'statistics'),
           ),
           ListTile(
             title: Text("Settings"),

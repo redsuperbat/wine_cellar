@@ -33,7 +33,7 @@ class ExportModel extends BaseModel {
   }
 
   void startExport() {
-    export = true;
+    export = !export;
     notifyListeners();
   }
 

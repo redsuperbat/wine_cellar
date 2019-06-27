@@ -13,6 +13,7 @@ class ExportDialog extends StatelessWidget {
       content: RaisedButton(
         onPressed: () {
           model.resolveError();
+          model.startExport();
           Navigator.pop(context);
         },
         child: Text("Return"),

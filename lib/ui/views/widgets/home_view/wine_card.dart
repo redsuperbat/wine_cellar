@@ -50,10 +50,8 @@ class WineCard extends StatelessWidget {
                 child: WineSlider(
                   title: "Drink one",
                   color: Colors.blue[300],
-                  child: Icon(
-                    Icons.local_drink,
-                    color: Colors.white,
-                  ),
+                  child: Icon(IconData(0xe800, fontFamily: 'WineGlass'),
+                      color: Colors.white),
                 ),
                 onTap: () => model.decrement(wine),
               )
@@ -111,7 +109,7 @@ class WineCard extends StatelessWidget {
                       children: <Widget>[
                         Container(
                           child: Text(
-                            wine.vintage.substring(0,4),
+                            wine.vintage.substring(0, 4),
                             style: TextStyle(fontStyle: FontStyle.italic),
                           ),
                         ),

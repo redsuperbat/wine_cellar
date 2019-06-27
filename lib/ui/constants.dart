@@ -45,7 +45,39 @@ const kSecondaryLabelTextStyle = TextStyle(
   color: Colors.grey,
 );
 
-const csvTitle = [
+const List<String> countryNames = [
+  "Spain",
+  "France",
+  "Argentina",
+  "Austria",
+  "Australia",
+  "Chile",
+  "Germany",
+  "Italy",
+  "Portugal",
+  "America",
+  "South Africa",
+];
+
+const List<String> wineCategories = [
+  'Red',
+  'White',
+  'Rose',
+  'Champagne',
+  'Sparkling',
+  'Sweet'
+];
+
+const List<String> wineTypes = [
+  "Red",
+  "White",
+  "Rose",
+  "Sparkling White",
+  "Sparkling Rose",
+  "Sweet"
+];
+
+const List<String> csvTitle = [
   "Name and Wine Producer",
   "Type of wine",
   "Appelation of origin",
@@ -59,4 +91,18 @@ const csvTitle = [
   "Comments about the wine",
   "Bought-price",
   "Rating"
+];
+
+const List<String> currencies = [
+  "EUR",
+  "BGN",
+  "GDP",
+  "HRK",
+  "CZK",
+  "DKK",
+  "HUF",
+  "PLN",
+  "RON",
+  "SEK",
+  "CHF"
 ];

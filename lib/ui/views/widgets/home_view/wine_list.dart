@@ -13,22 +13,24 @@ class WineList extends StatelessWidget {
       model: WineListModel(
           wineService: Provider.of(context), json: Provider.of(context)),
       builder: (context, model, child) => StreamBuilder(
-              stream: model.wines,
-              builder: (context, AsyncSnapshot<List> snapshot) => snapshot.hasData
-                  ? Expanded(
-                      child: RefreshIndicator(
-                        onRefresh: () async => await model.onRefresh(),
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: snapshot.data.length,
-                          itemBuilder: (context, index) =>
-                              WineCard(wine: snapshot.data[index]),
-                          //WineCard(wine: model.wines[index]),
-                        ),
+            stream: model.wines,
+            builder: (context, AsyncSnapshot<List> snapshot) => snapshot.hasData
+                ? Expanded(
+                    child: RefreshIndicator(
+                      onRefresh: () async => await model.onRefresh(),
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (context, index) =>
+                            WineCard(wine: snapshot.data[index]),
+                        //WineCard(wine: model.wines[index]),
                       ),
-                    )
-                  : Center(child: CircularProgressIndicator()),
-            ),
+                    ),
+                  )
+                : Center(
+                    child: CircularProgressIndicator(),
+                  ),
+          ),
     );
   }
 }

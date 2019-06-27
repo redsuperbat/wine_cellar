@@ -12,57 +12,71 @@ class ExportView extends StatelessWidget {
       model: ExportModel(db: Provider.of(context)),
       builder: (context, model, child) => Scaffold(
             appBar: AppBar(),
-            body: Column(
-              children: <Widget>[
-                Flexible(
-                  child: Text(
-                    "Importing/Exporting CSV",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 35),
+            body: SingleChildScrollView(
+              physics: ScrollPhysics(),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Flexible(
+                    child: Text(
+                      "Importing/Exporting CSV",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 35),
+                    ),
                   ),
-                ),
-                Flexible(
-                  child: Text(
-                    "This is where you can export and import CSV files to your database. "
-                    "Right now its only possible to export and import the entire database."
-                    "\nIn future versions of Wine Cellar you should be able to only export a part of your winecellar."
-                    "The CSV file can be opened by any program such as Microsoft Excel or Google "
-                    "sheets for further processing of the data",
-                    //textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 18),
+                  Flexible(
+                    child: Text(
+                      "This is where you can export and import CSV files to your database.\n"
+                      "The CSV file can be opened by any program such as Microsoft Excel or Google "
+                      "sheets for further processing of the data",
+                      //textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 18),
+                    ),
                   ),
-                ),
-                model.export
-                    ? Column(
-                        children: <Widget>[
-                          Text("Enter your filename"),
-                          TextField(
-                            controller: model.controller,
-                          ),
-                          RaisedButton(
-                            onPressed: () {
-                              model.exportToCsv();
-                              if (model.error)
-                                showDialog(
-                                  barrierDismissible: false,
-                                  context: context,
-                                  builder: (_) => ExportDialog(model: model),
-                                );
-                            },
-                            child: Text("Export!"),
-                          )
-                        ],
-                      )
-                    : RaisedButton(
-                        onPressed: () =>
-                          model.startExport(),
-                        child: Text("Export your databse"),
-                      ),
-                RaisedButton(
-                  onPressed: () {},
-                  child: Text("Import a new database from a CSV"),
-                )
-              ],
+                  SizedBox(
+                    height: 45,
+                  ),
+                  model.export
+                      ? Column(
+                          children: <Widget>[
+                            Text("Enter your filename"),
+                            Card(
+                              margin: EdgeInsets.symmetric(horizontal: 30),
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  border: InputBorder.none
+                                ),
+                                controller: model.controller,
+                              ),
+                            ),
+                            RaisedButton(
+                              onPressed: () {
+                                model.exportToCsv();
+                                if (model.error)
+                                  showDialog(
+                                    barrierDismissible: false,
+                                    context: context,
+                                    builder: (_) => ExportDialog(model: model),
+                                  );
+                              },
+                              child: Text("Export!"),
+                            )
+                          ],
+                        )
+                      : Column(
+                          children: [
+                            RaisedButton(
+                              onPressed: () => model.startExport(),
+                              child: Text("Export your databse"),
+                            ),
+                            RaisedButton(
+                              onPressed: () {},
+                              child: Text("Import a new database from a CSV"),
+                            )
+                          ],
+                        ),
+                ],
+              ),
             ),
           ),
     );

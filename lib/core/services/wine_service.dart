@@ -11,8 +11,6 @@ class WineService {
   final StreamController<List<Wine>> _wines = StreamController.broadcast();
   final StreamController<Wine> _wine = StreamController.broadcast();
 
-
-
   WineService({@required WineDb database}) : _db = database;
 
   Stream<Wine> get wineStream => _wine.stream;
@@ -55,7 +53,7 @@ class WineService {
   }
 
   Future<void> insertWine() async {
-    await _db.getAllWines().then((onValue) => wine.id = onValue.length);
+    wine.id = await _db.getId();
     wine.time = DateTime.now().toString();
     await _db.insertWine(wine);
     await getAllWine();
