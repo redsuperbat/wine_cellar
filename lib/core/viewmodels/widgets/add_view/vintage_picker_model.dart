@@ -8,11 +8,13 @@ import '../../base_model.dart';
 class VintagePickerModel extends BaseModel {
   final WineService _wineService;
 
-  DateTime selected = DateTime.now();
+  int selected = DateTime.now().year;
   bool isChecked = false;
   StreamSubscription subscription;
 
   Stream<Wine> get wineStream => _wineService.wineStream;
+
+  Wine get wine => _wineService.wine;
 
   VintagePickerModel({WineService wineService}) : _wineService = wineService {
     subscription = wineStream.listen((wine) => setVintageFromStream(wine));
@@ -25,24 +27,27 @@ class VintagePickerModel extends BaseModel {
     super.dispose();
   }
 
-  void setVintageFromStream(Wine wine) {
-    selected = DateTime.tryParse(wine.vintage);
-    if (selected == null) {
-      _wineService.wine.vintage = "NV";
+  void setVintageFromStream(Wine _wine) {
+    if (_wine.vintage == null) {
+      wine.nv = true;
       isChecked = true;
+      notifyListeners();
     }
-    notifyListeners();
+    else{
+      setYear(_wine.vintage);
+    }
   }
 
   void change() {
+    wine.nv = !wine.nv;
     isChecked = !isChecked;
     notifyListeners();
   }
 
-  void setYear(DateTime value) {
-    print('this is the datetime: $value');
-    selected = value;
-    _wineService.wine.vintage = isChecked ? "NV" : selected.toString();
+  void setYear(int year) {
+    print('this is the datetime: $year');
+    selected = year;
+    wine.vintage = isChecked ? null : year;
     notifyListeners();
   }
 }

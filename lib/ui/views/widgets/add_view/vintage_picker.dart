@@ -3,13 +3,14 @@ import 'package:provider/provider.dart';
 import 'package:wine_cellar/core/viewmodels/widgets/add_view/vintage_picker_model.dart';
 
 import '../../base_widget.dart';
+import 'my_year_picker.dart';
 
 class VintagePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<VintagePickerModel>(
       model: VintagePickerModel(wineService: Provider.of(context)),
-      onModelReady: (model) => model.setYear(DateTime.now()),
+      onModelReady: (model) => model.setYear(DateTime.now().year),
       builder: (context, model, child) => Column(
             children: <Widget>[
               Row(
@@ -36,11 +37,11 @@ class VintagePicker extends StatelessWidget {
                           border: Border.all(color: Colors.red, width: 1),
                           borderRadius: BorderRadius.circular(20)),
                       height: 100,
-                      child: YearPicker(
-                        selectedDate: model.selected ?? DateTime.now(),
-                        onChanged: (value) => model.setYear(value),
-                        firstDate: DateTime(1850),
-                        lastDate: DateTime.now(),
+                      child: MyYearPicker(
+                        selectedYear: model.selected ?? DateTime.now().year,
+                        onChanged: (year) => model.setYear(year),
+                        firstYear: 1850,
+                        lastYear: DateTime.now().year,
                       ),
                     ),
             ],

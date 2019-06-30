@@ -41,6 +41,12 @@ class CountryPickerModel extends BaseModel {
     notifyListeners();
   }
 
+  Future loadAssets() async {
+    setBusy(true);
+    _json.loadAssets();
+    setBusy(false);
+  }
+
   void setCountry(int index) {
     _country = countries[index];
     _wineService.wine.country = _country.name;

@@ -54,7 +54,7 @@ class AddWineFormModel extends BaseModel {
   void setWine(Wine wine) {
     _wineService.wine = wine;
     nameController.text = wine.name ?? "";
-    priceController.text = wine.price?.toString() ?? "";
+    priceController.text = wine.price == null ? "" : wine.price.toString();
     grapeController.text = wine.grapes ?? "";
     aooController.text = wine.aoo;
     _wineService.wineSink.add(wine);

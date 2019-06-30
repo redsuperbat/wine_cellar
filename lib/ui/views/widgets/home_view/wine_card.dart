@@ -75,8 +75,8 @@ class WineCard extends StatelessWidget {
                                 ? 'assets/wines/rose_wine.png'
                                 : wine.type == "Red"
                                     ? 'assets/wines/red_wine.png'
-                                    : wine.type == "Sparkling White" ||
-                                            wine.type == "Sparkling Rose"
+                                    : wine.type == "Sparkling" ||
+                                            wine.type == "Champagne"
                                         ? 'assets/wines/sparkling_wine.png'
                                         : 'assets/wines/white_wine.png',
                         height: 100,
@@ -109,7 +109,7 @@ class WineCard extends StatelessWidget {
                       children: <Widget>[
                         Container(
                           child: Text(
-                            wine.vintage.substring(0, 4),
+                            wine.nv ? "NV" : wine.vintage.toString(),
                             style: TextStyle(fontStyle: FontStyle.italic),
                           ),
                         ),

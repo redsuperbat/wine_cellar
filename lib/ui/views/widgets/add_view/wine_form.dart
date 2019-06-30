@@ -10,8 +10,7 @@ class AddWineForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseWidget<AddWineFormModel>(
       model: AddWineFormModel(
-        wineService: Provider.of(context),
-      ),
+          wineService: Provider.of(context), settings: Provider.of(context)),
       builder: (context, model, child) => Container(
             width: MediaQuery.of(context).size.width / 1.2,
             child: Stack(
@@ -32,34 +31,30 @@ class AddWineForm extends StatelessWidget {
                       controller: model.aooController,
                       decoration: InputDecoration(
                         suffixIcon: Tooltip(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
-                            message:
-                                'Where the wine originates from. \nEg. Bourgogne, Bourdeaux or Napa-Valley',
-                            child: Icon(
-                              Icons.info,
-                            )),
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          message:
+                              'Where the wine originates from. \nEg. Bourgogne, Bourdeaux or Napa-Valley',
+                          child: Icon(
+                            Icons.info,
+                          ),
+                        ),
                         hintText: 'Appellation of origin',
                       ),
                     ),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          flex: 7,
-                          child: TextField(
-                            keyboardType: TextInputType.number,
-                            controller: model.priceController,
-                            inputFormatters: <TextInputFormatter>[
-                              // WhitelistingTextInputFormatter('[0-9.]'), Implement me
-                            ],
-                            decoration:
-                                InputDecoration(hintText: 'Purchase price'),
-                          ),
-                        ),
-                        Expanded(
-                          child: Text(model.currency),
-                          flex: 3,
-                        )
+                    TextField(
+                      keyboardType: TextInputType.number,
+                      controller: model.priceController,
+                      inputFormatters: <TextInputFormatter>[
+                        // WhitelistingTextInputFormatter('[0-9.]'), Implement me
                       ],
+                      decoration: InputDecoration(
+                        suffixIcon: Container(
+                          height: 30,
+                          width: MediaQuery.of(context).size.width * 0.1,
+                          child: Center(child: Text(model.currency)),
+                        ),
+                        hintText: 'Purchase price',
+                      ),
                     ),
                   ],
                 ),

@@ -9,9 +9,8 @@ class WineList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<WineListModel>(
-      onModelReady: (model) => model.loadAssets(),
       model: WineListModel(
-          wineService: Provider.of(context), json: Provider.of(context)),
+          wineService: Provider.of(context)),
       builder: (context, model, child) => StreamBuilder(
             stream: model.wines,
             builder: (context, AsyncSnapshot<List> snapshot) => snapshot.hasData

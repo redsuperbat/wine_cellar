@@ -45,6 +45,8 @@ const kSecondaryLabelTextStyle = TextStyle(
   color: Colors.grey,
 );
 
+const List<String> wineSizes = ["375mL", "750mL", "1.5L", "3L", "6L"];
+
 const List<String> countryNames = [
   "Spain",
   "France",
@@ -66,15 +68,6 @@ const List<String> wineCategories = [
   'Champagne',
   'Sparkling',
   'Sweet'
-];
-
-const List<String> wineTypes = [
-  "Red",
-  "White",
-  "Rose",
-  "Sparkling White",
-  "Sparkling Rose",
-  "Sweet"
 ];
 
 const List<String> csvTitle = [

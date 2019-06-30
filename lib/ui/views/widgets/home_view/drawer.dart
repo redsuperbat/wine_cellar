@@ -9,11 +9,21 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Column(
+      child: ListView(
+        padding: EdgeInsets.zero,
         children: <Widget>[
-          Container(
-            height: MediaQuery.of(context).size.height * 0.2,
-            color: Colors.red,
+          UserAccountsDrawerHeader(
+            otherAccountsPictures: <Widget>[
+              CircleAvatar(
+                child: InkWell(
+                  onTap: () => print("hello"),
+                ),
+              ),
+              CircleAvatar()
+            ],
+            currentAccountPicture: CircleAvatar(),
+            accountName: Container(            ),
+            accountEmail: Container(child: Text("HELLO"),),
           ),
           ListTile(
             title: Text("Export/Import"),

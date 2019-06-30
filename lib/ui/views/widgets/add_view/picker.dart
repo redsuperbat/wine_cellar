@@ -9,7 +9,7 @@ class Picker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<PickerModel>(
-      model: PickerModel(Provider.of(context), Provider.of(context)),
+      model: PickerModel(Provider.of(context)),
       builder: (context, model, child) => Row(
             children: <Widget>[
               Spacer(),
@@ -22,7 +22,7 @@ class Picker extends StatelessWidget {
                     value: model.wine.size,
                     hint: Text("Size of bottle(s)"),
                     onChanged: (newValue) => model.setSize(newValue),
-                    items: model.sizes
+                    items: wineSizes
                         .map((value) => DropdownMenuItem<String>(
                             value: value, child: Text(value)))
                         .toList(),

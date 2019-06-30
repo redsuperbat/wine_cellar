@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wine_cellar/core/viewmodels/widgets/dropdown_filter_model.dart';
+import 'package:wine_cellar/ui/constants.dart';
 
 import '../../base_widget.dart';
 
@@ -8,10 +9,7 @@ class DropdownFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<DropdownFilterModel>(
-      model: DropdownFilterModel(
-        json: Provider.of(context),
-        wineService: Provider.of(context),
-      ),
+      model: DropdownFilterModel(wineService: Provider.of(context)),
       builder: (context, model, child) => Container(
             margin: EdgeInsets.only(right: 8),
             child: InkWell(
@@ -42,13 +40,13 @@ class DropdownFilter extends StatelessWidget {
                           position:
                               RelativeRect.fromLTRB(100.0, 40.0, 30.0, 100.0),
                           items: model.type == "Type"
-                              ? model.types
+                              ? wineCategories
                                   .map((t) => PopupMenuItem(
                                         child: Text(t),
                                         value: t,
                                       ))
                                   .toList()
-                              : model.sizes
+                              : wineSizes
                                   .map((s) => PopupMenuItem(
                                         child: Text(s),
                                         value: s,

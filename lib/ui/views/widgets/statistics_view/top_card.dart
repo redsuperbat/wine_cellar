@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wine_cellar/core/viewmodels/views/statistics_model.dart';
 
+import 'animated_number.dart';
+
 class TopCard extends StatelessWidget {
   final StatisticsModel model;
 
@@ -9,7 +11,7 @@ class TopCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(6),
+      margin: EdgeInsets.only(top: 6,right: 6,left: 6,bottom: 15),
       height: MediaQuery.of(context).size.height * 0.25,
       child: Column(
         children: <Widget>[
@@ -28,8 +30,8 @@ class TopCard extends StatelessWidget {
                   ],
                 ),
                 borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(10),
-                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(5),
+                  topLeft: Radius.circular(5),
                 ),
               ),
               child: Column(
@@ -49,39 +51,19 @@ class TopCard extends StatelessWidget {
                           width: 30,
                           height: 30,
                         ),
-                        middle: model.totalWines > 999999
-                            ? (model.totalWines / 1000000).toStringAsFixed(1) +
-                                'M'
-                            : model.totalWines > 99999
-                                ? (model.totalWines / 1000).toStringAsFixed(0) +
-                                    'K'
-                                : model.totalWines > 999
-                                    ? (model.totalWines / 1000)
-                                            .toStringAsFixed(1) +
-                                        'K'
-                                    : '${model.totalWines}',
-                        bottom: "Wines in\ncellar",
+                        middle: model.totalWines,
+                        bottom: "Bottles in\ncellar",
                       ),
-                      TopCardCircles(
-                        top: Icon(
-                          Icons.monetization_on,
-                          color: Colors.white,
-                          size: 30,
-                        ),
-                        middle: model.cellarWorth > 999999
-                            ? (model.cellarWorth / 1000000).toStringAsFixed(1) +
-                                'M'
-                            : model.cellarWorth > 99999
-                                ? (model.cellarWorth / 1000).toStringAsFixed(0) +
-                                    'K'
-                                : model.cellarWorth > 999
-                                    ? (model.cellarWorth / 1000)
-                                            .toStringAsFixed(1) +
-                                        'K'
-                                    : '${model.cellarWorth}',
-                        bottom: "Cellar net\nworth",
-                        extra: model.currency,
-                      ),
+                            TopCardCircles(
+                              top: Icon(
+                                Icons.monetization_on,
+                                color: Colors.white,
+                                size: 30,
+                              ),
+                              middle: model.cellarWorth.toInt(),
+                              bottom: "Cellar net\nworth",
+                              extra: model.currency,
+                            ),
                     ],
                   ),
                 ],
@@ -92,6 +74,9 @@ class TopCard extends StatelessWidget {
             flex: 1,
             child: Container(
               decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(color: Colors.grey, offset: Offset(0,1))
+                ],
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
@@ -102,8 +87,8 @@ class TopCard extends StatelessWidget {
                   ],
                 ),
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(10),
-                  bottomRight: Radius.circular(10),
+                  bottomLeft: Radius.circular(5),
+                  bottomRight: Radius.circular(5),
                 ),
               ),
             ),
@@ -116,7 +101,7 @@ class TopCard extends StatelessWidget {
 
 class TopCardCircles extends StatelessWidget {
   final Widget top;
-  final String middle;
+  final int middle;
   final String extra;
   final String bottom;
 
@@ -147,15 +132,7 @@ class TopCardCircles extends StatelessWidget {
                       flex: 10,
                       child: Padding(
                         padding: EdgeInsets.only(left: 18),
-                        child: Text(
-                          middle,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 25,
-                          ),
-                        ),
+                        child: AnimatedNumber(number: middle,),
                       ),
                     ),
                     Expanded(

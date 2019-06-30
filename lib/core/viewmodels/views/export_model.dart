@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:wine_cellar/core/models/wine.dart';
+import 'package:wine_cellar/core/services/api.dart';
 import 'package:wine_cellar/core/services/wine_db_service.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:csv/csv.dart';
@@ -11,12 +12,15 @@ import '../base_model.dart';
 
 class ExportModel extends BaseModel {
   final WineDb _db;
+  final Api _api;
   final TextEditingController controller = TextEditingController();
   bool export = false;
   bool error = false;
   final RegExp regExp = RegExp(r"^[a-zA-Z0-9_\s-]+$");
 
-  ExportModel({WineDb db}) : _db = db;
+  ExportModel({WineDb db, Api api})
+      : _db = db,
+        _api = api;
 
   List<Wine> wines;
 
@@ -28,7 +32,15 @@ class ExportModel extends BaseModel {
     wines = await _db.getAllWines();
   }
 
-  void resolveError(){
+  Future postWine() async {
+    await _api.exportCellar();
+  }
+
+  Future getCellar()async{
+    await _api.importCellar();
+  }
+
+  void resolveError() {
     error = false;
   }
 
@@ -49,7 +61,7 @@ class ExportModel extends BaseModel {
         row.add(wines[i].type ?? "");
         row.add(wines[i].aoo ?? "");
         row.add(wines[i].country ?? "");
-        row.add(wines[i].vintage.substring(0, 4));
+        row.add(wines[i].vintage.toString());
         row.add(wines[i].grapes ?? "");
         row.add(wines[i].owned.toString());
         row.add(wines[i].size ?? "");

@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white,
           textTheme: Theme.of(context).textTheme.apply(
                 bodyColor: Colors.black87,
               ),
@@ -20,8 +21,8 @@ class MyApp extends StatelessWidget {
           appBarTheme: AppBarTheme(
               textTheme: TextTheme(
                   title: TextStyle(color: Colors.black87, fontSize: 24)),
-              color: Colors.transparent,
-              elevation: 0,
+              color: Colors.blue[50],
+              elevation: 3,
               iconTheme: IconThemeData(color: Color(0xFFc72442))),
         ),
         onGenerateRoute: Router.generateRoute,

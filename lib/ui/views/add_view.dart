@@ -16,68 +16,95 @@ class Add extends StatelessWidget {
       model: AddModel(
         wineService: Provider.of(context),
       ),
-      builder: (context, model, child) => Scaffold(
-            appBar: AppBar(
-              leading: IconButton(
-                  icon: Icon(Icons.arrow_back),
-                  onPressed: () =>
-                      Navigator.pushReplacementNamed(context, '/')),
+      builder: (context, model, child) => Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: [0.05, 0.1],
+                tileMode: TileMode.clamp,
+                colors: [
+                  Colors.red[400],
+                  Colors.blue[100],
+                ],
+              ),
             ),
-            floatingActionButton: FloatingActionButton(
-              backgroundColor: Colors.red,
-              child: Icon(Icons.add_a_photo, color: Colors.white,),
-              onPressed: () async => await model.getImage(),
-            ),
-            body: WillPopScope(
-              onWillPop: () async => false,
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Text(
-                      "Add more wine to your cellar",
-                      style: TextStyle(fontSize: 30),
-                      textAlign: TextAlign.center,
-                    ),
-                    model.image == null
-                        ? Container()
-                        : Image.file(
-                            model.image,
-                            fit: BoxFit.contain,
-                            height: 100,
-                          ),
-                    AddWineForm(),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Picker(),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Row(
+            child: Scaffold(
+              backgroundColor: Colors.transparent,
+              appBar: AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                leading: IconButton(
+                    icon: Icon(Icons.arrow_back),
+                    onPressed: () =>
+                        Navigator.pushReplacementNamed(context, '/')),
+              ),
+              floatingActionButton: FloatingActionButton(
+                backgroundColor: Colors.red,
+                child: Icon(
+                  Icons.add_a_photo,
+                  color: Colors.white,
+                ),
+                onPressed: () async => await model.getImage(),
+              ),
+              body: WillPopScope(
+                onWillPop: () async => false,
+                child: SingleChildScrollView(
+                  child: Card(
+                    margin: EdgeInsets.all(25),
+                    elevation: 5,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                        Spacer(),
-                        CountryPicker(),
-                        Spacer(),
-                        BottleAmount(),
-                        Spacer(),
+                        Text(
+                          "Add more wine to your cellar",
+                          style: TextStyle(fontSize: 30),
+                          textAlign: TextAlign.center,
+                        ),
+                        model.image == null
+                            ? Container()
+                            : Image.file(
+                                model.image,
+                                fit: BoxFit.contain,
+                                height: 100,
+                              ),
+                        AddWineForm(),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Picker(),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Row(
+                          children: <Widget>[
+                            Spacer(),
+                            CountryPicker(),
+                            Spacer(),
+                            BottleAmount(),
+                            Spacer(),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 15),
+                          child: VintagePicker(),
+                        ),
+                        RaisedButton(
+                          onPressed: () async {
+                            await model.addWineToDb();
+                            Navigator.pushReplacementNamed(context, '/');
+                          },
+                          child: Text("Add to Cellar"),
+                        ),
                       ],
                     ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    VintagePicker(),
-                    RaisedButton(
-                      onPressed: () async {
-                        await model.addWineToDb();
-                        Navigator.pushReplacementNamed(context, '/');
-                      },
-                      child: Text("Add to Cellar"),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),

@@ -25,7 +25,7 @@ class AddModel extends BaseModel {
     cmtController = TextEditingController(text: wine.comment);
     cmtController.addListener(setComments);
 
-    vintageController = TextEditingController(text: wine.vintage);
+    vintageController = TextEditingController(text: wine.vintage.toString());
     countryController = TextEditingController(text: wine.country);
 
     if (wine.image != null) image = File(wine.image);

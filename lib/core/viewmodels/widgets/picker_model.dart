@@ -6,22 +6,17 @@ import 'dart:async';
 import '../base_model.dart';
 
 class PickerModel extends BaseModel {
-  final JsonService _json;
   final WineService _wineService;
 
   StreamSubscription subscription;
 
-  PickerModel(this._json, this._wineService) {
+  PickerModel(this._wineService) {
     subscription = wineStream.listen((wine) => setWine(wine));
   }
 
   Stream<Wine> get wineStream => _wineService.wineStream;
 
   Wine get wine => _wineService.wine;
-
-  List<String> get sizes => _json.sizes;
-
-  List<String> get types => _json.types;
 
 
   @override

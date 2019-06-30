@@ -4,10 +4,9 @@ import 'package:wine_cellar/core/services/wine_service.dart';
 import '../base_model.dart';
 
 class DropdownFilterModel extends BaseModel {
-  final JsonService json;
   final WineService wineService;
 
-  DropdownFilterModel({this.json, this.wineService});
+  DropdownFilterModel({this.wineService});
 
   String type = "show all";
 
@@ -38,8 +37,4 @@ class DropdownFilterModel extends BaseModel {
   }
 
   List<String> get category => ["show all", "Type", "Size"];
-
-  List<String> get sizes => json.sizes;
-
-  List<String> get types => json.types;
 }

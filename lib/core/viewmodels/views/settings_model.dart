@@ -9,8 +9,10 @@ class SettingsModel extends BaseModel {
 
   String get currency => _settings.currency;
 
+
   void setCurrency(String value){
-    value = _settings.currency;
+    _settings.currency = value;
+    _settings.setCurrency(value);
     notifyListeners();
   }
 }

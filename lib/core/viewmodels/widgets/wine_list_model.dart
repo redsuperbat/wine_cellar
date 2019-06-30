@@ -7,11 +7,9 @@ import '../base_model.dart';
 
 class WineListModel extends BaseModel {
   final WineService _wineService;
-  final JsonService _json;
 
-  WineListModel({WineService wineService, @required JsonService json})
-      : _wineService = wineService,
-        _json = json;
+  WineListModel({WineService wineService})
+      : _wineService = wineService;
 
   Stream<List<Wine>> get wines => _wineService.wines;
 
@@ -21,9 +19,4 @@ class WineListModel extends BaseModel {
     await _wineService.getAllWine();
   }
 
-  Future<void> loadAssets() async {
-    setBusy(true);
-    await _json.loadAssets();
-    setBusy(false);
-  }
 }

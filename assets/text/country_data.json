@@ -42,5 +42,9 @@
   {
     "name": "South Africa",
     "flag": "assets/countries/za.png"
+  },
+  {
+    "name": "Other",
+    "flag": "assets/countries/oth.png"
   }
 ]

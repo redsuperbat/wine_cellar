@@ -11,6 +11,7 @@ class CountryPicker extends StatelessWidget {
     return BaseWidget<CountryPickerModel>(
       model: CountryPickerModel(
           json: Provider.of(context), wineService: Provider.of(context)),
+      onModelReady: (model) => model.loadAssets(),
       builder: (context, model, child) => model.country == null
           ? RaisedButton(
               child: Text("Wine origin country"),
@@ -36,7 +37,7 @@ class CountryPicker extends StatelessWidget {
                         model.country.flag,
                         width: 60,
                         height: 40,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.contain,
                       ),
                       SizedBox(
                         width: 25,

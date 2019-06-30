@@ -11,21 +11,37 @@ class SettingsView extends StatelessWidget {
       model: SettingsModel(settings: Provider.of(context)),
       builder: (context, model, child) => Scaffold(
             appBar: AppBar(),
-            body: Column(
-              children: <Widget>[
-                DropdownButton(
-                  value: model.currency,
-                  items: currencies
-                      .map(
-                        (c) => DropdownMenuItem<String>(
-                              child: Text(c),
-                              value: c,
-                            ),
-                      )
-                      .toList(),
-                  onChanged: (value) => model.setCurrency(value),
-                )
-              ],
+            body: Container(
+              margin: EdgeInsets.symmetric(horizontal: 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text("Currency"),
+                  Row(
+                    children: <Widget>[
+                      Icon(IconData(0xf0d6, fontFamily: 'Currency')),
+                      SizedBox(width: 25,),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: DropdownButton(
+                            value: model.currency,
+                            items: currencies
+                                .map(
+                                  (c) => DropdownMenuItem<String>(
+                                        child: Text(c),
+                                        value: c,
+                                      ),
+                                )
+                                .toList(),
+                            onChanged: (value) => model.setCurrency(value),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
     );

@@ -9,7 +9,7 @@ class ExportView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<ExportModel>(
-      model: ExportModel(db: Provider.of(context)),
+      model: ExportModel(db: Provider.of(context), api: Provider.of(context)),
       builder: (context, model, child) => Scaffold(
             appBar: AppBar(),
             body: SingleChildScrollView(
@@ -43,9 +43,8 @@ class ExportView extends StatelessWidget {
                             Card(
                               margin: EdgeInsets.symmetric(horizontal: 30),
                               child: TextField(
-                                decoration: InputDecoration(
-                                  border: InputBorder.none
-                                ),
+                                decoration:
+                                    InputDecoration(border: InputBorder.none),
                                 controller: model.controller,
                               ),
                             ),
@@ -70,8 +69,12 @@ class ExportView extends StatelessWidget {
                               child: Text("Export your databse"),
                             ),
                             RaisedButton(
-                              onPressed: () {},
-                              child: Text("Import a new database from a CSV"),
+                              onPressed: () => model.postWine(),
+                              child: Text("Send to Api"),
+                            ),
+                            RaisedButton(
+                              onPressed: () => model.getCellar(),
+                              child: Text("Import from api"),
                             )
                           ],
                         ),
