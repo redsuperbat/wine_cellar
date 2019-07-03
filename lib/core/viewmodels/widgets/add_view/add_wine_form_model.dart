@@ -10,7 +10,7 @@ class AddWineFormModel extends BaseModel {
   final WineService _wineService;
   final Settings _settings;
 
-  //final LayerLink layerLink = LayerLink();
+  final FocusNode focusNode = FocusNode();
   final TextEditingController aooController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController nameController = TextEditingController();

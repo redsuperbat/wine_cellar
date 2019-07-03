@@ -17,11 +17,11 @@ class CustomPieChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      child: busy || numberOfWines == 0
+      child: busy || numberOfWines == 0 || dataMap.isEmpty
           ? Container(
               width: MediaQuery.of(context).size.width,
               height: 200,
-              child: Center(child: Text("You have no wines :(")),
+              child: Center(child: Text("No data to display :(")),
             )
           : Column(
               children: [

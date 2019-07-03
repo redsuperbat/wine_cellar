@@ -18,6 +18,7 @@ class AddWineForm extends StatelessWidget {
                 Column(
                   children: <Widget>[
                     TextField(
+                      focusNode: model.focusNode,
                       onTap: () => model.showWineSearch(),
                       controller: model.nameController,
                       decoration: InputDecoration(
@@ -64,7 +65,8 @@ class AddWineForm extends StatelessWidget {
                                 .hasData &&
                             snapshot.data.length != 0 &&
                             model.text != "" &&
-                            model.showSearch
+                            model.showSearch &&
+                            model.focusNode.hasFocus
                         ? Container(
                             color: Colors.transparent,
                             margin: EdgeInsets.only(top: 48, right: 5),

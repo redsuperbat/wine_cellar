@@ -1,36 +1,44 @@
 import 'package:sqflite/sqflite.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:path/path.dart';
 import 'package:wine_cellar/core/models/wine.dart';
 
 class WineDb {
   Database database;
-  String currentTable = 'wines';
+  String currentTable = "one";
 
   Future<void> iniDb() async {
     if (database == null) {
       print("Im creating my database");
-      database = await openDatabase(
-          join(await getDatabasesPath(), 'wine_database.db'),
-          onCreate: (db, version) => db.execute("CREATE TABLE $currentTable("
-              "id INTEGER PRIMARY KEY, "
-              "name TEXT, "
-              "vintage INTEGER, "
-              "aoo TEXT, "
-              "country TEXT, "
-              "type TEXT, "
-              "grapes TEXT, "
-              "size TEXT, "
-              "owned INTEGER, "
-              "time TEXT, "
-              "comment TEXT, "
-              "rating DOUBLE, "
-              "price DOUBLE, "
-              "nv INTEGER, "
-              "image TEXT)"),
-          version: 1);
+      database =
+          await openDatabase(join(await getDatabasesPath(), 'wine_database.db'),
+              onCreate: (db, version) => db.execute("CREATE TABLE one("
+                  "id INTEGER PRIMARY KEY, "
+                  "name TEXT, "
+                  "vintage INTEGER, "
+                  "aoo TEXT, "
+                  "country TEXT, "
+                  "type TEXT, "
+                  "grapes TEXT, "
+                  "size TEXT, "
+                  "owned INTEGER, "
+                  "time TEXT, "
+                  "comment TEXT, "
+                  "rating DOUBLE, "
+                  "price DOUBLE, "
+                  "nv INTEGER, "
+                  "image TEXT)"),
+              version: 1);
       print("im finished with creating the database");
     }
+/*    _prefs = await SharedPreferences.getInstance();
+    currentTable = _prefs.getStringList('cellars').length == 0
+        ? null
+        : _prefs.getStringList('cellars')[0];
+    if (currentTable == null) {
+      await createNewTable(name);
+    }*/
   }
 
   Future createNewTable(String name) async {
@@ -50,7 +58,12 @@ class WineDb {
         "price DOUBLE, "
         "nv INTEGER, "
         "image TEXT)");
-    currentTable = name;
+    changeCellar(name);
+  }
+
+  void changeCellar(String cellarName) {
+    currentTable = cellarName;
+    print(currentTable);
   }
 
   Future<void> insertWine(Wine wine) async {

@@ -28,23 +28,23 @@ class CountryPicker extends StatelessWidget {
                       context: context,
                       builder: (_) => CountryDialog(model: model),
                     ),
-                child: Card(
-                  color: Colors.grey[100],
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Image.asset(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Card(
+                      elevation: 3,
+                      child: Image.asset(
                         model.country.flag,
                         width: 60,
                         height: 40,
-                        fit: BoxFit.contain,
+                        fit: BoxFit.cover,
                       ),
-                      SizedBox(
-                        width: 25,
-                      ),
-                      Text(model.country.name),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      width: 25,
+                    ),
+                    Text(model.country.name),
+                  ],
                 ),
               ),
             ),

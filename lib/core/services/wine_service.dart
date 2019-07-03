@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:meta/meta.dart';
+import 'package:wine_cellar/core/models/profile.dart';
 import 'package:wine_cellar/core/models/wine.dart';
 
 import 'wine_db_service.dart';
@@ -45,6 +46,16 @@ class WineService {
 
   Future removeWine(Wine wine) async {
     _db.deleteWine(wine.id);
+    await getAllWine();
+  }
+
+  Future changeCellar(String cellarName) async {
+    _db.changeCellar(cellarName);
+    await getAllWine();
+  }
+
+  Future addCellar(String name) async {
+    await _db.createNewTable(name);
     await getAllWine();
   }
 

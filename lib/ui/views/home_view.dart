@@ -6,6 +6,7 @@ import 'base_widget.dart';
 import 'widgets/home_view/drawer.dart';
 import 'widgets/home_view/dropdown_filter.dart';
 import 'widgets/home_view/searchbar.dart';
+import 'widgets/home_view/welcome_dialog.dart';
 import 'widgets/home_view/wine_list.dart';
 
 class HomeView extends StatelessWidget {
@@ -14,9 +15,24 @@ class HomeView extends StatelessWidget {
     return BaseWidget<HomeModel>(
       model: HomeModel(
         wineService: Provider.of(context),
+        settings: Provider.of(context),
       ),
-      onModelReady: (model) {
-        model.loadDbData();
+      onModelReady: (model) async {
+        await model.iniSettings();
+        model.loadProfiles();
+        if (model.profiles.length == 0)
+          await showDialog(
+              context: context,
+              builder: (_) => WelcomeDialog(
+                    title: Text("Welcome to Cellar Tracker"),
+                    content: Text(
+                      "Please specify the name of your first winecellar",
+                      textAlign: TextAlign.center,
+                    ),
+                    addCellar: (name) => model.setCellarName(name),
+                  ),
+              barrierDismissible: false);
+        await model.iniDb();
       },
       builder: (context, model, child) => Scaffold(
             appBar: model.search
@@ -44,6 +60,9 @@ class HomeView extends StatelessWidget {
                     ),
                     actions: <Widget>[
                       IconButton(
+                          icon: Icon(Icons.clear),
+                          onPressed: () => model.clearPrefs()),
+                      IconButton(
                         icon: Icon(Icons.search),
                         onPressed: () => model.beginSearch(),
                       ),
@@ -53,7 +72,7 @@ class HomeView extends StatelessWidget {
             drawer: MyDrawer(model: model),
             floatingActionButton: FloatingActionButton(
               backgroundColor: Colors.red,
-              onPressed: () => Navigator.pushReplacementNamed(context, 'add'),
+              onPressed: () => Navigator.pushNamed(context, 'add'),
               child: Icon(Icons.add),
             ),
             body: Container(

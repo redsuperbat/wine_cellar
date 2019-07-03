@@ -8,7 +8,8 @@ import '../../base_model.dart';
 class VintagePickerModel extends BaseModel {
   final WineService _wineService;
 
-  int selected = DateTime.now().year;
+  int selected = DateTime.now().year-1;
+
   bool isChecked = false;
   StreamSubscription subscription;
 
@@ -32,9 +33,9 @@ class VintagePickerModel extends BaseModel {
       wine.nv = true;
       isChecked = true;
       notifyListeners();
-    }
-    else{
-      setYear(_wine.vintage);
+    } else {
+      isChecked = false;
+      notifyListeners();
     }
   }
 
@@ -45,9 +46,8 @@ class VintagePickerModel extends BaseModel {
   }
 
   void setYear(int year) {
-    print('this is the datetime: $year');
+  print("year was set to: $year");
     selected = year;
     wine.vintage = isChecked ? null : year;
-    notifyListeners();
   }
 }

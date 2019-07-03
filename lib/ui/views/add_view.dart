@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wine_cellar/core/viewmodels/views/add_model.dart';
+import '../constants.dart';
 
 import 'base_widget.dart';
 import 'widgets/add_view/bottle_amount.dart';
@@ -18,26 +19,22 @@ class Add extends StatelessWidget {
       ),
       builder: (context, model, child) => Container(
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                stops: [0.05, 0.1],
+              gradient: RadialGradient(
                 tileMode: TileMode.clamp,
+                radius: 1.6,
+                stops: [0.6, 0.8],
                 colors: [
-                  Colors.red[400],
-                  Colors.blue[100],
+                  mainColor,
+                  Colors.amber,
                 ],
               ),
             ),
             child: Scaffold(
               backgroundColor: Colors.transparent,
               appBar: AppBar(
+                iconTheme: IconThemeData(color: Colors.white),
                 backgroundColor: Colors.transparent,
                 elevation: 0,
-                leading: IconButton(
-                    icon: Icon(Icons.arrow_back),
-                    onPressed: () =>
-                        Navigator.pushReplacementNamed(context, '/')),
               ),
               floatingActionButton: FloatingActionButton(
                 backgroundColor: Colors.red,
@@ -47,63 +44,64 @@ class Add extends StatelessWidget {
                 ),
                 onPressed: () async => await model.getImage(),
               ),
-              body: WillPopScope(
-                onWillPop: () async => false,
-                child: SingleChildScrollView(
-                  child: Card(
-                    margin: EdgeInsets.all(25),
-                    elevation: 5,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Text(
-                          "Add more wine to your cellar",
-                          style: TextStyle(fontSize: 30),
-                          textAlign: TextAlign.center,
-                        ),
-                        model.image == null
-                            ? Container()
-                            : Image.file(
-                                model.image,
-                                fit: BoxFit.contain,
-                                height: 100,
-                              ),
-                        AddWineForm(),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Picker(),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Row(
-                          children: <Widget>[
-                            Spacer(),
-                            CountryPicker(),
-                            Spacer(),
-                            BottleAmount(),
-                            Spacer(),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Container(
-                          margin: EdgeInsets.symmetric(horizontal: 15),
-                          child: VintagePicker(),
-                        ),
-                        RaisedButton(
-                          onPressed: () async {
-                            await model.addWineToDb();
-                            Navigator.pushReplacementNamed(context, '/');
-                          },
-                          child: Text("Add to Cellar"),
-                        ),
-                      ],
-                    ),
+              body: SingleChildScrollView(
+                child: Card(
+                  elevation: 5,
+                  margin: EdgeInsets.all(25),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Text(
+                        "Add more wine to your cellar",
+                        style: TextStyle(fontSize: 30, color: mainColor),
+                        textAlign: TextAlign.center,
+                      ),
+                      model.image == null
+                          ? Container()
+                          : Image.file(
+                              model.image,
+                              fit: BoxFit.contain,
+                              height: 100,
+                            ),
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                        child: AddWineForm(),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Picker(),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Spacer(),
+                          CountryPicker(),
+                          Spacer(),
+                          BottleAmount(),
+                          Spacer(),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 15),
+                        child: VintagePicker(),
+                      ),
+                      RaisedButton(
+                        color: confirmColor,
+                        onPressed: () async {
+                          await model.addWineToDb();
+                          Navigator.pushReplacementNamed(context, '/');
+                        },
+                        child: Text("Add to Cellar", style: TextStyle(color: Colors.white),),
+                      ),
+                    ],
                   ),
                 ),
               ),

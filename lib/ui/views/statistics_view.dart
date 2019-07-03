@@ -16,33 +16,26 @@ class StatisticsView extends StatelessWidget {
         settings: Provider.of(context),
       ),
       onModelReady: (model) async => await model.loadAllStatistics(),
-      builder: (context, model, child) => WillPopScope(
-            onWillPop: () async => false,
-            child: Scaffold(
-              appBar: AppBar(
-                centerTitle: true,
-                leading: IconButton(
-                  icon: Icon(Icons.arrow_back),
-                  onPressed: () => Navigator.pushReplacementNamed(context, '/'),
-                ),
-                title: Text(
-                  "Statistics",
-                  textAlign: TextAlign.center,
+      builder: (context, model, child) => Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            "Statistics",
+            textAlign: TextAlign.center,
+          ),
+        ),
+        body: model.busy
+            ? Container()
+            : SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    TopCard(model: model),
+                    PieChartPageView(model: model),
+                  ],
                 ),
               ),
-              body: model.busy
-                  ? Container()
-                  : SingleChildScrollView(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          TopCard(model: model),
-                          PieChartPageView(model: model),
-                        ],
-                      ),
-                    ),
-            ),
-          ),
+      ),
     );
   }
 }
