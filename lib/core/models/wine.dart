@@ -45,7 +45,8 @@ class Wine {
         'time': time,
         'rating': rating,
         'comment': comment,
-        'price': price
+        'price': price,
+        'image': image,
       };
 
   Wine.fromJson(Map<String, dynamic> json) {

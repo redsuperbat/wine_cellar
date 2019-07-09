@@ -12,7 +12,7 @@ import '../../base_widget.dart';
 class WineCard extends StatelessWidget {
   final Wine wine;
 
-  WineCard({this.wine});
+  const WineCard({this.wine});
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +61,8 @@ class WineCard extends StatelessWidget {
               elevation: 3,
               child: InkWell(
                 onTap: () {
-                  model.injectWine(wine);
-                  Navigator.pushNamed(context, 'wine');
+                  //model.injectWine(wine);
+                  Navigator.pushNamed(context, 'wine', arguments: wine);
                 },
                 child: Row(
                   children: <Widget>[

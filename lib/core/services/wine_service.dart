@@ -65,6 +65,7 @@ class WineService {
   Future<void> insertWine() async {
     wine.id = await _db.getId();
     wine.time = DateTime.now().toString();
+    print('wine image path is: ${wine.image}');
     await _db.insertWine(wine);
     await getAllWine();
   }

@@ -25,7 +25,7 @@ class Add extends StatelessWidget {
                 stops: [0.6, 0.8],
                 colors: [
                   mainColor,
-                  Colors.white,
+                  Colors.black,
                 ],
               ),
             ),

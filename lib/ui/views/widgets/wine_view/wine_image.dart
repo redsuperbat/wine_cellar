@@ -1,42 +1,39 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:wine_cellar/core/viewmodels/views/add_model.dart';
 
 class WineImage extends StatelessWidget {
-  final AddModel model;
+  final String path;
+  final double width;
+  final double height;
 
-  const WineImage({Key key, this.model}) : super(key: key);
+  const WineImage({Key key, this.path, this.width, this.height}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: GestureDetector(
-        onTap: () => showDialog(
-              context: context,
-              builder: (_) => Dialog(
-                    backgroundColor: Colors.transparent,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(25),
-                      child: Image.file(
-                        model.image,
-                      ),
-                    ),
-                  ),
-            ),
-        child: model.image == null
-            ? Container()
-            : Container(
-                margin:
-                    EdgeInsets.only(top: 15, right: 15, left: 40, bottom: 15),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.file(
-                    model.image,
-                    height: 100,
-                    fit: BoxFit.contain,
-                  ),
+    print(path);
+    final image = path == null ? null : File(path);
+    return Hero(
+      tag: "image",
+      child: image == null
+          ? Container(
+              child: Center(
+                child: Text("No image"),
+              ),
+            )
+          : GestureDetector(
+              onTap: () =>
+                  Navigator.pushNamed(context, 'image', arguments: path),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.file(
+                  image,
+                  fit: BoxFit.contain,
+                  height: height,
+                  width: width,
                 ),
               ),
-      ),
+            ),
     );
   }
 }

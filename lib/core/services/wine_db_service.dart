@@ -100,6 +100,7 @@ class WineDb {
         await database.query(currentTable, orderBy: '$orderBy DESC');
     List<Wine> wines = [];
     _wines.forEach((w) => wines.add(Wine.fromJson(w)));
+    wines.forEach((wine) => print(wine.image));
     return wines;
   }
 
