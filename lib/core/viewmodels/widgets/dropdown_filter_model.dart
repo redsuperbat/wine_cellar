@@ -1,4 +1,3 @@
-import 'package:wine_cellar/core/services/json_service.dart';
 import 'package:wine_cellar/core/services/wine_service.dart';
 
 import '../base_model.dart';

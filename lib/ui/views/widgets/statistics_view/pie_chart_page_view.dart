@@ -12,7 +12,7 @@ class PieChartPageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.orange[50],
+      color: Colors.white,
       margin: EdgeInsets.only(bottom: 6, right: 6, left: 6),
       child: Column(
         children: <Widget>[

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:meta/meta.dart';
-import 'package:wine_cellar/core/models/profile.dart';
 import 'package:wine_cellar/core/models/wine.dart';
 
 import 'wine_db_service.dart';

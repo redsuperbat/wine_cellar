@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:wine_cellar/core/models/wine.dart';
 
 import 'wine_db_service.dart';
 
@@ -23,7 +22,7 @@ class Api {
         "Accept": "application/json"
       },
     );
-    final map = json.decode(utf8.decode(response.bodyBytes));
+    print(response.statusCode);
   }
 
   Future<bool> importCellar() async {

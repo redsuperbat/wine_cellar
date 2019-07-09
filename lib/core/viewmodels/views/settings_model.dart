@@ -9,6 +9,10 @@ class SettingsModel extends BaseModel {
 
   String get currency => _settings.currency;
 
+  Future<void> clearPrefs()async{
+    await _settings.clearSettings();
+  }
+
 
   void setCurrency(String value){
     _settings.currency = value;

@@ -13,7 +13,7 @@ class Wine {
   double rating;
   String comment;
   double price;
-  String time; //appellation of origin
+  String time;
 
   Wine(
       {this.name,

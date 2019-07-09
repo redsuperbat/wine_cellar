@@ -15,43 +15,46 @@ class MyDrawer extends StatelessWidget {
     print(model.profiles);
     print(model.profiles.length);
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
+      child: Column(
         children: <Widget>[
-          UserAccountsDrawerHeader(
-            decoration: BoxDecoration(
-              gradient: RadialGradient(
-                radius: 1.1,
-                stops: [0.7,0.95],
-                colors: [
-                  Colors.white,
-                  accentColor
+          Card(
+            color: accentColor,
+            child: InkWell(
+              splashColor: mainColor,
+              onTap: (){},
+              child: UserAccountsDrawerHeader(
+                margin: EdgeInsets.all(0),
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                ),
+                otherAccountsPictures: <Widget>[
+                  AlternativeCellar(
+                    profile: model.profiles.length > 1 ? model.profiles[1] : null,
+                    changeCellar: (profile) => model.changeCellar(profile),
+                    addCellar: (name) => model.createCellar(name),
+                  ),
+                  AlternativeCellar(
+                    profile: model.profiles.length > 2 ? model.profiles[2] : null,
+                    changeCellar: (profile) => model.changeCellar(profile),
+                    addCellar: (name) => model.createCellar(name),
+                  ),
                 ],
+                currentAccountPicture: CircleAvatar(
+                  backgroundColor: Color(model.profiles[0].color ?? 1),
+                  foregroundColor: Colors.white,
+                  child: Text(
+                    model.profiles[0].cellarName.substring(0, 1).toUpperCase(),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                  ),
+                ),
+                accountName: Container(),
+                accountEmail: Container(
+                  child: Text(
+                    model.profiles[0].cellarName,
+                    style: TextStyle(color: Colors.white,fontSize: 20),
+                  ),
+                ),
               ),
-            ),
-            otherAccountsPictures: <Widget>[
-              AlternativeCellar(
-                profile: model.profiles.length > 1 ? model.profiles[1] : null,
-                changeCellar: (profile) => model.changeCellar(profile),
-                addCellar: (name) => model.createCellar(name),
-              ),
-              AlternativeCellar(
-                profile: model.profiles.length > 2 ? model.profiles[2] : null,
-                changeCellar: (profile) => model.changeCellar(profile),
-                addCellar: (name) => model.createCellar(name),
-              ),
-            ],
-            currentAccountPicture: CircleAvatar(
-              backgroundColor: Color(model.profiles[0].color ?? 1),
-              foregroundColor: Colors.white,
-              child: Text(
-                model.profiles[0].cellarName.substring(0, 1).toUpperCase(),
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-              ),
-            ),
-            accountName: Container(),
-            accountEmail: Container(
-              child: Text(model.profiles[0].cellarName, style: TextStyle(color: mainColor),),
             ),
           ),
           ListTile(
@@ -64,11 +67,13 @@ class MyDrawer extends StatelessWidget {
             trailing: Icon(Icons.graphic_eq),
             onTap: () => Navigator.pushNamed(context, 'statistics'),
           ),
+          Spacer(),
           ListTile(
             title: Text("Settings"),
             trailing: Icon(Icons.settings),
             onTap: () => Navigator.pushNamed(context, 'settings'),
           ),
+          SizedBox(height: 15,),
         ],
       ),
     );
@@ -89,7 +94,7 @@ class AlternativeCellar extends StatelessWidget {
         ? InkWell(
             child: CircleAvatar(
               backgroundColor: Colors.white,
-              child: Icon(Icons.add),
+              child: Container(child: Icon(Icons.add),),
             ),
             onTap: () => showDialog(
                   context: context,

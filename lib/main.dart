@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'provider_setup.dart';
+import 'ui/constants.dart';
 import 'ui/router.dart';
 
 void main() => runApp(MyApp());
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
           appBarTheme: AppBarTheme(
               textTheme: TextTheme(
                   title: TextStyle(color: Colors.black87, fontSize: 24)),
-              color: Colors.blue[50],
+              color: accentColor,
               elevation: 3,
               iconTheme: IconThemeData(color: Color(0xFFc72442))),
         ),

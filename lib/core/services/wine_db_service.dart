@@ -1,5 +1,4 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:path/path.dart';
 import 'package:wine_cellar/core/models/wine.dart';
@@ -32,13 +31,6 @@ class WineDb {
               version: 1);
       print("im finished with creating the database");
     }
-/*    _prefs = await SharedPreferences.getInstance();
-    currentTable = _prefs.getStringList('cellars').length == 0
-        ? null
-        : _prefs.getStringList('cellars')[0];
-    if (currentTable == null) {
-      await createNewTable(name);
-    }*/
   }
 
   Future createNewTable(String name) async {

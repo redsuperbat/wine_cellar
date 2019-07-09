@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 import 'package:wine_cellar/core/viewmodels/views/statistics_model.dart';
 
@@ -32,6 +31,7 @@ class StatisticsView extends StatelessWidget {
                   children: [
                     TopCard(model: model),
                     PieChartPageView(model: model),
+
                   ],
                 ),
               ),

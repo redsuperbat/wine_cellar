@@ -30,8 +30,8 @@ class HomeModel extends BaseModel {
     setBusy(false);
   }
 
-  Future iniSettings()async{
-   await  _settings.getSettings();
+  Future iniSettings() async {
+    await _settings.getSettings();
   }
 
   void loadProfiles() {
@@ -72,9 +72,5 @@ class HomeModel extends BaseModel {
     setBusy(true);
     await _wineService.getAllWine();
     setBusy(false);
-  }
-
-  Future clearPrefs() async {
-    await _settings.clearSettings();
   }
 }

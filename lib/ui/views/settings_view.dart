@@ -16,30 +16,37 @@ class SettingsView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text("Currency"),
-                  Row(
-                    children: <Widget>[
-                      Icon(IconData(0xf0d6, fontFamily: 'Currency')),
-                      SizedBox(width: 25,),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: DropdownButton(
-                            value: model.currency,
-                            items: currencies
-                                .map(
-                                  (c) => DropdownMenuItem<String>(
-                                        child: Text(c),
-                                        value: c,
-                                      ),
-                                )
-                                .toList(),
-                            onChanged: (value) => model.setCurrency(value),
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
+                  ListTile(
+                    leading: Icon(
+                      IconData(0xf0d6, fontFamily: 'Currency'),
+                      size: 40,
+                      color: mainColor,
+                    ),
+                    title: Text("Change currency"),
+                    subtitle: DropdownButton(
+                      value: model.currency,
+                      items: currencies
+                          .map(
+                            (c) => DropdownMenuItem<String>(
+                                  child: Text(c),
+                                  value: c,
+                                ),
+                          )
+                          .toList(),
+                      onChanged: (value) => model.setCurrency(value),
+                    ),
+                  ),
+                  ListTile(
+                    onTap: () => model.clearPrefs(),
+                    leading: Icon(
+                      Icons.cancel,
+                      size: 40,
+                      color: mainColor,
+                    ),
+                    title: Text("Reset your preferences"),
+                    subtitle: Text(
+                        "If you reset your preferences you will delete the names of your databases"),
+                  ),
                 ],
               ),
             ),
