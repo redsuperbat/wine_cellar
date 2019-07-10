@@ -22,10 +22,11 @@ class _BottleAmountState extends State<BottleAmount> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Card(
+                    elevation: 3,
                     child: InkWell(
                       child: Icon(
                         Icons.remove,
-                        size: 50,
+                        size: 40,
                       ),
                       onTap: () => model.decrement(),
                     ),
@@ -45,10 +46,11 @@ class _BottleAmountState extends State<BottleAmount> {
                     ),
                   ),
                   Card(
+                    elevation: 3,
                     child: InkWell(
                       child: Icon(
                         Icons.add,
-                        size: 50,
+                        size: 40,
                       ),
                       onTap: () => model.increment(),
                     ),

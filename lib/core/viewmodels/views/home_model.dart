@@ -17,11 +17,17 @@ class HomeModel extends BaseModel {
 
   List<Profile> profiles = [];
 
+  int counter = 0;
+
   bool search = false;
 
   void beginSearch() {
     search = !search;
     notifyListeners();
+  }
+
+  void increment(){
+    counter++;
   }
 
   Future<void> iniDb() async {

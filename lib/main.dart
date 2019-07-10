@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'provider_setup.dart';
 import 'ui/constants.dart';
 import 'ui/router.dart';
 
-void main() => runApp(MyApp());
+void main() =>
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+        .then((_) => runApp(MyApp()));
 
 class MyApp extends StatelessWidget {
   @override
@@ -15,9 +18,7 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
-          textTheme: Theme.of(context).textTheme.apply(
-                bodyColor: Colors.black87,
-              ),
+          fontFamily: 'GlacialIndifference',
           iconTheme: IconThemeData(color: Colors.red),
           appBarTheme: AppBarTheme(
               textTheme: TextTheme(

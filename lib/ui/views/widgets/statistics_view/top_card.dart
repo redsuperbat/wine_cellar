@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wine_cellar/core/viewmodels/views/statistics_model.dart';
 
+import '../../../constants.dart';
 import 'animated_number.dart';
 
 class TopCard extends StatelessWidget {
@@ -11,8 +12,8 @@ class TopCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 6,right: 6,left: 6,bottom: 15),
-      height: MediaQuery.of(context).size.height * 0.25,
+      margin: EdgeInsets.only(top: 6, right: 6, left: 6, bottom: 15),
+      height: MediaQuery.of(context).size.height * 0.3,
       child: Column(
         children: <Widget>[
           Expanded(
@@ -48,22 +49,21 @@ class TopCard extends StatelessWidget {
                       TopCardCircles(
                         top: Image.asset(
                           'assets/wines/wine_bottle_icon.png',
-                          width: 30,
-                          height: 30,
+                          width: MediaQuery.of(context).size.width * 0.07,
                         ),
                         middle: model.totalWines,
                         bottom: "Bottles in\ncellar",
                       ),
-                            TopCardCircles(
-                              top: Icon(
-                                Icons.monetization_on,
-                                color: Colors.white,
-                                size: 30,
-                              ),
-                              middle: model.cellarWorth.toInt(),
-                              bottom: "Cellar net\nworth",
-                              extra: model.currency,
-                            ),
+                      TopCardCircles(
+                        top: Icon(
+                          Icons.monetization_on,
+                          color: Colors.white,
+                          size: MediaQuery.of(context).size.width * 0.07,
+                        ),
+                        middle: model.cellarWorth.toInt(),
+                        bottom: "Cellar net\nworth",
+                        extra: model.currency,
+                      ),
                     ],
                   ),
                 ],
@@ -75,7 +75,7 @@ class TopCard extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 boxShadow: [
-                  BoxShadow(color: Colors.grey, offset: Offset(0,1))
+                  BoxShadow(color: Colors.grey, offset: Offset(0, 1))
                 ],
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
@@ -109,45 +109,41 @@ class TopCardCircles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double size = MediaQuery.of(context).size.height * 0.18;
     return Expanded(
       child: Center(
         child: Container(
-          width: 120,
-          height: 120,
+          width: size,
+          height: size,
           decoration: BoxDecoration(
             border: Border.all(width: 2, color: Colors.white),
+         /*   gradient: LinearGradient(
+              colors: [accentColor, mainColor],
+              stops: [0.1,0.8],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter
+            ),*/
             borderRadius: BorderRadius.circular(150),
           ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(top: 8),
-                child: top,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 4),
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      flex: 10,
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 18),
-                        child: AnimatedNumber(number: middle,),
-                      ),
+              top,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  AnimatedNumber(
+                    number: middle,
+                  ),
+                  Text(
+                    extra ?? "",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 10,
                     ),
-                    Expanded(
-                      flex: 2,
-                      child: Text(
-                        extra ?? "",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontSize: 8,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               Flexible(
                 child: Text(

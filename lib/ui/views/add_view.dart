@@ -97,7 +97,7 @@ class Add extends StatelessWidget {
                         color: confirmColor,
                         onPressed: () async {
                           await model.addWineToDb();
-                          Navigator.pushReplacementNamed(context, '/');
+                          Navigator.pop(context);
                         },
                         child: Text("Add to Cellar", style: TextStyle(color: Colors.white),),
                       ),

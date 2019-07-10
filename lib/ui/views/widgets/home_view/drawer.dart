@@ -12,8 +12,6 @@ class MyDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(model.profiles);
-    print(model.profiles.length);
     return Drawer(
       child: Column(
         children: <Widget>[
@@ -21,7 +19,22 @@ class MyDrawer extends StatelessWidget {
             color: accentColor,
             child: InkWell(
               splashColor: mainColor,
-              onTap: (){},
+              onTap: () {
+                model.increment();
+                if (model.counter == 12) {
+                  showDialog(
+                      context: context,
+                      builder: (_) => AlertDialog(
+                            title: Text("You really like to click that huh?"),
+                            content: RaisedButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: Text("Return to being a bored person"),
+                            ),
+                          ),
+                      barrierDismissible: false);
+                  model.counter = 0;
+                }
+              },
               child: UserAccountsDrawerHeader(
                 margin: EdgeInsets.all(0),
                 decoration: BoxDecoration(
@@ -29,12 +42,14 @@ class MyDrawer extends StatelessWidget {
                 ),
                 otherAccountsPictures: <Widget>[
                   AlternativeCellar(
-                    profile: model.profiles.length > 1 ? model.profiles[1] : null,
+                    profile:
+                        model.profiles.length > 1 ? model.profiles[1] : null,
                     changeCellar: (profile) => model.changeCellar(profile),
                     addCellar: (name) => model.createCellar(name),
                   ),
                   AlternativeCellar(
-                    profile: model.profiles.length > 2 ? model.profiles[2] : null,
+                    profile:
+                        model.profiles.length > 2 ? model.profiles[2] : null,
                     changeCellar: (profile) => model.changeCellar(profile),
                     addCellar: (name) => model.createCellar(name),
                   ),
@@ -51,29 +66,36 @@ class MyDrawer extends StatelessWidget {
                 accountEmail: Container(
                   child: Text(
                     model.profiles[0].cellarName,
-                    style: TextStyle(color: Colors.white,fontSize: 20),
+                    style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ),
               ),
             ),
           ),
           ListTile(
+            isThreeLine: true,
             title: Text("Export/Import"),
+            subtitle: Text("Export your data so you can view it in Excel"),
             trailing: Icon(Icons.import_export),
             onTap: () => Navigator.pushNamed(context, 'export'),
           ),
           ListTile(
             title: Text("Statistics"),
+            isThreeLine: true,
+            subtitle: Text("View the statistics of your cellar"),
             trailing: Icon(Icons.graphic_eq),
             onTap: () => Navigator.pushNamed(context, 'statistics'),
           ),
           Spacer(),
           ListTile(
+            subtitle: Text("Change the settings"),
             title: Text("Settings"),
             trailing: Icon(Icons.settings),
             onTap: () => Navigator.pushNamed(context, 'settings'),
           ),
-          SizedBox(height: 15,),
+          SizedBox(
+            height: 15,
+          ),
         ],
       ),
     );
@@ -93,14 +115,16 @@ class AlternativeCellar extends StatelessWidget {
     return profile == null
         ? InkWell(
             child: CircleAvatar(
-              backgroundColor: Colors.white,
-              child: Container(child: Icon(Icons.add),),
+              backgroundColor: mainColor,
+              child: Container(
+                child: Icon(Icons.add, color: Colors.white,),
+              ),
             ),
             onTap: () => showDialog(
                   context: context,
                   builder: (_) => WelcomeDialog(
                         addCellar: addCellar,
-                        title: Text("Add a new cellar"),
+                        title: Text("Add a new cellar", style: titleStyle,),
                         content: Text(
                           "This new cellar will contain no wines,"
                           "\nto change back to your original cellar just press that cellar.",
@@ -115,7 +139,7 @@ class AlternativeCellar extends StatelessWidget {
               foregroundColor: Colors.white,
               backgroundColor: Color(profile.color),
               child: Text(
-                profile.cellarName.substring(0, 1),
+                profile.cellarName.substring(0, 1).toUpperCase(),
               ),
             ),
           );

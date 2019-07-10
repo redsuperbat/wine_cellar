@@ -34,6 +34,10 @@ class WineService {
     _wine.close();
   }
 
+  void resetWine(){
+    wine = Wine();
+  }
+
   Future<void> initializeDb() async {
     await _db.iniDb();
     await getAllWine();

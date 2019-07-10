@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 const mainColor = Color(0xffA50104);
 const accentColor = Color(0xffFCBA04);
 const confirmColor = Color(0xff06A77D);
@@ -13,6 +12,17 @@ const List<int> colors = [
   0xffbae1ff,
 ];
 
+const TextStyle titleStyle = TextStyle(
+  fontSize: 25,
+  color: Colors.black87,
+  fontWeight: FontWeight.bold,
+);
+
+const TextStyle hintStyle = TextStyle(
+  fontSize: 11,
+  color: Colors.black54,
+  fontStyle: FontStyle.italic,
+);
 const List<String> wineSizes = ["375mL", "750mL", "1.5L", "3L", "6L"];
 
 const List<String> countryNames = [

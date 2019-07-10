@@ -73,33 +73,36 @@ class AddWineForm extends StatelessWidget {
                             child: LimitedBox(
                               maxHeight: snapshot.data.length.toDouble() * 45,
                               maxWidth: double.infinity,
-                              child: ListView.builder(
-                                physics: NeverScrollableScrollPhysics(),
-                                itemCount: snapshot.data.length,
-                                itemBuilder: (context, index) => Card(
-                                      color: Colors.white,
-                                      margin: EdgeInsets.all(0),
-                                      elevation: 0,
-                                      child: Container(
+                              child: Card(
+                                margin: EdgeInsets.zero,
+                                elevation: 4,
+                                child: ListView.builder(
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: snapshot.data.length,
+                                  itemBuilder: (context, index) => Container(
+                                    padding: EdgeInsets.all(5),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                            border: Border(
+                                                bottom: BorderSide(
+                                                    color: Colors.black54))),
                                         height: 45,
                                         child: InkWell(
                                           child: Row(
                                             children: [
                                               Flexible(
                                                 child: Text(
-                                                  snapshot.data[index].name ??
-                                                      "",
-                                                  style:
-                                                      TextStyle(fontSize: 17),
+                                                  snapshot.data[index].name ?? "",
+                                                  style: TextStyle(fontSize: 17),
                                                 ),
                                               ),
                                             ],
                                           ),
-                                          onTap: () => model
-                                              .setWine(snapshot.data[index]),
+                                          onTap: () =>
+                                              model.setWine(snapshot.data[index]),
                                         ),
                                       ),
-                                    ),
+                                ),
                               ),
                             ),
                           )

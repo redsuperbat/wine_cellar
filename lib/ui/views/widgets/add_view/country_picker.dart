@@ -21,7 +21,7 @@ class CountryPicker extends StatelessWidget {
                   ),
             )
           : Container(
-              width: MediaQuery.of(context).size.width / 2,
+              width: MediaQuery.of(context).size.width * 0.45,
               height: 60,
               child: InkWell(
                 onTap: () => showDialog(
@@ -41,7 +41,7 @@ class CountryPicker extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width: 25,
+                      width: MediaQuery.of(context).size.width * 0.05,
                     ),
                     Text(model.country.name),
                   ],

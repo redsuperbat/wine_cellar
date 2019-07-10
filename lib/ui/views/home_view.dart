@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wine_cellar/core/viewmodels/views/home_model.dart';
 
+import '../constants.dart';
 import 'base_widget.dart';
 import 'widgets/home_view/drawer.dart';
 import 'widgets/home_view/dropdown_filter.dart';
@@ -24,7 +25,7 @@ class HomeView extends StatelessWidget {
           await showDialog(
               context: context,
               builder: (_) => WelcomeDialog(
-                    title: Text("Welcome to Cellar Tracker"),
+                    title: Text("Welcome to Cellar Tracker", style: titleStyle,),
                     content: Text(
                       "Please specify the name of your first winecellar",
                       textAlign: TextAlign.center,

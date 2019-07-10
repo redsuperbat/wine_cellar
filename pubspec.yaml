@@ -86,7 +86,10 @@ flutter:
     - family: WineGlass
       fonts:
         - asset: fonts/wine_glass.ttf
-
+    - family: GlacialIndifference
+      fonts:
+        - asset: fonts/gi_regular.otf
+        - asset: fonts/gi_bold.otf
     - family: Currency
       fonts:
         - asset: fonts/currency.ttf

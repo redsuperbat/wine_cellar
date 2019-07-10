@@ -87,7 +87,7 @@ class WineCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Container(
-                          width: MediaQuery.of(context).size.width / 2,
+                          width: MediaQuery.of(context).size.width*0.40,
                           child: Text(
                             wine.name ?? "",
                             style: TextStyle(fontWeight: FontWeight.bold),
@@ -95,7 +95,7 @@ class WineCard extends StatelessWidget {
                         ),
                         Text('${wine.country ?? ""} ${wine.aoo ?? ""}'),
                         Container(
-                          width: MediaQuery.of(context).size.width * 0.5,
+                          width: MediaQuery.of(context).size.width * 0.40,
                           child: Text(
                             wine.grapes ?? "",
                             style: TextStyle(

@@ -15,7 +15,6 @@ class ExportModel extends BaseModel {
   final Api _api;
   final TextEditingController controller = TextEditingController();
   bool export = false;
-  bool error = false;
   final RegExp regExp = RegExp(r"^[a-zA-Z0-9_\s-]+$");
 
   ExportModel({WineDb db, Api api})
@@ -24,12 +23,13 @@ class ExportModel extends BaseModel {
 
   List<Wine> wines;
 
-  List<List<String>> rows = [csvTitle];
+  List<List<String>> rows;
 
   String get text => controller.text;
 
   Future getCurrentDatabase() async {
     wines = await _db.getAllWines();
+    rows = [csvTitle];
   }
 
   Future postWine() async {
@@ -40,18 +40,16 @@ class ExportModel extends BaseModel {
     await _api.importCellar();
   }
 
-  void resolveError() {
-    error = false;
-  }
 
   void startExport() {
     export = !export;
+    controller.clear();
     notifyListeners();
   }
 
-  Future exportToCsv() async {
+  Future<bool> exportToCsv() async {
     if (!regExp.hasMatch(controller.text)) {
-      error = true;
+      return false;
     } else {
       final String filename = controller.text;
       await getCurrentDatabase();
@@ -88,6 +86,7 @@ class ExportModel extends BaseModel {
         String csv = const ListToCsvConverter().convert(rows);
         f.writeAsString(csv);
       }
+      return true;
     }
   }
 }

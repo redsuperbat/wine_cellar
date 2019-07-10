@@ -8,7 +8,7 @@ class CustomPieChart extends StatelessWidget {
   final String title;
 
   CustomPieChart(
-      {      @required this.dataMap,
+      {@required this.dataMap,
       @required this.title,
       @required this.numberOfWines,
       @required this.busy});
@@ -20,7 +20,7 @@ class CustomPieChart extends StatelessWidget {
       child: busy || numberOfWines == 0 || dataMap.isEmpty
           ? Container(
               width: MediaQuery.of(context).size.width,
-              height: 200,
+              height: MediaQuery.of(context).size.height*0.3,
               child: Center(child: Text("No data to display :(")),
             )
           : Column(
@@ -35,7 +35,7 @@ class CustomPieChart extends StatelessWidget {
                 ),
                 PieChart(
                   legendFontWeight: FontWeight.normal,
-                  chartRadius: MediaQuery.of(context).size.width * 0.35,
+                  chartRadius: MediaQuery.of(context).size.height * 0.18,
                   dataMap: dataMap,
                 ),
               ],

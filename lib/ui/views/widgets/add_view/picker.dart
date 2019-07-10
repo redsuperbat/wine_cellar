@@ -17,23 +17,20 @@ class Picker extends StatelessWidget {
                 Card(
                   color: model.wine.size == null ? accentColor : confirmColor,
                   margin: EdgeInsets.symmetric(horizontal: 10),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10),
-                    child: DropdownButton<String>(
-                      value: model.wine.size,
-                      hint: Text("Size of bottle(s)"),
-                      onChanged: (newValue) => model.setSize(newValue),
-                      items: wineSizes
-                          .map((value) => DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(
-                                value,
-                                style: TextStyle(
-                                    color: Colors.black54,
-                                    fontWeight: FontWeight.bold),
-                              )))
-                          .toList(),
-                    ),
+                  child: DropdownButton<String>(
+                    value: model.wine.size,
+                    hint: Text("Size of bottle(s)"),
+                    onChanged: (newValue) => model.setSize(newValue),
+                    items: wineSizes
+                        .map((value) => DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                              style: TextStyle(
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.bold),
+                            )))
+                        .toList(),
                   ),
                 ),
                 Card(

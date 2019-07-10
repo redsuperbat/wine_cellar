@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wine_cellar/core/viewmodels/views/statistics_model.dart';
 
+import '../../../constants.dart';
 import 'custom_pie_chart.dart';
 import 'dot.dart';
 
@@ -17,7 +18,7 @@ class PieChartPageView extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Container(
-            height: MediaQuery.of(context).size.height * 0.25,
+            height: MediaQuery.of(context).size.height * 0.3,
             child: PageView(
               onPageChanged: (index) => model.setIndex(index),
               controller: model.controller,
@@ -41,15 +42,26 @@ class PieChartPageView extends StatelessWidget {
               ],
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              for (var i = 0; i < model.stats.length; i++)
-                Dot(
-                  dimensions: model.index == i ? 13 : 10,
-                  color: model.index == i ? Colors.red : null,
-                )
-            ],
+          Container(
+            height: MediaQuery.of(context).size.height*0.05,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.white, accentColor],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                for (var i = 0; i < model.stats.length; i++)
+                  Dot(
+                    dimensions: model.index == i ? 13 : 10,
+                    color: model.index == i ? Colors.red : null,
+                    borderColor: Colors.red,
+                  )
+              ],
+            ),
           )
         ],
       ),

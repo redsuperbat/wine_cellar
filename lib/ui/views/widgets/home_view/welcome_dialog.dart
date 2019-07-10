@@ -17,23 +17,28 @@ class WelcomeDialog extends StatelessWidget {
         title: title,
         content: content,
         actions: <Widget>[
-          Container(
-            width: MediaQuery.of(context).size.width * 0.5,
-            child: TextField(
-              controller: controller,
-              decoration: InputDecoration(hintText: "Cellar Name"),
+          ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width*0.7),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.4,
+                  child: TextField(
+                    controller: controller,
+                    decoration: InputDecoration(hintText: "Cellar Name"),
+                  ),
+                ),
+                Spacer(),
+                RaisedButton(
+                  color: Colors.white,
+                  onPressed: () {
+                    addCellar(controller.text);
+                    Navigator.pop(context);
+                  },
+                  child: Text("Lets go!"),
+                ),
+              ],
             ),
-          ),
-          SizedBox(
-            width: 10,
-          ),
-          RaisedButton(
-            color: Colors.white,
-            onPressed: () {
-              addCellar(controller.text);
-              Navigator.pop(context);
-            },
-            child: Text("Lets go!"),
           ),
         ],
       ),

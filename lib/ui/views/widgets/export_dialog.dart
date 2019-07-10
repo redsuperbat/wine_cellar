@@ -11,12 +11,15 @@ class ExportDialog extends StatelessWidget {
     return AlertDialog(
       title: Text("Filename cannot be ${model.text}"),
       content: RaisedButton(
+        color: Colors.blue,
         onPressed: () {
-          model.resolveError();
           model.startExport();
           Navigator.pop(context);
         },
-        child: Text("Return"),
+        child: Text(
+          "Return",
+          style: TextStyle(color: Colors.white),
+        ),
       ),
     );
   }

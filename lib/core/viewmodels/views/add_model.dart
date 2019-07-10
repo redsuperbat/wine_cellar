@@ -11,6 +11,12 @@ class AddModel extends BaseModel {
 
   AddModel({WineService wineService}) : _wineService = wineService;
 
+  @override
+  void dispose() {
+   _wineService.resetWine();
+    super.dispose();
+  }
+
   Future<void> addWineToDb() async {
     await _wineService.insertWine();
   }

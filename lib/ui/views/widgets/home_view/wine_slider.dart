@@ -15,7 +15,7 @@ class WineSlider extends StatelessWidget {
       elevation: 3,
       color: color,
       child: Container(
-        width: 100,
+        width: MediaQuery.of(context).size.width*0.25,
         height: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
