@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wine_cellar/core/viewmodels/views/statistics_model.dart';
 
-import '../../../constants.dart';
 import 'animated_number.dart';
 
 class TopCard extends StatelessWidget {

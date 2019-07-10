@@ -139,5 +139,6 @@ class WineDb {
   Future dropDatabase() async {
     await database.close();
     await deleteDatabase(database.path);
+    database = null;
   }
 }

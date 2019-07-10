@@ -7,7 +7,8 @@ class WineImage extends StatelessWidget {
   final double width;
   final double height;
 
-  const WineImage({Key key, this.path, this.width, this.height}) : super(key: key);
+  const WineImage({Key key, this.path, this.width, this.height})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +18,20 @@ class WineImage extends StatelessWidget {
       tag: "image",
       child: image == null
           ? Container(
+              width: width,
+              height: height,
               child: Center(
-                child: Text("No image"),
+                child:  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Icon(
+                        Icons.image,
+                        size: width,
+                        color: Colors.grey,
+                      ),
+                      Text("No image"),
+                    ],
+                  ),
               ),
             )
           : GestureDetector(

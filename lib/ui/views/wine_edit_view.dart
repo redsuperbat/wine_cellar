@@ -10,12 +10,13 @@ class WineEditView extends StatelessWidget {
     return BaseWidget<WineEditModel>(
       model: WineEditModel(),
       builder: (context,model,child) => Scaffold(
-        appBar: AppBar(),
-        body: Column(
-          children: <Widget>[
-            
-          ],
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text("Edit your wine"),
         ),
+        body: Center(
+          child: Text("Only available in Wine Cellar Pro"),
+        )
       ),
     );
   }

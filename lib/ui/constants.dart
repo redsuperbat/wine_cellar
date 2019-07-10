@@ -18,6 +18,12 @@ const TextStyle titleStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+const TextStyle subTitleStyle = TextStyle(
+  fontSize: 20,
+  color: Colors.black54,
+  fontWeight: FontWeight.bold
+);
+
 const TextStyle hintStyle = TextStyle(
   fontSize: 11,
   color: Colors.black54,

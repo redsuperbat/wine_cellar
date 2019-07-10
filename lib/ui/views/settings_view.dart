@@ -8,7 +8,10 @@ class SettingsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<SettingsModel>(
-      model: SettingsModel(settings: Provider.of(context)),
+      model: SettingsModel(
+        settings: Provider.of(context),
+        db: Provider.of(context),
+      ),
       builder: (context, model, child) => Scaffold(
             appBar: AppBar(
               title: Text("Settings"),
@@ -42,7 +45,9 @@ class SettingsView extends StatelessWidget {
                         context: context,
                         builder: (_) => SimpleDialog(
                               title: Text(
-                                "Are you sure?\nThis will delete your ENTIRE wine cellar. You will not be able to recover it",
+                                "Are you sure?\nThis will delete your ENTIRE "
+                                "wine cellar. You will not be able "
+                                "to recover it",
                                 textAlign: TextAlign.center,
                               ),
                               children: <Widget>[
@@ -50,17 +55,26 @@ class SettingsView extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     RaisedButton(
-                                      onPressed: () => model.clearPrefs(),
+                                      onPressed: () async {
+                                        await model.clearPrefs();
+                                        Navigator.of(context).popUntil((route) => route.isFirst);
+                                      },
                                       color: mainColor,
-                                      child: Text("Yes, delete"),
+                                      child: Text(
+                                        "Yes, delete",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
                                     ),
                                     SizedBox(
                                       width: 35,
                                     ),
                                     RaisedButton(
                                       onPressed: () => Navigator.pop(context),
-                                      color: Colors.greenAccent,
-                                      child: Text("No, return"),
+                                      color: confirmColor,
+                                      child: Text(
+                                        "No, return",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -72,9 +86,10 @@ class SettingsView extends StatelessWidget {
                     size: 40,
                     color: mainColor,
                   ),
-                  title: Text("Reset your preferences"),
-                  subtitle: Text(
-                      "If you reset your preferences you will delete the names of your databases"),
+                  title: Text("Delete your winecellars"),
+                  subtitle:
+                      Text("If you delete your database there is no return. "
+                          "Export it if you want to keep the data elsewhere."),
                 ),
               ],
             ),

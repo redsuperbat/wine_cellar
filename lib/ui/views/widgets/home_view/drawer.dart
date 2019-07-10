@@ -55,7 +55,7 @@ class MyDrawer extends StatelessWidget {
                   ),
                 ],
                 currentAccountPicture: CircleAvatar(
-                  backgroundColor: Color(model.profiles[0].color ?? 1),
+                  backgroundColor: Color(model.profiles[0].color),
                   foregroundColor: Colors.white,
                   child: Text(
                     model.profiles[0].cellarName.substring(0, 1).toUpperCase(),
@@ -117,14 +117,20 @@ class AlternativeCellar extends StatelessWidget {
             child: CircleAvatar(
               backgroundColor: mainColor,
               child: Container(
-                child: Icon(Icons.add, color: Colors.white,),
+                child: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
               ),
             ),
             onTap: () => showDialog(
                   context: context,
                   builder: (_) => WelcomeDialog(
                         addCellar: addCellar,
-                        title: Text("Add a new cellar", style: titleStyle,),
+                        title: Text(
+                          "Add a new cellar",
+                          style: titleStyle,
+                        ),
                         content: Text(
                           "This new cellar will contain no wines,"
                           "\nto change back to your original cellar just press that cellar.",

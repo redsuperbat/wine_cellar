@@ -15,7 +15,7 @@ class HomeModel extends BaseModel {
 
   Stream<String> get subType => _wineService.subType;
 
-  List<Profile> profiles = [];
+  List<Profile> get profiles => _settings.profiles;
 
   int counter = 0;
 
@@ -40,20 +40,7 @@ class HomeModel extends BaseModel {
     await _settings.getSettings();
   }
 
-  void loadProfiles() {
-    profiles.clear();
-    for (var i = 0; i < _settings.cellars.length; i++) {
-      profiles.add(
-        Profile(
-          index: i == 0 ? 'one' : i == 1 ? 'two' : 'three',
-          cellarName: _settings.cellars[i],
-          isDefault: i == 0 ? true : false,
-          color: _settings.userColors[i],
-        ),
-      );
-    }
-    print(profiles);
-  }
+
 
   Future changeCellar(Profile profile) async {
     profiles.remove(profile);
@@ -68,11 +55,16 @@ class HomeModel extends BaseModel {
     notifyListeners();
   }
 
+  void loadProfiles(){
+    _settings.loadProfiles();
+  }
+
   Future createCellar(String name) async {
     setCellarName(name);
     await _wineService
         .addCellar(profiles.singleWhere((p) => p.cellarName == name).index);
   }
+
 
   Future<void> getAllWine() async {
     setBusy(true);

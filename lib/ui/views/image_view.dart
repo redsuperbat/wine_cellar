@@ -17,6 +17,7 @@ class _ImageViewState extends State<ImageView> {
   double _zoom;
   double _previousZoom;
   Offset _scrollOffset;
+  Offset _previousScrollOffset;
 
   @override
   void initState() {
@@ -24,6 +25,7 @@ class _ImageViewState extends State<ImageView> {
     _zoom = 1.0;
     _previousZoom = null;
     _scrollOffset = Offset.zero;
+    _previousScrollOffset = Offset.zero;
     super.initState();
   }
 
@@ -33,13 +35,11 @@ class _ImageViewState extends State<ImageView> {
       tag: "image",
       child: Scaffold(
         backgroundColor: Colors.black,
-        body: GestureDetector(
-          onScaleStart: _handleScaleStart,
-          onScaleUpdate: _handleScaleUpdate,
-          onScaleEnd: _handleScaleEnd,
-          onDoubleTap: _handleDoubleTap,
-          child: GestureDetector(
-            onPanUpdate: _handleScrolling,
+        body:  GestureDetector(
+            onScaleStart: _handleScaleStart,
+            onScaleUpdate: _handleScaleUpdate,
+            onScaleEnd: _handleScaleEnd,
+            onDoubleTap: _handleDoubleTap,
             child: Center(
               child: Transform(
                 transform:
@@ -52,18 +52,9 @@ class _ImageViewState extends State<ImageView> {
                 ),
               ),
             ),
-          ),
         ),
       ),
     );
-  }
-
-  void _handleScrolling(DragUpdateDetails details) {
-    if (_zoom > 1) {
-      setState(() {
-        _scrollOffset += details.delta;
-      });
-    }
   }
 
   void _handleDoubleTap() {
@@ -88,8 +79,12 @@ class _ImageViewState extends State<ImageView> {
   }
 
   void _handleScaleUpdate(ScaleUpdateDetails update) {
-    print(update.focalPoint);
+    Offset _position = _previousScrollOffset-update.focalPoint;
+    _previousScrollOffset = update.focalPoint;
     setState(() {
+      if(_zoom >1 && _position.distance < 20){
+        _scrollOffset -= _position;
+      }
       _zoom = _previousZoom * update.scale;
     });
   }

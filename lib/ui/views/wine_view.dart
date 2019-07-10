@@ -16,118 +16,155 @@ class WineView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<WineModel>(
-      model: WineModel(wineService: Provider.of(context)),
+      model: WineModel(
+          wineService: Provider.of(context), settings: Provider.of(context)),
       onModelReady: (model) => model.initialize(wine),
       builder: (context, model, child) => WillPopScope(
-            onWillPop: () => model.updateWine(wine),
-            child: Scaffold(
-              appBar: AppBar(
-                centerTitle: true,
-                title: Text(wine.name),
-                actions: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.edit),
-                    onPressed: () => Navigator.pushNamed(context, 'edit'),
-                  ),
-                ],
+        onWillPop: () => model.updateWine(wine),
+        child: Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(wine.name ?? ""),
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.edit),
+                onPressed: () => Navigator.pushNamed(context, 'edit'),
               ),
-              body: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
+            ],
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              padding: EdgeInsets.all(25),
-                              child: WineImage(
-                                path: wine.image,
-                                width: MediaQuery.of(context).size.width*0.4,
-                              ),
+                        InkWell(
+                          onTap: () => model.getImage(wine),
+                          child: Container(
+                            padding: EdgeInsets.all(25),
+                            child: WineImage(
+                              path: wine.image,
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              height: MediaQuery.of(context).size.height * 0.245,
                             ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  "Rating",
-                                  style: titleStyle,
-                                ),
-                                Text(
-                                  "Set the rating by dragging the stars",
-                                  style: hintStyle,
-                                ),
-                                FlutterRatingBar(
-                                  initialRating: wine.rating,
-                                  allowHalfRating: true,
-                                  onRatingUpdate: (rating) =>
-                                      model.setRating(rating, wine),
-                                ),
-                                Text('${wine.rating}/5.0')
-                              ],
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 25),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              WineInfo(text: '${wine.country}, ${wine.aoo}'),
-                              WineInfo(text: wine.vintage.toString()),
-                              WineInfo(text: wine.grapes),
-                              WineInfo(text: wine.price.toString()),
-                              WineInfo(text: wine.type)
-                            ],
                           ),
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              "Rating",
+                              style: titleStyle,
+                            ),
+                            Text(
+                              "Set the rating by dragging the stars",
+                              style: hintStyle,
+                            ),
+                            FlutterRatingBar(
+                              initialRating: wine.rating,
+                              allowHalfRating: true,
+                              onRatingUpdate: (rating) =>
+                                  model.setRating(rating, wine),
+                            ),
+                            Text('${wine.rating}/5.0')
+                          ],
                         ),
                       ],
                     ),
-                    Text(
-                      "Comments",
-                      style: titleStyle,
-                    ),
                     Card(
-                      margin: EdgeInsets.only(right: 25, left: 25, bottom: 10),
-                      elevation: 3,
-                      child: TextField(
-                        controller: model.cmtController,
-                        onChanged: (value) => model.setComments(value, wine),
-                        decoration: InputDecoration.collapsed(
-                          hintText: "Write your notes about the wine here",
+                      margin: EdgeInsets.only(top: 25),
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Column(
+                          children: <Widget>[
+                            if (wine.country != null && wine.aoo != null)
+                              WineInfo(
+                                  title: 'Country & Appelation',
+                                  text:
+                                      '${wine.country ?? ""} ${wine.aoo ?? ""}'),
+                            if (!wine.nv)
+                              WineInfo(
+                                  title: "Vintage",
+                                  text: wine.vintage.toString()),
+                            if (wine.grapes != null)
+                              WineInfo(
+                                text: wine.grapes,
+                                title: "Grapes",
+                              ),
+                            if (wine.price != null)
+                              WineInfo(
+                                text:
+                                    '${wine.price.toString().replaceAll(".0", "")} ${model.currency}',
+                                title: "Price",
+                              ),
+                            if (wine.type != null)
+                              WineInfo(
+                                text: wine.type,
+                                title: "Type",
+                              )
+                          ],
                         ),
-                        maxLines: 10,
                       ),
-                    ),
-                    Text(
-                      'Placed in cellar: ${wine.time.substring(0, 16)}',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(),
                     ),
                   ],
                 ),
-              ),
+                Text(
+                  "Comments",
+                  style: titleStyle,
+                ),
+                Card(
+                  margin: EdgeInsets.only(right: 25, left: 25, bottom: 10),
+                  elevation: 3,
+                  child: TextField(
+                    controller: model.cmtController,
+                    onChanged: (value) => model.setComments(value, wine),
+                    decoration: InputDecoration.collapsed(
+                      hintText: "Write your notes about the wine here",
+                    ),
+                    maxLines: 10,
+                  ),
+                ),
+                Text(
+                  'Placed in cellar: ${wine.time.substring(0, 16)}',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(),
+                ),
+              ],
             ),
           ),
+        ),
+      ),
     );
   }
 }
 
 class WineInfo extends StatelessWidget {
   final String text;
+  final String title;
 
-  const WineInfo({Key key, this.text}) : super(key: key);
+  const WineInfo({Key key, this.text, this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.4,
-      child: Text(
-        text,
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 18),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Text(
+            title,
+            style: subTitleStyle,
+          ),
+          Text(
+            text ?? "",
+            style: TextStyle(fontSize: 18),
+          ),
+        ],
       ),
     );
   }
