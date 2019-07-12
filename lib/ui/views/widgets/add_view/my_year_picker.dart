@@ -84,6 +84,7 @@ class _MyYearPickerState extends State<MyYearPicker> {
             _position.floor() != otherPosition.floor()) {
           autoScroll();
         }
+        return true;
       },
       child: ListView.builder(
         dragStartBehavior: DragStartBehavior.start,
