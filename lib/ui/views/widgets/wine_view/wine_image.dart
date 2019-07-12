@@ -26,7 +26,7 @@ class WineImage extends StatelessWidget {
                     children: <Widget>[
                       Icon(
                         Icons.image,
-                        size: width,
+                        size: height*0.8,
                         color: Colors.grey,
                       ),
                       Text("No image"),

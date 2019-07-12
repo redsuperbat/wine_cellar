@@ -73,38 +73,41 @@ class WineView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Card(
-                    margin: EdgeInsets.only(top: 25),
-                    child: Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Column(
-                        children: <Widget>[
-                          if (wine.country != null && wine.aoo != null)
-                            WineInfo(
-                                title: 'Country & Appelation',
+                  Container(
+                    width: MediaQuery.of(context).size.width*0.43,
+                    child: Card(
+                      margin: EdgeInsets.only(top: 25),
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Column(
+                          children: <Widget>[
+                            if (wine.country != null && wine.aoo != null)
+                              WineInfo(
+                                  title: 'Country & Appelation',
+                                  text:
+                                      '${wine.country ?? ""} ${wine.aoo ?? ""}'),
+                            if (!wine.nv)
+                              WineInfo(
+                                  title: "Vintage",
+                                  text: wine.vintage.toString()),
+                            if (wine.grapes != null)
+                              WineInfo(
+                                text: wine.grapes,
+                                title: "Grapes",
+                              ),
+                            if (wine.price != null)
+                              WineInfo(
                                 text:
-                                    '${wine.country ?? ""} ${wine.aoo ?? ""}'),
-                          if (!wine.nv)
-                            WineInfo(
-                                title: "Vintage",
-                                text: wine.vintage.toString()),
-                          if (wine.grapes != null)
-                            WineInfo(
-                              text: wine.grapes,
-                              title: "Grapes",
-                            ),
-                          if (wine.price != null)
-                            WineInfo(
-                              text:
-                                  '${wine.price.toString().replaceAll(".0", "")} ${model.currency}',
-                              title: "Price",
-                            ),
-                          if (wine.type != null)
-                            WineInfo(
-                              text: wine.type,
-                              title: "Type",
-                            )
-                        ],
+                                    '${wine.price.toString().replaceAll(".0", "")} ${model.currency}',
+                                title: "Price",
+                              ),
+                            if (wine.type != null)
+                              WineInfo(
+                                text: wine.type,
+                                title: "Type",
+                              )
+                          ],
+                        ),
                       ),
                     ),
                   ),
