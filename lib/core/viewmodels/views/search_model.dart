@@ -14,7 +14,7 @@ class SearchModel extends BaseModel {
 
   @override
   void dispose() {
-    print("Search Model disposing");
+    print("Disposing SearchModel");
     getAllWine();
     super.dispose();
   }

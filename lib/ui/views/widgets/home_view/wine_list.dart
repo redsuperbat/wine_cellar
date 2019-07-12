@@ -9,27 +9,31 @@ class WineList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<WineListModel>(
-      model: WineListModel(
-          wineService: Provider.of(context)),
+      model: WineListModel(wineService: Provider.of(context)),
       builder: (context, model, child) => StreamBuilder(
-            stream: model.wines,
-            builder: (context, AsyncSnapshot<List> snapshot) => snapshot.hasData
-                ? Expanded(
-                    child: RefreshIndicator(
-                      onRefresh: () async => await model.onRefresh(),
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: snapshot.data.length,
-                        itemBuilder: (context, index) =>
-                            WineCard(wine: snapshot.data[index]),
-                        //WineCard(wine: model.wines[index]),
-                      ),
+        stream: model.wines,
+        builder: (context, AsyncSnapshot<List> snapshot) => snapshot.hasData
+            ? Expanded(
+                child: RefreshIndicator(
+                  onRefresh: () async => await model.onRefresh(),
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (context, index) => WineCard(
+                      wine: snapshot.data[index],
+                      onRemove: (wine) {
+                        snapshot.data.remove(wine);
+                        model.removeWine(wine);
+                      },
                     ),
-                  )
-                : Center(
-                    child: CircularProgressIndicator(),
+                    //WineCard(wine: model.wines[index]),
                   ),
-          ),
+                ),
+              )
+            : Center(
+                child: CircularProgressIndicator(),
+              ),
+      ),
     );
   }
 }

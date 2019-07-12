@@ -43,7 +43,7 @@ class AddWineFormModel extends BaseModel {
     priceController.dispose();
     grapeController.dispose();
     aooController.dispose();
-    print("Disposing AddWineFormModel now");
+    print("Disposing AddWineFormModel");
     super.dispose();
   }
 

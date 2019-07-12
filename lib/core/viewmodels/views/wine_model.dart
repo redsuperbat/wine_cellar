@@ -32,6 +32,7 @@ class WineModel extends BaseModel {
 
   Future<bool> updateWine(Wine wine) async {
     await _wineService.updateWine(newWine: wine);
+    await _wineService.getAllWine();
     return true;
   }
 

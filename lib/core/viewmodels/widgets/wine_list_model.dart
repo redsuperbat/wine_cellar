@@ -17,4 +17,9 @@ class WineListModel extends BaseModel {
     await _wineService.getAllWine();
   }
 
+  Future<void> removeWine(Wine wine) async{
+    await _wineService.removeWine(wine);
+    notifyListeners();
+}
+
 }

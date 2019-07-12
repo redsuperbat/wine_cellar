@@ -12,6 +12,10 @@ class CountryPickerModel extends BaseModel {
   final JsonService _json;
   final WineService _wineService;
   StreamSubscription subscription;
+  Country _country;
+  final StreamController<bool> suggestionController =
+      StreamController.broadcast();
+  final StreamController<bool> otherController = StreamController.broadcast();
 
   CountryPickerModel(
       {@required JsonService json, @required WineService wineService})
@@ -22,16 +26,22 @@ class CountryPickerModel extends BaseModel {
 
   Stream<Wine> get wineStream => _wineService.wineStream;
 
+  Stream<bool> get suggestionStream => suggestionController.stream;
+
+  Stream<bool> get otherStream => otherController.stream;
+
   List<Country> get countries => _json.countries;
 
-  Country _country;
+  List<Country> get suggestedCountries => _json.suggestedCountries;
 
   Country get country => _country;
 
   @override
   void dispose() {
-    print("Disposing of countrypicker");
+    print("Disposing Countrypicker");
     subscription.cancel();
+    suggestionController.close();
+    otherController.close();
     super.dispose();
   }
 
@@ -41,14 +51,28 @@ class CountryPickerModel extends BaseModel {
     notifyListeners();
   }
 
+  void toggleSuggestions(bool show) {
+    suggestionController.sink.add(show);
+    if (show) {
+      otherController.sink.add(!show);
+    }
+  }
+
+  void toggleOther(bool show) {
+    otherController.sink.add(show);
+    if (show) {
+      suggestionController.sink.add(!show);
+    }
+  }
+
   Future loadAssets() async {
     setBusy(true);
     _json.loadAssets();
     setBusy(false);
   }
 
-  void setCountry(int index) {
-    _country = countries[index];
+  void setCountry(Country country) {
+    _country = country;
     _wineService.wine.country = _country.name;
     notifyListeners();
   }

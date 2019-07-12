@@ -49,7 +49,7 @@ class WineService {
 
   Future removeWine(Wine wine) async {
     _db.deleteWine(wine.id);
-    await getAllWine();
+    //await getAllWine();
   }
 
   Future changeCellar(String cellarName) async {
@@ -80,7 +80,6 @@ class WineService {
 
   Future<void> updateWine({Wine newWine}) async {
     await _db.updateWine(newWine ?? wine);
-    await getAllWine();
   }
 
   Future decrementWine(Wine wine) async {

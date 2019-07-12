@@ -23,7 +23,7 @@ class VintagePickerModel extends BaseModel {
 
   @override
   void dispose() {
-    print("Im disposing of VintagePicker");
+    print("Disposing VintagePicker");
     subscription.cancel();
     super.dispose();
   }

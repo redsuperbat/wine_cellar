@@ -77,7 +77,7 @@ class ExportModel extends BaseModel {
       if (permissions[PermissionGroup.storage] == PermissionStatus.granted) {
         //store file in documents folder
         final String dir =
-            (await getExternalStorageDirectory()).absolute.path + "/documents";
+            (await getExternalStorageDirectory()).absolute.path;
         print("The file is at: $dir/$filename.csv");
         final File f = File("$dir/$filename.csv");
 

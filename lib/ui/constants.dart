@@ -18,11 +18,8 @@ const TextStyle titleStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
-const TextStyle subTitleStyle = TextStyle(
-  fontSize: 20,
-  color: Colors.black54,
-  fontWeight: FontWeight.bold
-);
+const TextStyle subTitleStyle =
+    TextStyle(fontSize: 20, color: Colors.black54, fontWeight: FontWeight.bold);
 
 const TextStyle hintStyle = TextStyle(
   fontSize: 11,
@@ -32,17 +29,17 @@ const TextStyle hintStyle = TextStyle(
 const List<String> wineSizes = ["375mL", "750mL", "1.5L", "3L", "6L"];
 
 const List<String> countryNames = [
-  "Spain",
-  "France",
   "Argentina",
-  "Austria",
   "Australia",
+  "Austria",
   "Chile",
+  "France",
   "Germany",
   "Italy",
   "Portugal",
-  "America",
-  "South Africa",
+  "South africa",
+  "Spain",
+  "United States",
 ];
 
 const List<String> wineCategories = [

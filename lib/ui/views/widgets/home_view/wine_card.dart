@@ -11,8 +11,9 @@ import '../../base_widget.dart';
 
 class WineCard extends StatelessWidget {
   final Wine wine;
+  final Function onRemove;
 
-  const WineCard({this.wine});
+  const WineCard({this.wine, this.onRemove});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class WineCard extends StatelessWidget {
                   ),
                   color: Colors.red[300],
                 ),
-                onTap: () => model.removeWine(wine),
+                onTap: () => onRemove(wine),
               ),
             ],
             secondaryActions: <Widget>[

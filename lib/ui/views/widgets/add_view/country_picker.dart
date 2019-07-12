@@ -33,17 +33,19 @@ class CountryPicker extends StatelessWidget {
                   children: <Widget>[
                     Card(
                       elevation: 3,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(45.0),
+                      ),
                       child: Image.asset(
                         model.country.flag,
-                        width: 60,
-                        height: 40,
-                        fit: BoxFit.cover,
+                        height: 60,
+                        fit: BoxFit.contain,
                       ),
                     ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.05,
                     ),
-                    Text(model.country.name),
+                    Flexible(child: Text(model.country.name)),
                   ],
                 ),
               ),

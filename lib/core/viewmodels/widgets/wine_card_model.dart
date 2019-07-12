@@ -15,6 +15,7 @@ class WineCardModel extends BaseModel {
   Future increment(Wine wine)async {
     wine.owned++;
     await _wineService.updateWine(newWine: wine);
+    notifyListeners();
   }
 
   void injectWine(Wine wine) {
@@ -24,5 +25,6 @@ class WineCardModel extends BaseModel {
   Future decrement(Wine wine)async {
     wine.owned--;
    await _wineService.decrementWine(wine);
+   notifyListeners();
   }
 }
