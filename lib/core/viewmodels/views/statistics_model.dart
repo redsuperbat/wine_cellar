@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:wine_cellar/core/services/settings_service.dart';
-import 'package:wine_cellar/core/services/wine_db_service.dart';
+import 'package:wine_cellar/core/services/wine_service.dart';
 import 'dart:async';
 import 'package:wine_cellar/ui/constants.dart';
 
 import '../base_model.dart';
 
 class StatisticsModel extends BaseModel {
-  final WineDb _db;
+  final WineService _db;
   final Settings _settings;
   final PageController _controller = PageController(initialPage: 1);
   final List<Map<String, double>> stats = [];
   int _index = 1;
 
-  StatisticsModel({WineDb db, Settings settings})
+  StatisticsModel({WineService db, Settings settings})
       : _db = db,
         _settings = settings;
 

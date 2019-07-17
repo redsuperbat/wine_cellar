@@ -12,6 +12,7 @@ class MyDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    model.loadProfiles();
     return Drawer(
       child: Column(
         children: <Widget>[
@@ -35,41 +36,42 @@ class MyDrawer extends StatelessWidget {
                   model.counter = 0;
                 }
               },
-              child: UserAccountsDrawerHeader(
-                margin: EdgeInsets.all(0),
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                ),
-                otherAccountsPictures: <Widget>[
-                  AlternativeCellar(
-                    profile:
-                        model.profiles.length > 1 ? model.profiles[1] : null,
-                    changeCellar: (profile) => model.changeCellar(profile),
-                    addCellar: (name) => model.createCellar(name),
-                  ),
-                  AlternativeCellar(
-                    profile:
-                        model.profiles.length > 2 ? model.profiles[2] : null,
-                    changeCellar: (profile) => model.changeCellar(profile),
-                    addCellar: (name) => model.createCellar(name),
-                  ),
-                ],
-                currentAccountPicture: CircleAvatar(
-                  backgroundColor: Color(model.profiles[0].color),
-                  foregroundColor: Colors.white,
-                  child: Text(
-                    model.profiles[0].cellarName.substring(0, 1).toUpperCase(),
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-                  ),
-                ),
-                accountName: Container(),
-                accountEmail: Container(
-                  child: Text(
-                    model.profiles[0].cellarName,
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                ),
-              ),
+              child: StreamBuilder<List>(
+                  stream: model.profiles,
+                  builder: (context, snapshot) {
+                    final int length =
+                        snapshot.hasData ? snapshot.data.length : 0;
+                    return UserAccountsDrawerHeader(
+                      margin: EdgeInsets.all(0),
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                      ),
+                      otherAccountsPictures: <Widget>[
+                        for (var i = 1; i <= 2; i++)
+                          AlternativeCellar(
+                            profile: snapshot.hasData && length > i
+                                ? snapshot.data[i]
+                                : null,
+                            changeCellar: (profile) =>
+                                model.changeCellar(profile),
+                            addCellar: (name) => model.createCellar(name),
+                          ),
+                      ],
+                      currentAccountPicture: AlternativeCellar(
+                        profile: snapshot.hasData && length > 0
+                            ? snapshot.data[0]
+                            : null,
+                        addCellar: (name) => model.createCellar(name),
+                      ),
+                      accountName: Container(),
+                      accountEmail: Container(
+                        child: Text(
+                          snapshot.hasData ? snapshot.data[0].cellarName : "",
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        ),
+                      ),
+                    );
+                  }),
             ),
           ),
           ListTile(
@@ -124,23 +126,24 @@ class AlternativeCellar extends StatelessWidget {
               ),
             ),
             onTap: () => showDialog(
-                  context: context,
-                  builder: (_) => WelcomeDialog(
-                        addCellar: addCellar,
-                        title: Text(
-                          "Add a new cellar",
-                          style: titleStyle,
-                        ),
-                        content: Text(
-                          "This new cellar will contain no wines,"
-                          "\nto change back to your original cellar just press that cellar.",
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
+              context: context,
+              builder: (_) => WelcomeDialog(
+                addCellar: addCellar,
+                title: Text(
+                  "Add a new cellar",
+                  style: titleStyle,
                 ),
+                content: Text(
+                  "This new cellar will contain no wines,"
+                  "\nto change back to your original cellar just press that cellar.",
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           )
         : InkWell(
-            onTap: () => changeCellar(profile),
+            onTap: () =>
+                changeCellar == null ? print("im null") : changeCellar(profile),
             child: CircleAvatar(
               foregroundColor: Colors.white,
               backgroundColor: Color(profile.color),

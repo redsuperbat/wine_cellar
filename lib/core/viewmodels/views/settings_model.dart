@@ -1,23 +1,24 @@
+import 'package:wine_cellar/core/services/database_service.dart';
+import 'package:wine_cellar/core/services/profile_service.dart';
 import 'package:wine_cellar/core/services/settings_service.dart';
-import 'package:wine_cellar/core/services/wine_db_service.dart';
 
 import '../base_model.dart';
 
 class SettingsModel extends BaseModel {
   final Settings _settings;
-  final WineDb _db;
+  final DatabaseService _db;
+  final ProfileService _profile;
 
-  SettingsModel({Settings settings, WineDb db})
+  SettingsModel({Settings settings, DatabaseService db, ProfileService profile})
       : _settings = settings,
-        _db = db;
+        _db = db,
+        _profile = profile;
 
   String get currency => _settings.currency;
 
-  Future<void> clearPrefs() async {
-    await _settings.clearSettings();
+  Future<void> deleteDb() async {
     await _db.dropDatabase();
-    await _db.iniDb();
-    notifyListeners();
+    _profile.profileSink.add([]);
   }
 
   void setCurrency(String value) {

@@ -56,7 +56,7 @@ class SettingsView extends StatelessWidget {
                                   children: <Widget>[
                                     RaisedButton(
                                       onPressed: () async {
-                                        await model.clearPrefs();
+                                        await model.deleteDb();
                                         Navigator.of(context).popUntil((route) => route.isFirst);
                                       },
                                       color: mainColor,

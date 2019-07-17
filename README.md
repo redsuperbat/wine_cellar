@@ -1,16 +1,13 @@
-# wine_cellar
+# Wine Cellar
 
-App for keeping track of whats in your cellar
+This is an application that helps you keep track of the wines that you own.
 
-## Getting Started
+## Features of Wine Cellar
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+* Easily insert wines with a variable amount of information. This includes pictures
+* Autofills previously inserted wines to easily insert more wines into your cellar
+* Statistics over your cellar such as total net worth, number of bottles in cellar and much more.
+* Export your cellar to a csv-file that you can open in excel or google sheets for further
+processing of the data
+* Fully functional without internet connection and does not require an account to use
+* Supports several cellars all with their own name and wines

@@ -7,12 +7,12 @@ class WineDb {
   Database database;
   String currentTable = "one";
 
-  Future<void> iniDb() async {
+/*  Future<void> iniDb() async {
     if (database == null) {
       print("Im creating my database");
       database =
           await openDatabase(join(await getDatabasesPath(), 'wine_database.db'),
-              onCreate: (db, version) => db.execute("CREATE TABLE one("
+              onOpen: (db) => db.execute("CREATE TABLE one("
                   "id INTEGER PRIMARY KEY, "
                   "name TEXT, "
                   "vintage INTEGER, "
@@ -28,12 +28,12 @@ class WineDb {
                   "price DOUBLE, "
                   "nv INTEGER, "
                   "image TEXT)"),
-              version: 1);
+              version: 2);
       print("im finished with creating the database");
     }
-  }
+  }*/
 
-  Future createNewTable(String name) async {
+/*  Future createNewTable(String name) async {
     await database.execute("CREATE TABLE $name("
         "id INTEGER PRIMARY KEY, "
         "name TEXT, "
@@ -51,31 +51,31 @@ class WineDb {
         "nv INTEGER, "
         "image TEXT)");
     changeCellar(name);
-  }
+  }*/
 
-  void changeCellar(String cellarName) {
+  /*void changeCellar(String cellarName) {
     currentTable = cellarName;
     print(currentTable);
   }
 
   Future<void> insertWine(Wine wine) async {
     await database.insert(currentTable, wine.toJson());
-  }
+  }*/
 
   Future<void> importDatabase(Map map) async {
     await database.insert(currentTable, map);
   }
 
-  Future<double> getCellarWorth() async {
+/*  Future<double> getCellarWorth() async {
     double sum = 0;
     final data =
         await database.rawQuery("SELECT price, owned FROM $currentTable");
     data.forEach((m) => sum = sum + m['price'] * m['owned']);
     print('Data is: $data sum is $sum');
     return sum;
-  }
+  }*/
 
-  Future<int> getStatistics({String column, String shouldEqual}) async {
+/*  Future<int> getStatistics({String column, String shouldEqual}) async {
     int sum = 0;
     if (column != null && shouldEqual != null) {
       final data = await database.rawQuery(
@@ -87,7 +87,7 @@ class WineDb {
       data.forEach((m) => sum = sum + m['owned']);
     }
     return sum;
-  }
+  }*/
 
   Future<List<Map>> getWinesForExport() async {
     final List<Map<String, dynamic>> _wines =
@@ -95,23 +95,23 @@ class WineDb {
     return _wines;
   }
 
-  Future<List<Wine>> getAllWines({String orderBy = 'time'}) async {
+/*  Future<List<Wine>> getAllWines({String orderBy = 'time'}) async {
     final List<Map<String, dynamic>> _wines =
         await database.query(currentTable, orderBy: '$orderBy DESC');
     List<Wine> wines = [];
     _wines.forEach((w) => wines.add(Wine.fromJson(w)));
     wines.forEach((wine) => print(wine.image));
     return wines;
-  }
+  }*/
 
-  Future<int> getId() async {
+/*  Future<int> getId() async {
     int data = Sqflite.firstIntValue(
         await database.rawQuery("SELECT COUNT(*) FROM $currentTable"));
     print(data);
     return data + 1;
-  }
+  }*/
 
-  Future<void> updateWine(Wine wine) async {
+/*  Future<void> updateWine(Wine wine) async {
     await database.update(currentTable, wine.toJson(),
         where: "id = ?", whereArgs: [wine.id]);
   }
@@ -130,9 +130,9 @@ class WineDb {
     List<Wine> wines = [];
     _wines.forEach((w) => wines.add(Wine.fromJson(w)));
     return wines;
-  }
+  }*/
 
-  void deleteWine(int id) {
+/*  void deleteWine(int id) {
     database.delete(currentTable, where: "id = ?", whereArgs: [id]);
   }
 
@@ -140,5 +140,5 @@ class WineDb {
     await database.close();
     await deleteDatabase(database.path);
     database = null;
-  }
+  }*/
 }

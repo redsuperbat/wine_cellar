@@ -1,34 +1,33 @@
 import 'package:flutter/widgets.dart';
-import 'package:wine_cellar/core/models/wine.dart';
 import 'package:wine_cellar/core/services/api.dart';
-import 'package:wine_cellar/core/services/wine_db_service.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:csv/csv.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import 'package:wine_cellar/core/services/wine_service.dart';
 import 'package:wine_cellar/ui/constants.dart';
 
 import '../base_model.dart';
 
 class ExportModel extends BaseModel {
-  final WineDb _db;
+  final WineService _db;
   final Api _api;
   final TextEditingController controller = TextEditingController();
   bool export = false;
   final RegExp regExp = RegExp(r"^[a-zA-Z0-9_\s-]+$");
 
-  ExportModel({WineDb db, Api api})
+  ExportModel({WineService db, Api api})
       : _db = db,
         _api = api;
 
-  List<Wine> wines;
+  List<Map<String,dynamic>> wines;
 
   List<List<String>> rows;
 
   String get text => controller.text;
 
   Future getCurrentDatabase() async {
-    wines = await _db.getAllWines();
+    wines = await _db.getExportData();
     rows = [csvTitle];
   }
 
@@ -55,19 +54,19 @@ class ExportModel extends BaseModel {
       await getCurrentDatabase();
       for (int i = 0; i < wines.length; i++) {
         List<String> row = List();
-        row.add(wines[i].name ?? "");
-        row.add(wines[i].type ?? "");
-        row.add(wines[i].aoo ?? "");
-        row.add(wines[i].country ?? "");
-        row.add(wines[i].vintage.toString());
-        row.add(wines[i].grapes ?? "");
-        row.add(wines[i].owned.toString());
-        row.add(wines[i].size ?? "");
-        row.add(wines[i].image ?? "");
-        row.add(wines[i].time ?? "");
-        row.add(wines[i].comment ?? "");
-        row.add(wines[i].price?.toString() ?? "");
-        row.add(wines[i].rating?.toString() ?? "");
+        row.add(wines[i]['name'] ?? "");
+        row.add(wines[i]['type'] ?? "");
+        row.add(wines[i]['aoo'] ?? "");
+        row.add(wines[i]['country'] ?? "");
+        row.add(wines[i]['vintage'].toString());
+        row.add(wines[i]['grapes'] ?? "");
+        row.add(wines[i]['owned'].toString());
+        row.add(wines[i]['size'] ?? "");
+        row.add(wines[i]['image'] ?? "");
+        row.add(wines[i]['time'] ?? "");
+        row.add(wines[i]['comment'] ?? "");
+        row.add(wines[i]['price']?.toString() ?? "");
+        row.add(wines[i]['rating']?.toString() ?? "");
         rows.add(row);
       }
       Map<PermissionGroup, PermissionStatus> permissions =

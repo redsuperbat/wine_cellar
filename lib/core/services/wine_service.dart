@@ -3,15 +3,15 @@ import 'dart:async';
 import 'package:meta/meta.dart';
 import 'package:wine_cellar/core/models/wine.dart';
 
-import 'wine_db_service.dart';
+import 'database_service.dart';
 
 class WineService {
-  final WineDb _db;
+  final DatabaseService _db;
   final StreamController<String> _subType = StreamController.broadcast();
   final StreamController<List<Wine>> _wines = StreamController.broadcast();
   final StreamController<Wine> _wine = StreamController.broadcast();
 
-  WineService({@required WineDb database}) : _db = database;
+  WineService({@required DatabaseService database}) : _db = database;
 
   Stream<Wine> get wineStream => _wine.stream;
 
@@ -27,6 +27,7 @@ class WineService {
 
   String category;
   String subCategory;
+  String cellar;
 
   void closeControllers() {
     _subType.close();
@@ -34,52 +35,88 @@ class WineService {
     _wine.close();
   }
 
-  void resetWine(){
+  void resetWine() {
     wine = Wine();
   }
 
-  Future<void> initializeDb() async {
-    await _db.iniDb();
-    await getAllWine();
+  Future<void> initializeDb(String cellarName) async {
+    cellar = cellarName;
+    if (cellar != null) {
+      await getAllWine();
+    }
   }
 
   Future<void> searchWine(String query) async {
-    _wines.add(await _db.searchWine(query));
+    final List<Wine> wines = [];
+    final response = await _db.search(cellar, 'name', query);
+    response.forEach((w) => wines.add(Wine.fromJson(w)));
+    _wines.add(wines);
   }
 
   Future removeWine(Wine wine) async {
-    _db.deleteWine(wine.id);
-    //await getAllWine();
+    _db.remove(cellar, wine.id);
   }
 
   Future changeCellar(String cellarName) async {
-    _db.changeCellar(cellarName);
+    cellar = cellarName;
     await getAllWine();
   }
 
   Future addCellar(String name) async {
-    await _db.createNewTable(name);
+    cellar = name;
+    await _db.createTable(name);
     await getAllWine();
   }
 
   Future<void> filterWine() async {
-    _wines.add(await _db.filterWine(query: subCategory, column: category));
+    final request = await _db.filter(cellar, subCategory, category);
+    final List<Wine> wines = [];
+    request.forEach((w) => wines.add(Wine.fromJson(w)));
+    _wines.add(wines);
   }
 
   Future<void> insertWine() async {
-    wine.id = await _db.getId();
+    wine.id = await _db.getId(cellar);
     wine.time = DateTime.now().toString();
     print('wine image path is: ${wine.image}');
-    await _db.insertWine(wine);
+    await _db.insert(cellar, wine.toJson());
     await getAllWine();
   }
 
+  Future<List<Map<String, dynamic>>> getExportData() async {
+    final request = await _db.getTable(cellar);
+    return request;
+  }
+
   Future<void> getAllWine() async {
-    _wines.add(await _db.getAllWines());
+    final request = await _db.getTable(cellar);
+    final List<Wine> wines = [];
+    request.forEach((w) => wines.add(Wine.fromJson(w)));
+    _wines.add(wines);
   }
 
   Future<void> updateWine({Wine newWine}) async {
-    await _db.updateWine(newWine ?? wine);
+    await _db.update(cellar, newWine?.toJson() ?? wine.toJson());
+  }
+
+  Future<int> getStatistics({String column, String shouldEqual}) async {
+    int sum = 0;
+    if (column != null && shouldEqual != null) {
+      final data = await _db.rawQuery(
+          "SELECT type, owned FROM $cellar WHERE $column = '$shouldEqual'");
+      data.forEach((m) => sum = sum + m['owned']);
+    } else {
+      final data = await _db.rawQuery("SELECT type, owned FROM $cellar");
+      data.forEach((m) => sum = sum + m['owned']);
+    }
+    return sum;
+  }
+
+  Future<double> getCellarWorth() async {
+    double sum = 0;
+    final data = await _db.rawQuery("SELECT price, owned FROM $cellar");
+    data.forEach((m) => sum = sum + m['price'] * m['owned']);
+    return sum;
   }
 
   Future decrementWine(Wine wine) async {
