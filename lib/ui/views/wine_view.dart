@@ -26,7 +26,7 @@ class WineView extends StatelessWidget {
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.edit),
-              onPressed: () => Navigator.pushNamed(context, 'edit'),
+              onPressed: () => Navigator.pushNamed(context, 'wine-edit'),
             ),
           ],
         ),

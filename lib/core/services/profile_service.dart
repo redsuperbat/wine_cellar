@@ -35,6 +35,11 @@ class ProfileService {
     return cellarName;
   }
 
+  Future<void> updateProfile(Profile profile)async{
+   await _db.update('profiles', profile.toJson());
+   sinkProfiles();
+  }
+
   Future<void> iniDb() async {
     await _db.iniDb();
   }

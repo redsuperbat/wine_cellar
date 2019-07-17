@@ -8,6 +8,7 @@ class SettingsModel extends BaseModel {
   final Settings _settings;
   final DatabaseService _db;
   final ProfileService _profile;
+  int index;
 
   SettingsModel({Settings settings, DatabaseService db, ProfileService profile})
       : _settings = settings,
@@ -16,9 +17,20 @@ class SettingsModel extends BaseModel {
 
   String get currency => _settings.currency;
 
+  Stream<List> get profiles => _profile.profileStream;
+
   Future<void> deleteDb() async {
     await _db.dropDatabase();
     _profile.profileSink.add([]);
+  }
+
+  Future<void> loadProfiles() async {
+    await _profile.sinkProfiles();
+  }
+
+  void showOptions(int i) {
+    index = i;
+    notifyListeners();
   }
 
   void setCurrency(String value) {

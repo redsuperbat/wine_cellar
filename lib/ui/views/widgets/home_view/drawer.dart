@@ -58,15 +58,16 @@ class MyDrawer extends StatelessWidget {
                           ),
                       ],
                       currentAccountPicture: AlternativeCellar(
-                        profile: snapshot.hasData && length > 0
-                            ? snapshot.data[0]
-                            : null,
-                        addCellar: (name) => model.createCellar(name),
-                      ),
+                          profile: snapshot.hasData && length > 0
+                              ? snapshot.data[0]
+                              : null,
+                          addCellar: (name) => model.createCellar(name),
+                          style: TextStyle(
+                              fontSize: 35, )),
                       accountName: Container(),
                       accountEmail: Container(
                         child: Text(
-                          snapshot.hasData ? snapshot.data[0].cellarName : "",
+                          snapshot.hasData ? snapshot.data[0].displayName : "",
                           style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
                       ),
@@ -108,8 +109,10 @@ class AlternativeCellar extends StatelessWidget {
   final Profile profile;
   final Function changeCellar;
   final Function addCellar;
+  final TextStyle style;
 
-  AlternativeCellar({this.profile, this.changeCellar, this.addCellar});
+  AlternativeCellar(
+      {this.profile, this.changeCellar, this.addCellar, this.style});
 
   @override
   Widget build(BuildContext context) {
@@ -148,7 +151,8 @@ class AlternativeCellar extends StatelessWidget {
               foregroundColor: Colors.white,
               backgroundColor: Color(profile.color),
               child: Text(
-                profile.cellarName.substring(0, 1).toUpperCase(),
+                profile.displayName.substring(0, 1).toUpperCase(),
+                style: style ?? TextStyle(),
               ),
             ),
           );

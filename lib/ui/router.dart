@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'views/add_view.dart';
+import 'views/cellar_edit_view.dart';
 import 'views/export_view.dart';
 import 'views/home_view.dart';
 import 'views/image_view.dart';
@@ -33,8 +34,14 @@ class Router {
       case 'image':
         String path = settings.arguments;
         return MaterialPageRoute(builder: (_) => ImageView(path));
-      case 'edit':
+      case 'wine-edit':
         return MaterialPageRoute(builder: (_) => WineEditView());
+      case 'cellar-edit':
+        var profile = settings.arguments;
+        return MaterialPageRoute(
+            builder: (_) => CellarEditView(
+                  profile: profile,
+                ));
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
