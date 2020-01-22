@@ -15,5 +15,6 @@ processing of the data
 ## Screenshots
 ### Search &emsp; &emsp; &emsp; &emsp; &nbsp; &emsp; Homepage &emsp; &emsp; &emsp; &nbsp; &nbsp; Add Cellars &emsp; &emsp; &emsp; &nbsp; &nbsp; Export Cellar
 <img src="screenshots/search.jpg" width="200px"> <img src="screenshots/homepage.jpg" width="200px"> <img src="screenshots/create_new_cellar.jpg" width="200px"> <img src="screenshots/export_database.jpg" width="200px"> 
-
+### Search &emsp; &emsp; &emsp; &emsp; &nbsp; &emsp; Homepage &emsp; &emsp; &emsp; &nbsp; &nbsp; Add Cellars &emsp; &emsp; &emsp; &nbsp; &nbsp; Export Cellar
+<img src="screenshots/add_wine.jpg" width="200px"> <img src="screenshots/sort_wines.jpg" width="200px"> <img src="screenshots/statistics.jpg" width="200px">
 
