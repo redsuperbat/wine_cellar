@@ -14,4 +14,4 @@ processing of the data
 
 ## Screenshots
 
-![search](screenshots/search.jpg)
+![search](screenshots/search.jpg=200x)
