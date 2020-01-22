@@ -14,4 +14,4 @@ processing of the data
 
 ## Screenshots
 
-![](/screenshots/search.jpg=200)
+![](wine_cellar/screenshots/search.jpg=200)
