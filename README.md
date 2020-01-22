@@ -13,7 +13,7 @@ processing of the data
 * Supports several cellars all with their own name and wines
 
 ## Screenshots
-### Search &emsp; &emsp; &emsp; &emsp;  &emsp; Homepage
+### Search &emsp; &emsp; &emsp; &emsp; &nbsp; &emsp; Homepage
 <img src="screenshots/search.jpg" width="200px"> <img src="screenshots/homepage.jpg" width="200px"> 
 
 
