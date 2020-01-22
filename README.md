@@ -13,7 +13,7 @@ processing of the data
 * Supports several cellars all with their own name and wines
 
 ## Screenshots
-### Search &emsp; &emsp; &emsp; &emsp; &nbsp; &emsp; Homepage &emsp; &emsp; &emsp; &nbsp; Create Additional Cellar &emsp; &nbsp; Export Cellar Database 
+### Search &emsp; &emsp; &emsp; &emsp; &nbsp; &emsp; Homepage &emsp; &emsp; &emsp; &nbsp; Add Cellars &emsp; &nbsp; Export Cellar Database 
 <img src="screenshots/search.jpg" width="200px"> <img src="screenshots/homepage.jpg" width="200px"> <img src="screenshots/create_new_cellar.jpg" width="200px"> <img src="screenshots/export_database.jpg" width="200px"> 
 
 
