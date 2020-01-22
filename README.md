@@ -11,3 +11,7 @@ This is an application that helps you keep track of the wines that you own.
 processing of the data
 * Fully functional without internet connection and does not require an account to use
 * Supports several cellars all with their own name and wines
+
+## Screenshots
+
+![](/screenshots/search.jpg=200)
