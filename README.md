@@ -14,4 +14,7 @@ processing of the data
 
 ## Screenshots
 
-![search](screenshots/search.jpg=200x)
+![search](screenshots/search.jpg)
+
+<img src="screenshots/search.jpg" width="200px">
+
