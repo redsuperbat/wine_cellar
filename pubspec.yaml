@@ -16,7 +16,6 @@ version: 1.0.0+1
 environment:
   sdk: ">=2.2.2 <3.0.0"
 
-
 dependencies:
   flutter:
     sdk: flutter
@@ -41,19 +40,16 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-
 flutter_icons:
   android: true
   ios: true
   image_path: "assets/wines/red_wine.png"
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -64,8 +60,6 @@ flutter:
     - assets/countries/
     - assets/text/
     - assets/wines/
-  #  - images/a_dot_burr.jpeg
-  #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

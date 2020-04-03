@@ -5,9 +5,11 @@ import 'provider_setup.dart';
 import 'ui/constants.dart';
 import 'ui/router.dart';
 
-void main() =>
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-        .then((_) => runApp(MyApp()));
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) => runApp(MyApp()));
+}
 
 class MyApp extends StatelessWidget {
   @override
